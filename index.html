@@ -664,7 +664,7 @@
   var $ = function (id) { return document.getElementById(id); };
 
   var APP = JSON.parse($('appdata').textContent);
-  var AUDIO_BASE = 'audio/';   // khi host: MP3 nằm trong thư mục audio/ cạnh index.html
+  var AUDIO_BASE = '';   // khi host: MP3 nằm cùng thư mục với index.html (thư mục gốc repo)
   // Quyển (book) → tests → sections. Tương thích ngược file cũ (chỉ có "sections").
   var TESTS = APP.tests || [{ id: 1, name: 'Test', sections: APP.sections || [] }];
   var TID = 0;                          // Test đang chọn
