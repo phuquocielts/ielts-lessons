@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sự Hoà Hợp Chủ Ngữ và Động Từ — 21 Quy Tắc ⚡</title>
+<style>
+:root{
+  --bg:#0B0614; --bg2:#120A22; --glass:rgba(255,255,255,.055); --glass-b:rgba(255,255,255,.12);
+  --txt:#EDEAF6; --mut:#9E96B8;
+  --cyan:#22D3EE; --pink:#FF4D8D; --amber:#FFC53D; --violet:#A78BFA; --lime:#7CF25C;
+  --ok:#7CF25C; --no:#FF6B6B;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  font-size:16.5px;line-height:1.65;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 12% -5%, rgba(167,139,250,.22), transparent 65%),
+    radial-gradient(700px 480px at 95% 8%, rgba(255,77,141,.16), transparent 65%),
+    radial-gradient(700px 520px at 50% 110%, rgba(34,211,238,.14), transparent 65%);}
+::selection{background:var(--pink);color:#fff;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:8px;}
+
+/* ---------- HERO ---------- */
+.hero{max-width:1080px;margin:0 auto;padding:64px 20px 28px;position:relative;}
+.hero .yo{display:inline-block;background:var(--glass);border:1px solid var(--glass-b);
+  border-radius:999px;padding:6px 16px;font-weight:700;font-size:.85em;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:18px;backdrop-filter:blur(6px);}
+.hero h1{font-weight:900;letter-spacing:-.03em;line-height:.98;font-size:clamp(2.6rem,9vw,5.4rem);text-transform:uppercase;}
+.hero h1 .l1{display:block;background:linear-gradient(92deg,#fff 10%,var(--violet) 55%,var(--pink) 95%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero h1 .l2{display:block;background:linear-gradient(92deg,var(--cyan) 5%,var(--lime) 60%,var(--amber) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{margin-top:10px;font-size:clamp(1.05rem,3vw,1.5rem);font-style:italic;color:var(--amber);font-weight:600;}
+.sticker{position:absolute;font-size:clamp(2rem,6vw,3.4rem);filter:drop-shadow(0 6px 14px rgba(0,0,0,.5));
+  animation:bob 5s ease-in-out infinite;user-select:none;}
+.s1{top:40px;right:8%;transform:rotate(12deg);}
+.s2{bottom:-4px;right:24%;transform:rotate(-9deg);animation-delay:1.4s;}
+@keyframes bob{0%,100%{translate:0 0;}50%{translate:0 -10px;}}
+
+/* contents card */
+.toc{max-width:1080px;margin:26px auto 0;padding:0 20px;}
+.toc-card{background:var(--glass);border:1px solid var(--glass-b);border-radius:24px;padding:22px 22px 16px;backdrop-filter:blur(8px);}
+.toc-card h2{font-size:1.05em;font-weight:800;letter-spacing:.04em;margin-bottom:12px;}
+.toc-card h2 span{color:var(--pink);}
+.toc-row{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-top:1px dashed rgba(255,255,255,.1);}
+.toc-row:first-of-type{border-top:0;}
+.toc-tag{flex-shrink:0;font-size:.72em;font-weight:800;letter-spacing:.06em;border-radius:8px;padding:3px 10px;margin-top:3px;
+  background:rgba(255,255,255,.08);border:1px solid var(--glass-b);color:var(--mut);white-space:nowrap;}
+.toc-row b{font-weight:800;}
+.tc1 b{color:var(--cyan);} .tc2 b{color:var(--pink);} .tc3 b{color:var(--amber);} .tc4 b{color:var(--violet);}
+
+/* ---------- NAV CHIPS ---------- */
+.chipnav{position:sticky;top:0;z-index:60;background:rgba(11,6,20,.82);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);}
+.chipnav .inner{max-width:1080px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:10px 20px;
+  scrollbar-width:none;}
+.chipnav .inner::-webkit-scrollbar{display:none;}
+.chip{flex-shrink:0;border-radius:999px;padding:7px 16px;font-weight:800;font-size:.85em;white-space:nowrap;
+  border:1.5px solid var(--glass-b);background:var(--glass);color:var(--txt);transition:.2s;}
+.chip:hover{transform:translateY(-2px);}
+.chip.c1:hover{border-color:var(--cyan);color:var(--cyan);}
+.chip.c2:hover{border-color:var(--pink);color:var(--pink);}
+.chip.c3:hover{border-color:var(--amber);color:var(--amber);}
+.chip.c4:hover{border-color:var(--violet);color:var(--violet);}
+.chip.c5:hover{border-color:var(--lime);color:var(--lime);}
+.chip.c6:hover{border-color:#fff;}
+
+/* ---------- SECTIONS ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+section.grp{padding:54px 0 8px;}
+.grp-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px;}
+.grp-head .big{font-weight:900;font-size:clamp(1.6rem,5vw,2.4rem);letter-spacing:-.02em;text-transform:uppercase;}
+.grp-head .desc{color:var(--mut);font-weight:600;font-size:.95em;}
+.g1 .big{color:var(--cyan);} .g2 .big{color:var(--pink);} .g3 .big{color:var(--amber);} .g4 .big{color:var(--violet);}
+
+/* rule cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:18px;}
+.rule{position:relative;background:var(--glass);border:1px solid var(--glass-b);border-radius:22px;
+  padding:22px 20px 18px;backdrop-filter:blur(8px);overflow:hidden;transition:transform .2s,border-color .2s;}
+.rule:hover{transform:translateY(-4px) rotate(-.3deg);}
+.rule .rnum{position:absolute;top:-18px;right:-6px;font-size:5.2rem;font-weight:900;line-height:1;
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.13);user-select:none;pointer-events:none;}
+.rule h3{font-weight:900;font-size:1.13em;line-height:1.35;letter-spacing:-.01em;padding-right:52px;}
+.rule .h-en{display:block;font-weight:600;font-style:italic;font-size:.82em;color:var(--mut);margin-top:2px;}
+.formula{margin:12px 0;border-radius:12px;padding:9px 14px;font-weight:800;font-size:.92em;line-height:1.5;
+  background:rgba(0,0,0,.35);border:1px solid var(--glass-b);}
+.g1 .rule:hover{border-color:var(--cyan);} .g1 .formula{color:var(--cyan);}
+.g2 .rule:hover{border-color:var(--pink);} .g2 .formula{color:var(--pink);}
+.g3 .rule:hover{border-color:var(--amber);} .g3 .formula{color:var(--amber);}
+.g4 .rule:hover{border-color:var(--violet);} .g4 .formula{color:var(--violet);}
+.ex{margin:10px 0;padding-left:12px;border-left:3px solid rgba(255,255,255,.16);}
+.ex .een{font-weight:700;color:#fff;}
+.ex .evi{display:block;color:var(--mut);font-style:italic;font-size:.9em;}
+.ex .note{display:block;font-size:.86em;font-weight:700;margin-top:1px;}
+.g1 .ex .note{color:var(--cyan);} .g2 .ex .note{color:var(--pink);}
+.g3 .ex .note{color:var(--amber);} .g4 .ex .note{color:var(--violet);}
+.tip{margin-top:12px;border-radius:14px;padding:10px 14px;font-size:.9em;
+  background:linear-gradient(120deg,rgba(255,197,61,.12),rgba(255,77,141,.1));
+  border:1px dashed rgba(255,197,61,.45);}
+.tip b{color:var(--amber);}
+.tip .tvi{display:block;color:var(--mut);font-style:italic;}
+.plist{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:10px 0;}
+.plist span{background:rgba(0,0,0,.3);border:1px solid var(--glass-b);border-radius:10px;
+  padding:5px 10px;font-size:.88em;font-weight:600;}
+
+/* recap strip */
+.recap{margin:22px 0 8px;display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin;}
+.recap span{flex-shrink:0;border-radius:999px;padding:8px 16px;font-weight:800;font-size:.85em;white-space:nowrap;
+  background:rgba(0,0,0,.35);border:1.5px solid var(--glass-b);}
+.recap.rc1 span{color:var(--cyan);border-color:rgba(34,211,238,.4);}
+.recap.rc2 span{color:var(--pink);border-color:rgba(255,77,141,.4);}
+.recap.rc3 span{color:var(--amber);border-color:rgba(255,197,61,.4);}
+.recap.rc4 span{color:var(--violet);border-color:rgba(167,139,250,.4);}
+.recap-label{font-size:.78em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin-top:16px;}
+
+/* ---------- MASTER TABLE ---------- */
+#master{padding-top:54px;}
+.tbl-wrap{overflow-x:auto;border-radius:20px;border:1px solid var(--glass-b);margin-top:18px;}
+table{width:100%;min-width:680px;border-collapse:collapse;background:rgba(0,0,0,.28);}
+thead th{background:linear-gradient(92deg,rgba(167,139,250,.28),rgba(255,77,141,.28));
+  padding:12px 14px;text-align:left;font-size:.82em;letter-spacing:.08em;text-transform:uppercase;font-weight:900;}
+tbody td{padding:10px 14px;border-top:1px solid rgba(255,255,255,.07);font-size:.93em;vertical-align:top;}
+tbody tr:hover td{background:rgba(255,255,255,.045);}
+td.n{font-weight:900;color:var(--lime);}
+td.k{font-weight:800;color:#fff;}
+td.e{font-style:italic;color:var(--mut);}
+
+/* ---------- PRACTICE ---------- */
+#practice{padding-top:54px;}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:18px;}
+.pq{background:var(--glass);border:1px solid var(--glass-b);border-radius:20px;padding:18px;backdrop-filter:blur(8px);}
+.pq .qn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:12px;
+  font-weight:900;background:linear-gradient(135deg,var(--lime),var(--cyan));color:#062012;margin-bottom:8px;}
+.pq .qt{font-weight:700;}
+.opts{display:flex;gap:10px;margin-top:12px;}
+.opt{flex:1;border-radius:12px;padding:10px 6px;font-weight:900;font-size:1em;cursor:pointer;
+  background:rgba(0,0,0,.35);border:1.5px solid var(--glass-b);color:var(--txt);transition:.15s;}
+.opt:hover{border-color:var(--lime);transform:translateY(-2px);}
+.opt:disabled{cursor:default;transform:none;}
+.opt.yes{background:rgba(124,242,92,.16);border-color:var(--ok);color:var(--ok);}
+.opt.nah{background:rgba(255,107,107,.13);border-color:var(--no);color:var(--no);text-decoration:line-through;}
+.opt.show-right{border-color:var(--ok);}
+.pfb{display:none;margin-top:12px;border-radius:12px;padding:9px 12px;font-size:.88em;line-height:1.55;
+  background:rgba(0,0,0,.3);border:1px dashed var(--glass-b);}
+.pfb.show{display:block;}
+.pfb .verdict{font-weight:900;}
+.pfb.right .verdict{color:var(--ok);} .pfb.wrong .verdict{color:var(--no);}
+.pfb .hint{color:var(--amber);font-weight:700;}
+.strategy{margin-top:22px;border-radius:18px;padding:16px 20px;font-weight:600;
+  background:linear-gradient(120deg,rgba(124,242,92,.1),rgba(34,211,238,.1));
+  border:1.5px solid rgba(124,242,92,.35);}
+.strategy b{color:var(--lime);}
+.strategy .svi{display:block;color:var(--mut);font-style:italic;font-size:.92em;}
+
+/* ---------- FOOTER ---------- */
+footer{margin-top:70px;border-top:1px solid rgba(255,255,255,.08);padding:34px 20px 44px;text-align:center;}
+footer .fname{font-weight:900;font-size:1.15em;letter-spacing:.02em;
+  background:linear-gradient(92deg,var(--cyan),var(--violet),var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+@media(max-width:520px){
+  .hero{padding-top:46px;}
+  .plist{grid-template-columns:1fr;}
+  .rule{padding:18px 16px 16px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO ================= -->
+<div class="hero">
+  <span class="sticker s1">⚡</span><span class="sticker s2">🔥</span>
+  <span class="yo">Grammar · no cap 💯</span>
+  <h1><span class="l1">Sự Hoà Hợp</span><span class="l2">Chủ Ngữ &amp; Động Từ</span></h1>
+  <div class="sub">Subject and Verb Agreement ✨</div>
+</div>
+
+<div class="toc">
+  <div class="toc-card">
+    <h2>🎯 <span>21 Quy tắc</span> – Lesson Contents</h2>
+    <div class="toc-row tc1"><span class="toc-tag">Slides 2–3</span><div><b><a href="#g1">QT 1–6:</a></b> AND / EACH/EVERY / V-ing / Noun clause / Titles / -s nouns</div></div>
+    <div class="toc-row tc2"><span class="toc-tag">Slides 4–5</span><div><b><a href="#g2">QT 7–12:</a></b> Plural nouns / THE+adj / Either–or / As well as / OF / A number</div></div>
+    <div class="toc-row tc3"><span class="toc-tag">Slides 6–7</span><div><b><a href="#g3">QT 13–18:</a></b> Collective / THERE / Relative clause / Possessive / Always-plural / Indefinite pronoun</div></div>
+    <div class="toc-row tc4"><span class="toc-tag">Slide 8</span><div><b><a href="#g4">QT 19–21:</a></b> NO / Inversion / None of… + Master Summary</div></div>
+  </div>
+</div>
+
+<!-- ================= NAV ================= -->
+<nav class="chipnav" aria-label="Điều hướng nhanh">
+  <div class="inner">
+    <a class="chip c1" href="#g1">1️⃣ QT 1–6</a>
+    <a class="chip c2" href="#g2">2️⃣ QT 7–10</a>
+    <a class="chip c3" href="#g3">3️⃣ QT 11–14</a>
+    <a class="chip c4" href="#g4">4️⃣ QT 15–21</a>
+    <a class="chip c5" href="#master">📋 Bảng tổng kết</a>
+    <a class="chip c6" href="#practice">🎮 Bài tập</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= GROUP 1 : QT 1–6 ================= -->
+<section class="grp g1" id="g1">
+  <div class="grp-head">
+    <span class="big">Quy tắc 1–6</span>
+    <span class="desc">Rules 1–6: AND / EACH–EVERY / V-ing / Noun clause / Titles / -S nouns</span>
+  </div>
+  <div class="grid">
+
+    <article class="rule"><span class="rnum">1</span>
+      <h3>AND → số nhiều (trừ ngoại lệ)<span class="h-en">AND → plural (with exceptions)</span></h3>
+      <div class="formula">[A] and [B] → V (số nhiều / plural)</div>
+      <div class="ex"><span class="een">📌 My sister and I like listening to classical music.</span>
+        <span class="evi">Chị gái tôi và tôi thích nghe nhạc cổ điển.</span></div>
+      <div class="tip">💡 <b>EXCEPT:</b> same person, food pair, or math: Salt and pepper is... / Two and three is five.
+        <span class="tvi">NGOẠI LỆ: cùng 1 người, món ăn kép, hoặc phép tính cộng</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">2</span>
+      <h3>EACH, EVERY, MANY A → số ít<span class="h-en">EACH / EVERY / MANY A → singular</span></h3>
+      <div class="formula">Each / Every / Many a + N → V (số ít)</div>
+      <div class="ex"><span class="een">📌 Each person is allowed 20 kg. / Every student is told about changes.</span>
+        <span class="evi">Mỗi người được phép mang 20 kg. / Mỗi học sinh được thông báo.</span></div>
+      <div class="tip">💡 <b>Many a politician has promised to make changes.</b>
+        <span class="tvi">Nhiều chính trị gia đã hứa sẽ cải cách.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">3</span>
+      <h3>TO V / V-ing làm chủ ngữ → số ít<span class="h-en">Infinitive / Gerund as subject → singular</span></h3>
+      <div class="formula">To V / V-ing → V (số ít / singular)</div>
+      <div class="ex"><span class="een">📌 To jog / Jogging every day is good for your health.</span>
+        <span class="evi">Chạy bộ mỗi ngày rất tốt cho sức khoẻ.</span></div>
+      <div class="tip">💡 <b>The entire infinitive/gerund phrase = one idea = singular.</b>
+        <span class="tvi">Toàn bộ cụm động từ nguyên mẫu/V-ing là 1 ý → số ít</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">4</span>
+      <h3>Mệnh đề danh từ làm chủ ngữ → số ít<span class="h-en">Noun clause as subject → singular</span></h3>
+      <div class="formula">What/That + clause → V (số ít)</div>
+      <div class="ex"><span class="een">📌 What you have said is not true.</span>
+        <span class="evi">Những gì bạn đã nói là không đúng sự thật.</span></div>
+      <div class="tip">💡 <b>The noun clause functions as one unit = singular.</b>
+        <span class="tvi">Mệnh đề danh từ = 1 đơn vị → số ít</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">5</span>
+      <h3>Tựa đề (phim, sách, bài hát) → số ít<span class="h-en">Titles (film / book / song) → singular</span></h3>
+      <div class="formula">"Title" → V (số ít / singular)</div>
+      <div class="ex"><span class="een">📌 "Tom and Jerry" is my son's favorite cartoon.</span>
+        <span class="evi">"Tom and Jerry" là bộ phim hoạt hình yêu thích của con tôi.</span></div>
+      <div class="tip">💡 <b>Even if title contains AND or plural nouns, use singular.</b>
+        <span class="tvi">Dù tựa đề có AND hay danh từ số nhiều, vẫn dùng số ít</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">6</span>
+      <h3>Danh từ kết thúc -s nhưng dùng số ít<span class="h-en">Nouns ending in -s but singular</span></h3>
+      <div class="formula">Subjects / Sports / Diseases / Amounts / Countries → V (số ít)</div>
+      <div class="ex"><span class="een">📌 Physics is difficult. / Measles is contagious. / Ten miles is far.</span>
+        <span class="evi">Vật lý rất khó. / Bệnh sởi dễ lây. / Mười dặm là xa.</span></div>
+      <div class="tip">💡 <b>Also: The United States / the Philippines / Wales → singular.</b>
+        <span class="tvi">Môn học, môn thể thao, bệnh, khoảng cách/thời gian/tiền, tên nước</span></div>
+    </article>
+  </div>
+
+  <div class="recap-label">⚡ Recap nhanh</div>
+  <div class="recap rc1">
+    <span>AND → số nhiều</span><span>EACH/EVERY/MANY A → số ít</span><span>V-ing/To V → số ít</span>
+    <span>Mệnh đề DT → số ít</span><span>Tựa đề → số ít</span><span>môn học/bệnh/đo lường → số ít</span>
+  </div>
+</section>
+
+<!-- ================= GROUP 2 : QT 7–10 ================= -->
+<section class="grp g2" id="g2">
+  <div class="grp-head">
+    <span class="big">Quy tắc 7–9</span>
+    <span class="desc">Rules 7–9: Always-Plural / THE+Adj / Either–Nor / Not only–But also</span>
+  </div>
+  <div class="grid">
+
+    <article class="rule"><span class="rnum">7</span>
+      <h3>Danh từ KHÔNG -s nhưng số nhiều<span class="h-en">Nouns without -s but always plural</span></h3>
+      <div class="formula">Always plural → V (số nhiều)</div>
+      <div class="plist">
+        <span>• people / người</span><span>• cattle / gia súc</span>
+        <span>• police / cảnh sát</span><span>• army / quân đội</span>
+        <span>• children / trẻ em</span><span>• women / phụ nữ</span>
+        <span>• men / đàn ông</span><span>• teeth / răng</span>
+        <span>• feet / chân</span><span>• mice / chuột</span>
+      </div>
+      <div class="ex"><span class="een">📌 The police are investigating.</span>
+        <span class="evi">Cảnh sát đang điều tra.</span></div>
+      <div class="ex"><span class="een">📌 Children are the future.</span>
+        <span class="evi">Trẻ em là tương lai.</span></div>
+      <div class="ex"><span class="een">📌 The army are marching.</span>
+        <span class="evi">Quân đội đang hành quân.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">8</span>
+      <h3>THE + Tính từ = Danh từ chỉ người → số nhiều<span class="h-en">THE + Adjective = Noun (people) → plural</span></h3>
+      <div class="formula">The + adj → V (số nhiều / plural)</div>
+      <div class="ex"><span class="een">📌 The blind are people who can't see.</span>
+        <span class="evi">Người mù là những ai không thể nhìn.</span></div>
+      <div class="tip">💡 <b>the rich / the poor / the elderly / the disabled → số nhiều</b>
+        <span class="tvi">Người giàu / nghèo / cao tuổi / khuyết tật → số nhiều</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">9</span>
+      <h3>EITHER…OR / NEITHER…NOR / NOT ONLY…BUT ALSO → chia theo chủ ngữ GẦN NHẤT<span class="h-en">Verb agrees with the NEAREST subject</span></h3>
+      <div class="ex"><span class="een">📌 Neither she nor her children were inherited.</span>
+        <span class="evi">Cả cô ấy lẫn các con đều không được thừa kế.</span>
+        <span class="note">→ chia theo 'children' (gần nhất)</span></div>
+      <div class="ex"><span class="een">📌 Either they or their son is not allowed.</span>
+        <span class="evi">Hoặc họ hoặc con trai họ không được phép.</span>
+        <span class="note">→ chia theo 'son' (gần nhất)</span></div>
+      <div class="ex"><span class="een">📌 Not only she but also her friends are going.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">10</span>
+      <h3>AS WELL AS / WITH / TOGETHER WITH → chia theo chủ ngữ PHÍA TRƯỚC<span class="h-en">Verb agrees with the FIRST (main) subject — as well as / with / together with / along with / accompanied by</span></h3>
+      <div class="ex"><span class="een">📌 She as well as I is going to university.</span>
+        <span class="evi">Cô ấy cũng như tôi sẽ vào đại học.</span>
+        <span class="note">→ chia theo 'She' (phía trước)</span></div>
+      <div class="ex"><span class="een">📌 Mrs. Smith together with her sons is away.</span>
+        <span class="evi">Bà Smith cùng các con đi vắng.</span>
+        <span class="note">→ chia theo 'Mrs. Smith' (phía trước)</span></div>
+      <div class="ex"><span class="een">📌 The teacher along with students is in class.</span>
+        <span class="evi">Giáo viên cùng học sinh đang trong lớp.</span>
+        <span class="note">→ chia theo 'The teacher'</span></div>
+      <div class="ex"><span class="een">📌 John with his brothers is playing outside.</span>
+        <span class="evi">John cùng các anh đang chơi ngoài đó.</span>
+        <span class="note">→ chia theo 'John'</span></div>
+    </article>
+  </div>
+
+  <div class="recap-label">⚡ Recap nhanh</div>
+  <div class="recap rc2">
+    <span>QT7: luôn số nhiều (people/police...)</span>
+    <span>QT8: the + adj → số nhiều</span>
+    <span>QT9: either/neither/not only → chủ ngữ GẦN NHẤT</span>
+    <span>QT10: as well as/with → chủ ngữ TRƯỚC</span>
+  </div>
+</section>
+
+<!-- ================= GROUP 3 : QT 11–14 ================= -->
+<section class="grp g3" id="g3">
+  <div class="grp-head">
+    <span class="big">Quy tắc 11–14</span>
+    <span class="desc">Rules 11–14: OF / A–THE number / Collective nouns / THERE</span>
+  </div>
+  <div class="grid">
+
+    <article class="rule"><span class="rnum">11</span>
+      <h3>Hai danh từ nối bằng OF → chia theo DT phía TRƯỚC (trừ some/all/most/majority...)</h3>
+      <div class="formula">DT + of + DT → V theo DT TRƯỚC &nbsp;|&nbsp; some/all/most/half... of + DT → V theo DT SAU
+        <span style="display:block;font-weight:600;font-style:italic;font-size:.85em;color:var(--mut);">Noun + of + Noun → V agrees with FIRST noun | some/all/most/half of Noun → V with noun AFTER 'of'</span></div>
+      <div class="ex"><span class="een">📌 The study of living things is called philosophy.</span>
+        <span class="evi">Nghiên cứu sinh vật được gọi là triết học.</span>
+        <span class="note">→ chia theo 'study' (DT trước of)</span></div>
+      <div class="ex"><span class="een">📌 Some of the students are late for class.</span>
+        <span class="evi">Một số sinh viên đến lớp trễ.</span>
+        <span class="note">→ some → chia theo 'students' (DT sau of)</span></div>
+      <div class="ex"><span class="een">📌 Most of the water is polluted.</span>
+        <span class="evi">Phần lớn nước bị ô nhiễm.</span>
+        <span class="note">→ most → chia theo 'water' (số ít)</span></div>
+      <div class="ex"><span class="een">📌 The majority think that...</span>
+        <span class="evi">Đa số nghĩ rằng...</span>
+        <span class="note">→ majority đứng 1 mình → suy ra người → số nhiều</span></div>
+      <div class="ex"><span class="een">📌 All of the cake was eaten.</span>
+        <span class="evi">Tất cả chiếc bánh đã bị ăn hết.</span>
+        <span class="note">→ all → chia theo 'cake' (số ít)</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">12</span>
+      <h3>A NUMBER OF vs THE NUMBER OF</h3>
+      <div class="formula">A number of + N → V NHIỀU &nbsp;|&nbsp; The number of + N → V ÍT</div>
+      <div class="ex"><span class="een">📌 A number of students are going to the picnic.</span>
+        <span class="evi">Rất nhiều sinh viên sẽ đi dã ngoại. (A number of = nhiều → số nhiều)</span></div>
+      <div class="ex"><span class="een">📌 The number of days in a week is seven.</span>
+        <span class="evi">Số ngày trong tuần là bảy. (The number of = con số → số ít)</span></div>
+      <div class="tip">💡 <b>Mẹo:</b> A number = nhiều (như a lot of) → số nhiều &nbsp;|&nbsp; The number = con số cụ thể → số ít</div>
+    </article>
+
+    <article class="rule"><span class="rnum">13</span>
+      <h3>Danh từ tập hợp (family, team, committee...)<span class="h-en">Collective nouns → depends on meaning</span></h3>
+      <div class="formula">Hành động từng thành viên → V NHIỀU &nbsp;|&nbsp; Tính chất tập thể → V ÍT</div>
+      <div class="ex"><span class="een">📌 The family ARE having breakfast. (từng thành viên)</span></div>
+      <div class="ex"><span class="een">📌 The family IS very conservative. (cả tập thể)</span>
+        <span class="evi">Gia đình đang ăn sáng. / Gia đình rất bảo thủ.</span></div>
+      <div class="tip">💡 <b>family / staff / team / group / committee / congress / crowd → có thể số ít HOẶC số nhiều</b>
+        <span class="tvi">depending on meaning of action (individual members or as a unit)</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">14</span>
+      <h3>THERE + V → chia theo DT SAU THERE</h3>
+      <div class="formula">There is a book... &nbsp;|&nbsp; There are two books... &nbsp;|&nbsp; There is a book and two pens... (chia theo 'a book')</div>
+    </article>
+  </div>
+
+  <div class="recap-label">⚡ Recap nhanh</div>
+  <div class="recap rc3">
+    <span>OF: chia theo DT trước (trừ some/all/most/half/majority... → chia theo DT sau of)</span>
+    <span>A number → số nhiều</span>
+    <span>The number → số ít</span>
+    <span>THERE → chia theo DT sau there</span>
+  </div>
+</section>
+
+<!-- ================= GROUP 4 : QT 15–21 ================= -->
+<section class="grp g4" id="g4">
+  <div class="grp-head">
+    <span class="big">Quy tắc 15–21</span>
+    <span class="desc">Rules 15–21: Relative Clause / Possessive / Always-plural / Indefinite / NO / Inversion / None of</span>
+  </div>
+  <div class="grid">
+
+    <article class="rule"><span class="rnum">15</span>
+      <h3>Mệnh đề quan hệ → chia theo DT trong MĐ chính<span class="h-en">Relative clause → verb agrees with antecedent in main clause</span></h3>
+      <div class="formula">...noun + who/which/that + V (theo noun đó)</div>
+      <div class="ex"><span class="een">📌 One of the girls who go out is very good. (→ "the girls" → go)</span>
+        <span class="evi">"One of the girls" → mệnh đề quan hệ chia theo "the girls" (số nhiều)</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">16</span>
+      <h3>Đại từ sở hữu (mine/his/hers/ours...) → suy ra sở hữu<span class="h-en">Possessive pronouns → deduce the noun owned</span></h3>
+      <div class="formula">mine/his/hers... → think about WHAT is possessed (singular/plural?)</div>
+      <div class="ex"><span class="een">📌 Give me your scissors. Mine are very old.</span>
+        <span class="evi">Mine ở đây → scissors của tôi → số nhiều → Mine ARE very old</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">17</span>
+      <h3>Danh từ luôn số nhiều (scissors, pants, trousers...)<span class="h-en">Always-plural nouns (scissors / trousers / pliers...)</span></h3>
+      <div class="formula">scissors/pants/trousers/pliers/tongs → V (số nhiều) &nbsp;|&nbsp; 'A pair of...' → V (số ít)</div>
+      <div class="ex"><span class="een">📌 The scissors are sharp. &nbsp;BUT:&nbsp; A pair of scissors was left on the table.</span>
+        <span class="evi">Cái kéo rất sắc. NHƯNG: Một cái kéo được để lại trên bàn.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">18</span>
+      <h3>Đại từ bất định (someone/anyone/everyone/nobody...) → số ít<span class="h-en">Indefinite pronouns (someone/anything/nobody...) → singular</span></h3>
+      <div class="formula">someone/anyone/everyone/nobody/something/nothing/everything... → V (số ít)</div>
+      <div class="ex"><span class="een">📌 Everything seems perfect. / Nobody loves me. / Someone is here.</span>
+        <span class="evi">Mọi thứ trông có vẻ hoàn hảo. / Chả ai yêu tôi cả.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">19</span>
+      <h3>NO + DT số ít → V số ít / NO + DT số nhiều → V số nhiều<span class="h-en">NO + singular N → singular / NO + plural N → plural</span></h3>
+      <div class="formula">No + [N-singular] → V singular &nbsp;|&nbsp; No + [N-plural] → V plural</div>
+      <div class="ex"><span class="een">📌 No money has been invested. / No lessons were given.</span>
+        <span class="evi">Không có tiền nào được đầu tư. / Không có bài học nào được dạy.</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">20</span>
+      <h3>Đảo ngữ chỉ nơi chốn → V theo DT sau động từ<span class="h-en">Inversion with place adverbials → V agrees with the following noun</span></h3>
+      <div class="formula">Place adverb + V + Noun (verb agrees with the noun)</div>
+      <div class="ex"><span class="een">📌 On the top of the hill is a temple.</span>
+        <span class="evi">Trên đỉnh đồi có một ngôi đền. (V = is, theo 'a temple')</span></div>
+    </article>
+
+    <article class="rule"><span class="rnum">21</span>
+      <h3>NONE OF / EITHER OF / NEITHER OF / ONE OF → V số ít<span class="h-en">None of / Either of / Neither of / One of → singular verb</span></h3>
+      <div class="formula">None of / Either of / Neither of / One of + N → V (số ít)</div>
+      <div class="ex"><span class="een">📌 None of my children has blue eyes. / One of the girls is late.</span>
+        <span class="evi">Không ai trong số các con tôi có mắt xanh. / Một trong số các cô gái đến muộn.</span></div>
+    </article>
+  </div>
+
+  <div class="recap-label">⚡ Recap nhanh</div>
+  <div class="recap rc4">
+    <span>QT15: MĐ QH → chia theo DT trong MĐ chính</span>
+    <span>QT17: scissors/pants/trousers → số nhiều (a pair of → số ít)</span>
+    <span>QT18: someone/nobody → số ít</span>
+    <span>QT21: none of → số ít</span>
+  </div>
+</section>
+
+<!-- ================= MASTER TABLE ================= -->
+<section id="master">
+  <div class="grp-head">
+    <span class="big" style="background:linear-gradient(92deg,var(--lime),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;">📋 Bảng tổng kết 21 quy tắc</span>
+    <span class="desc">21 Rules – Master Reference Table</span>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Từ/Cấu trúc / Key word</th><th>Quy tắc / Rule</th><th>Ví dụ / Example</th></tr></thead>
+      <tbody>
+        <tr><td class="n">1</td><td class="k">AND</td><td>Số nhiều / Plural (trừ cùng người, món ăn, phép cộng)</td><td class="e">She and I like music. → like</td></tr>
+        <tr><td class="n">2</td><td class="k">EACH/EVERY/MANY A</td><td>Số ít / Singular</td><td class="e">Each student is...</td></tr>
+        <tr><td class="n">3</td><td class="k">To V / V-ing</td><td>Số ít / Singular</td><td class="e">Jogging is good...</td></tr>
+        <tr><td class="n">4</td><td class="k">That/What clause</td><td>Số ít / Singular</td><td class="e">What you said is...</td></tr>
+        <tr><td class="n">5</td><td class="k">"Title"</td><td>Số ít / Singular</td><td class="e">"T&amp;J" is a cartoon.</td></tr>
+        <tr><td class="n">6</td><td class="k">Physics/-ics / Measles / $10 / USA</td><td>Số ít / Singular</td><td class="e">Physics is hard.</td></tr>
+        <tr><td class="n">7</td><td class="k">People/Police/Cattle</td><td>Luôn số nhiều / Always plural</td><td class="e">People are kind.</td></tr>
+        <tr><td class="n">8</td><td class="k">The + adj</td><td>Số nhiều (chỉ người) / Plural for people</td><td class="e">The blind are...</td></tr>
+        <tr><td class="n">9</td><td class="k">Either...or / Neither...nor</td><td>Theo chủ ngữ GẦN NHẤT / Nearest S</td><td class="e">Neither she nor they are...</td></tr>
+        <tr><td class="n">10</td><td class="k">As well as / Together with</td><td>Theo chủ ngữ PHÍA TRƯỚC / First S</td><td class="e">She as well as I is...</td></tr>
+        <tr><td class="n">11</td><td class="k">N of N</td><td>Theo DT TRƯỚC of (trừ some/all/most/half/majority)</td><td class="e">The group of students is...</td></tr>
+        <tr><td class="n">12</td><td class="k">A number of</td><td>Số nhiều / Plural</td><td class="e">A number of students are...</td></tr>
+        <tr><td class="n">13</td><td class="k">The number of</td><td>Số ít / Singular</td><td class="e">The number is seven.</td></tr>
+        <tr><td class="n">14</td><td class="k">Family/Team/Committee</td><td>Tùy ý nghĩa: từng TV → nhiều, tập thể → ít</td><td class="e">The team is/are...</td></tr>
+        <tr><td class="n">15</td><td class="k">There</td><td>Theo DT SAU 'there' / Noun after 'there'</td><td class="e">There are two books.</td></tr>
+        <tr><td class="n">16</td><td class="k">Mệnh đề QH / Relative</td><td>Theo DT TIỀN DANH TỪ / Antecedent</td><td class="e">...girls who go → go</td></tr>
+        <tr><td class="n">17</td><td class="k">mine/his/hers...</td><td>Suy ra danh từ sở hữu / Deduce the noun</td><td class="e">Mine are old (scissors)</td></tr>
+        <tr><td class="n">18</td><td class="k">scissors/pants/trousers</td><td>Luôn số nhiều (a pair of → số ít)</td><td class="e">The scissors are sharp.</td></tr>
+        <tr><td class="n">19</td><td class="k">someone/nobody/everything</td><td>Số ít / Singular</td><td class="e">Nobody knows.</td></tr>
+        <tr><td class="n">20</td><td class="k">no + N</td><td>Theo danh từ sau 'no' / Follow N after 'no'</td><td class="e">No lessons were given.</td></tr>
+        <tr><td class="n">21</td><td class="k">Inversion chỉ nơi</td><td>Theo DT sau V / Follow noun after verb</td><td class="e">On the hill is a temple.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= PRACTICE ================= -->
+<section id="practice">
+  <div class="grp-head">
+    <span class="big" style="background:linear-gradient(92deg,var(--pink),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent;">🎮 Bài tập áp dụng</span>
+    <span class="desc">Practice – Subject–Verb Agreement</span>
+  </div>
+  <p style="margin-top:8px;font-weight:700;">📝 Chọn động từ đúng / Choose the correct verb form:</p>
+  <div class="pgrid" id="pgrid"></div>
+
+  <div class="strategy">🔑 <b>Chiến lược:</b> (1) Tìm chủ ngữ thực &nbsp;(2) Xác định số ít/nhiều &nbsp;(3) Áp dụng quy tắc đặc biệt nếu có
+    <span class="svi">Find real subject → singular or plural? → apply special rule if any.</span>
+  </div>
+</section>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="fname">Nguyễn Duy Nhất - 0932067877</div>
+</footer>
+
+<script>
+var qs=[
+ {t:'The United Nations (is / are) ______ headquartered in New York.',o:['is','are'],c:0,h:"QT6: tên quốc gia/tổ chức → số ít"},
+ {t:'Neither the students nor the teacher (was / were) ______ informed.',o:['was','were'],c:0,h:"QT9: neither…nor → chia theo 'teacher' (gần nhất)"},
+ {t:'A number of people (has / have) ______ signed the petition.',o:['has','have'],c:1,h:"QT12: A number of → số nhiều"},
+ {t:'The number of students in the class (is / are) ______ 30.',o:['is','are'],c:0,h:"QT12: The number of → số ít"},
+ {t:'What he said (was / were) ______ completely false.',o:['was','were'],c:0,h:"QT4: mệnh đề danh từ → số ít"},
+ {t:'The scissors (is / are) ______ in the drawer.',o:['is','are'],c:1,h:"QT17: scissors → luôn số nhiều"},
+ {t:'Each of the students (has / have) ______ a textbook.',o:['has','have'],c:0,h:"QT2 + QT21: each → số ít"},
+ {t:'The police (is / are) ______ investigating the incident.',o:['is','are'],c:1,h:"QT7: police → luôn số nhiều"},
+ {t:'She together with her children (is / are) ______ going abroad.',o:['is','are'],c:0,h:"QT10: together with → chia theo 'She' (phía trước)"},
+ {t:'One of the girls who (go / goes) ______ to school is very bright.',o:['go','goes'],c:0,h:"QT15: mệnh đề QH chia theo 'the girls' (số nhiều)"}
+];
+var grid=document.getElementById('pgrid');
+qs.forEach(function(q,i){
+  var d=document.createElement('div');d.className='pq';
+  var h='<span class="qn">'+(i+1)+'</span><div class="qt">'+q.t+'</div><div class="opts">';
+  q.o.forEach(function(op,j){h+='<button class="opt" data-q="'+i+'" data-o="'+j+'">'+op+'</button>';});
+  h+='</div><div class="pfb" id="fb'+i+'"></div>';
+  d.innerHTML=h;grid.appendChild(d);
+});
+grid.addEventListener('click',function(e){
+  var b=e.target.closest('.opt');if(!b||b.disabled)return;
+  var i=+b.dataset.q,j=+b.dataset.o,q=qs[i],right=(j===q.c);
+  document.querySelectorAll('.opt[data-q="'+i+'"]').forEach(function(x){
+    var k=+x.dataset.o;x.disabled=true;
+    if(k===j)x.classList.add(right?'yes':'nah');
+    if(k===q.c)x.classList.add('show-right','yes');
+  });
+  var fb=document.getElementById('fb'+i);
+  fb.className='pfb show '+(right?'right':'wrong');
+  fb.innerHTML='<span class="verdict">'+(right?'✅ Slay! Đúng rồi':'❌ Oops! Đáp án đúng: '+q.o[q.c])+'</span> — <span class="hint">💡 '+q.h+'</span>';
+});
+</script>
+</body>
+</html>
