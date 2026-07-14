@@ -1,0 +1,1359 @@
+<title>IELTS Listening · Gen Z</title>
+<style>
+  /* Bảng màu navy + gold, hài hòa với IELTS Phú Quốc */
+  :root {
+    --bg: #0a1830; --bg2: #0e2145;
+    --panel: rgba(255,255,255,0.045); --panel-solid: #122644; --panel-2: rgba(255,255,255,0.07);
+    --brd: rgba(201,169,106,0.20); --ink: #f4efe1; --muted: #a7b6d1;
+    --pink: #c9a96a; --violet: #3a63b0; --cyan: #6f9fd6; --lime: #d8bd7b;
+    --good: #57c08a; --good-bg: rgba(87,192,138,0.15);
+    --bad: #e46b83; --bad-bg: rgba(228,107,131,0.16);
+    --shadow: 0 22px 55px -22px rgba(0,0,0,0.75);
+    --font: "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --serif: Georgia, "Times New Roman", "Playfair Display", serif;
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f1e7; --bg2: #ece7d8; --panel: rgba(20,35,70,0.035); --panel-solid: #ffffff;
+    --panel-2: rgba(20,35,70,0.06); --brd: rgba(30,45,80,0.16); --ink: #14233f; --muted: #5c6b86;
+    --pink: #a8843a; --violet: #234b8c; --cyan: #2f6aa8; --lime: #c2a35a;
+    --good: #1a8f5f; --good-bg: rgba(26,143,95,0.10); --bad: #cf4d68; --bad-bg: rgba(207,77,104,0.10);
+    --shadow: 0 22px 50px -26px rgba(20,35,70,0.35);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f1e7; --bg2: #ece7d8; --panel: rgba(20,35,70,0.035); --panel-solid: #ffffff;
+      --panel-2: rgba(20,35,70,0.06); --brd: rgba(30,45,80,0.16); --ink: #14233f; --muted: #5c6b86;
+      --pink: #a8843a; --violet: #234b8c; --cyan: #2f6aa8; --lime: #c2a35a;
+      --good: #1a8f5f; --good-bg: rgba(26,143,95,0.10); --bad: #cf4d68; --bad-bg: rgba(207,77,104,0.10);
+      --shadow: 0 22px 50px -26px rgba(20,35,70,0.35);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    font-family: var(--font); color: var(--ink); min-height: 100vh;
+    background:
+      radial-gradient(1000px 520px at 12% -8%, rgba(58,99,176,0.28), transparent 60%),
+      radial-gradient(820px 460px at 100% 0%, rgba(201,169,106,0.16), transparent 55%),
+      radial-gradient(700px 600px at 50% 120%, rgba(111,159,214,0.12), transparent 60%),
+      linear-gradient(160deg, var(--bg), var(--bg2));
+    background-attachment: fixed; -webkit-font-smoothing: antialiased; line-height: 1.5;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 20px 16px 90px; }
+
+  header { text-align: center; margin: 6px 0 14px; }
+  .kicker { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--muted); padding: 6px 13px; border-radius: 999px;
+    border: 1px solid var(--brd); background: var(--panel); }
+  h1 { margin: 12px 0 6px; font-family: var(--serif); font-size: clamp(30px, 7vw, 50px); font-weight: 800; letter-spacing: .02em;
+    line-height: 1; text-wrap: balance;
+    background: linear-gradient(100deg, var(--lime), var(--pink) 55%, var(--violet));
+    -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: 14.5px; margin: 0; font-weight: 600; }
+
+  .overall { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+    margin: 14px 0 4px; font-weight: 800; font-size: 14px; color: var(--muted); }
+  .overall b { color: var(--lime); font-size: 17px; }
+  .overall .pt { color: var(--cyan); }
+  .bar { height: 9px; border-radius: 999px; background: var(--panel-2); overflow: hidden; margin-top: 10px; }
+  .bar > i { display: block; height: 100%; width: 0; border-radius: 999px;
+    background: linear-gradient(90deg, var(--lime), var(--cyan)); transition: width .4s ease; }
+
+  .hdr-actions { display: flex; gap: 9px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+  .act { cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 13.5px;
+    padding: 10px 16px; border-radius: 12px; border: 1px solid var(--brd); background: var(--panel-solid); color: var(--ink);
+    transition: transform .1s, border-color .15s, filter .15s; }
+  .act:hover { transform: translateY(-1px); border-color: var(--violet); }
+  .act:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .act.hot { border: none; color: #10071e; background: linear-gradient(100deg, var(--lime), var(--cyan)); }
+  .act.hot:hover { filter: brightness(1.06); }
+
+  .testbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 18px 0 4px;
+    padding: 10px 12px; border: 1px solid var(--brd); border-radius: 14px; background: var(--panel); }
+  .testbar .tb-book { font-weight: 800; font-size: 14px; color: var(--pink); margin-right: 6px; white-space: nowrap; }
+  .tb-btn { cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 13.5px; padding: 8px 15px; border-radius: 10px;
+    border: 1px solid var(--brd); background: var(--panel-solid); color: var(--ink); transition: transform .1s, border-color .15s, background .15s; }
+  .tb-btn:hover { transform: translateY(-1px); border-color: var(--violet); }
+  .tb-btn.active { border: none; color: #10203c; background: linear-gradient(100deg, var(--lime), var(--pink)); }
+  .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0 18px; }
+  .tab { cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 14px;
+    padding: 12px 8px; border-radius: 15px; border: 1px solid var(--brd); background: var(--panel); color: var(--ink);
+    position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    transition: transform .12s, border-color .15s, background .2s; }
+  .tab:hover { transform: translateY(-2px); border-color: var(--violet); }
+  .tab:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .tab .emo { font-size: 20px; } .tab .lbl { font-size: 12.5px; }
+  .tab .mini { font-size: 10.5px; color: var(--muted); font-weight: 700; }
+  .tab.active { color: #fff; border: none; background: linear-gradient(120deg, var(--violet), var(--pink));
+    box-shadow: 0 12px 26px -12px rgba(255,46,151,0.6); }
+  .tab.active .mini { color: rgba(255,255,255,0.85); }
+  .tab.done::after { content: "✓"; position: absolute; top: 6px; right: 8px; font-size: 12px; color: var(--good); font-weight: 900; }
+  .tab.active.done::after { color: #fff; }
+
+  .sec-title { display: flex; align-items: baseline; gap: 10px; margin: 4px 2px 12px; flex-wrap: wrap; }
+  .sec-title h2 { margin: 0; font-size: 20px; font-weight: 900; }
+  .sec-title span { color: var(--muted); font-weight: 700; font-size: 14px; }
+
+  .sample-banner { background: linear-gradient(100deg, rgba(255,210,63,0.12), rgba(255,46,151,0.10));
+    border: 1px dashed var(--brd); border-radius: 14px; padding: 12px 15px; font-size: 13px; color: var(--muted); margin: 0 0 16px; font-weight: 600; }
+  .sample-banner b { color: var(--ink); }
+
+  .player { background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 18px; box-shadow: var(--shadow); padding: 14px 16px; margin: 0 0 16px; }
+  .player .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  audio { width: 100%; min-width: 200px; flex: 1; }
+  .pick label { cursor: pointer; padding: 9px 13px; border-radius: 11px; font-weight: 800; font-size: 13px;
+    color: var(--ink); background: var(--panel-2); border: 1px solid var(--brd); white-space: nowrap; }
+  .pick label:hover { border-color: var(--cyan); }
+  .pick input { display: none; }
+  .anote { font-size: 12.5px; color: var(--pink); margin: 9px 0 0; display: none; font-weight: 700; }
+  .anote.show { display: block; }
+
+  .export-row { margin: 0 0 20px; }
+  .btn-export { width: 100%; cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 14px;
+    padding: 13px; border-radius: 14px; border: 1px dashed var(--cyan); background: var(--panel); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: background .15s, transform .1s; }
+  .btn-export:hover { background: rgba(34,228,255,0.1); transform: translateY(-1px); }
+  .btn-export:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .btn-export small { color: var(--muted); font-weight: 700; }
+
+  .tools-row { display: flex; gap: 9px; margin: 0 0 20px; flex-wrap: wrap; }
+  .tools-row .tbtn { flex: 1; min-width: 130px; cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 13.5px;
+    padding: 12px; border-radius: 13px; border: 1px solid var(--brd); background: var(--panel-solid); color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px; transition: transform .1s, border-color .15s, background .15s; }
+  .tools-row .tbtn:hover { transform: translateY(-1px); border-color: var(--violet); }
+  .tools-row .tbtn.exp { border: 1px dashed var(--cyan); }
+  .tools-row .tbtn.exp:hover { background: rgba(34,228,255,0.1); }
+
+  .twrap { padding: 8px 18px 22px; }
+  .thint { color: var(--muted); font-size: 12.5px; font-weight: 700; margin: 0 0 12px; }
+  .tlist { display: grid; gap: 2px; }
+  .tline { position: relative; padding: 9px 12px; border-radius: 9px; cursor: pointer; font-size: 15px; line-height: 1.55; transition: background .12s; }
+  .tline:hover { background: var(--panel-2); }
+  .tline .tt { color: var(--cyan); font-weight: 800; font-size: 12px; font-variant-numeric: tabular-nums; margin-right: 8px; }
+  .tvn { position: absolute; left: 12px; right: 12px; bottom: calc(100% - 3px); z-index: 3; background: var(--violet); color: #fff;
+    font-size: 13.5px; font-weight: 600; line-height: 1.4; padding: 8px 11px; border-radius: 10px; box-shadow: var(--shadow);
+    opacity: 0; visibility: hidden; transition: opacity .15s; pointer-events: none; }
+  .tvn::after { content: ""; position: absolute; left: 20px; top: 100%; border: 6px solid transparent; border-top-color: var(--violet); }
+  .tline:hover .tvn, .tline.show .tvn { opacity: 1; visibility: visible; }
+
+  .dwrap { padding: 8px 18px 22px; }
+  .dhint { color: var(--muted); font-size: 12.5px; font-weight: 700; margin: 0 0 14px; }
+  .dcard { border: 1px solid var(--brd); border-radius: 14px; padding: 13px 14px; margin-bottom: 12px; background: var(--panel); }
+  .dtop { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+  .dtop .dnum { font-weight: 700; font-size: 13px; color: var(--muted); }
+  .dplay { cursor: pointer; border: none; font-family: var(--font); font-weight: 800; font-size: 13px; padding: 8px 13px; border-radius: 10px;
+    color: #10071e; background: linear-gradient(100deg, var(--lime), var(--cyan)); display: inline-flex; align-items: center; gap: 6px; }
+  .dplay:hover { filter: brightness(1.06); }
+  .dinput { width: 100%; font-family: var(--font); font-size: 15px; padding: 11px 13px; border-radius: 11px;
+    border: 1px solid var(--brd); background: var(--panel-2); color: var(--ink); }
+  .dinput:focus-visible { outline: 2px solid var(--violet); outline-offset: 1px; }
+  .dbtns { display: flex; gap: 8px; margin-top: 9px; }
+  .dbtns button { cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 13px; padding: 9px 13px; border-radius: 10px;
+    border: 1px solid var(--brd); background: var(--panel-solid); color: var(--ink); }
+  .dbtns .dcheck { border: none; color: #fff; background: linear-gradient(100deg, var(--violet), var(--pink)); }
+  .dfb { margin-top: 10px; font-size: 14px; line-height: 1.7; display: none; }
+  .dfb.show { display: block; }
+  .dfb .ok { color: var(--good); font-weight: 700; }
+  .dfb .miss { color: var(--bad); font-weight: 700; text-decoration: underline; }
+  .dfb .scoreline { font-weight: 800; margin-bottom: 5px; }
+
+  .qlist { display: grid; gap: 10px; }
+  .qcard { text-align: left; width: 100%; cursor: pointer; font-family: var(--font);
+    background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 15px;
+    padding: 14px 16px; color: var(--ink); display: flex; gap: 13px; align-items: center;
+    transition: border-color .15s, transform .1s; }
+  .qcard:hover { border-color: var(--pink); transform: translateY(-1px); }
+  .qcard:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .qnum { flex: none; min-width: 34px; padding: 0 6px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+    font-weight: 900; font-size: 14px; color: #fff; background: linear-gradient(120deg, var(--violet), var(--cyan)); white-space: nowrap; }
+  .qcard.correct .qnum { background: linear-gradient(120deg, var(--good), var(--lime)); color: #06210f; }
+  .qcard.wrong .qnum { background: linear-gradient(120deg, var(--bad), var(--pink)); color: #fff; }
+  .qtext { flex: 1; font-weight: 600; font-size: 15px; }
+  .qtag { display: block; font-size: 10.5px; color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-top: 3px; }
+  .status { flex: none; font-size: 12px; font-weight: 800; }
+  .status.c { color: var(--good); } .status.w { color: var(--bad); }
+  .chev { color: var(--muted); font-size: 20px; }
+
+  /* vocab */
+  .vocab { margin-top: 26px; background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 18px; padding: 18px 18px 20px; box-shadow: var(--shadow); }
+  .vocab h3 { margin: 0 0 4px; font-size: 17px; font-weight: 900;
+    background: linear-gradient(100deg, var(--lime), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .vocab .vsub { margin: 0 0 14px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .vgrid { display: grid; gap: 10px; }
+  .vcard { border: 1px solid var(--brd); border-radius: 13px; padding: 12px 14px; background: var(--panel); }
+  .vw { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 800; font-size: 15.5px; }
+  .vw .ipa { font-weight: 600; color: var(--cyan); font-size: 14px; font-family: "Segoe UI", system-ui; }
+  .vw .pos { color: var(--muted); font-weight: 700; font-size: 12.5px; font-style: italic; }
+  .vw .say { margin-left: auto; border: none; cursor: pointer; background: var(--panel-2); color: var(--ink);
+    width: 30px; height: 30px; border-radius: 9px; font-size: 15px; }
+  .vw .say:hover { background: rgba(34,228,255,0.2); }
+  .vvn { margin-top: 4px; font-weight: 700; font-size: 14px; }
+  .vex { margin-top: 3px; color: var(--muted); font-size: 13.5px; font-style: italic; }
+  .vocab h4 { margin: 20px 0 8px; font-size: 14px; font-weight: 900; color: var(--pink); }
+  .structs { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+  .structs li { border-left: 3px solid var(--violet); padding: 4px 0 4px 12px; font-size: 14px; }
+  .structs li b { color: var(--ink); }
+  .structs li span { color: var(--muted); }
+  .structs li .sex { display: block; margin-top: 3px; color: var(--pink); font-style: italic; font-size: 13.5px; }
+  .vdetails { border: 1px solid var(--brd); border-radius: 13px; background: var(--panel); overflow: hidden; }
+  .vdetails > summary { cursor: pointer; list-style: none; padding: 13px 15px; display: flex; align-items: center; gap: 10px;
+    font-weight: 800; font-size: 15.5px; color: var(--ink); }
+  .vdetails > summary::-webkit-details-marker { display: none; }
+  .vdetails > summary::after { content: "▾"; margin-left: auto; color: var(--muted); transition: transform .2s; }
+  .vdetails[open] > summary::after { transform: rotate(180deg); }
+  .vdetails > summary .vhint2 { font-size: 11.5px; font-weight: 700; color: var(--pink); background: var(--panel-2); padding: 3px 9px; border-radius: 999px; }
+  .vdetails[open] > summary .vhint2 { display: none; }
+  .vdetails .vsub { padding: 0 15px; }
+  .vdetails .vgrid { padding: 4px 15px 15px; }
+
+  /* ===== EXAM MODE — giống phuquocielts.vn (computer-delivered) ===== */
+  .examact { border-color: #16243d !important; }
+  body.exammode { background: #ffffff !important; }
+  body.exammode .wrap { max-width: 100%; padding: 0; }
+  body.exammode > .wrap > header, body.exammode .tabs, body.exammode .testbar, body.exammode > .wrap > footer { display: none; }
+  body.exammode { font-family: Arial, Helvetica, sans-serif; }
+
+  .exam-top { position: fixed; top: 0; left: 0; right: 0; height: 46px; background: #17253f; color: #fff;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; z-index: 46; }
+  .et-user { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .et-user .ava { width: 22px; height: 22px; border-radius: 50%; background: #33445f; display: grid; place-items: center; font-size: 12px; }
+  .et-timer { font-weight: 700; font-size: 16px; color: #d3e021; font-variant-numeric: tabular-nums; }
+  .et-timer.low { color: #ff6b6b; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: .5; } }
+  .et-ctrl { display: flex; align-items: center; gap: 10px; }
+  .vspk { background: none; border: none; color: #fff; cursor: pointer; font-size: 17px; padding: 0; }
+  .vslider { width: 120px; accent-color: #6ea8e0; cursor: pointer; }
+  .pick2 label { cursor: pointer; background: #33445f; color: #fff; border-radius: 5px; padding: 4px 8px; font-size: 13px; }
+  .pick2 input { display: none; }
+  .gear { background: none; border: none; color: #fff; cursor: pointer; font-size: 15px; opacity: .85; padding: 0; }
+
+  .exam-parthead { position: fixed; top: 46px; left: 0; right: 0; height: 48px; background: #fff; border-bottom: 1px solid #e2e6ea;
+    display: flex; align-items: center; padding: 0 22px; z-index: 44; font-weight: 700; font-size: 18px; color: #1a1a1a; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+
+  .exam-audiobar { position: fixed; top: 94px; left: 0; right: 0; height: 52px; background: #eef1f5; border-bottom: 1px solid #d5dade;
+    display: flex; align-items: center; gap: 14px; padding: 0 20px; z-index: 43; }
+  .exam-audiobar .ab-label { font-weight: 700; font-size: 13px; color: #333; white-space: nowrap; }
+  .exam-audiobar audio { height: 36px; flex: 1; max-width: 560px; min-width: 180px; }
+  .exam-audiobar .pick2 label { background: #17253f; color: #fff; border-radius: 6px; padding: 8px 13px; font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .exam-audiobar .pick2 input { display: none; }
+  #homeBtn { font-size: 13px; font-weight: 700; }
+  .exam-main { padding: 170px 34px 92px; background: #fff; color: #111; min-height: 100vh; }
+  @media (max-width: 620px) { .exam-audiobar { height: 46px; gap: 8px; padding: 0 12px; } .exam-audiobar .ab-label { display: none; } .exam-main { padding-top: 168px; } }
+  .exam-instr { font-size: 15px; margin-bottom: 20px; line-height: 1.55; color: #111; }
+  .eqgrid { display: grid; grid-template-columns: 1fr; gap: 6px 56px; }
+  @media (min-width: 900px) { .eqgrid.two { grid-template-columns: 1fr 1fr; } }
+  .eq { padding: 14px 0 18px; }
+  .eqh { font-size: 16px; line-height: 1.45; margin-bottom: 12px; display: flex; align-items: flex-start; gap: 8px; }
+  .eqh .qlabel { font-weight: 700; white-space: nowrap; }
+  .eqh .eqt { flex: 1; }
+  .flagbtn { flex: none; margin-left: 6px; border: 1px solid #ccc; background: #fff; border-radius: 5px; cursor: pointer; font-size: 14px; padding: 1px 7px; color: #555; }
+  .flagbtn:hover { border-color: #e67e22; background: #fff7f0; }
+  .eopts { display: grid; gap: 11px; padding-left: 8px; }
+  .eopt { display: flex; align-items: flex-start; gap: 11px; font-size: 15px; color: #111; cursor: pointer; line-height: 1.4; }
+  .eopt:hover { color: #17253f; }
+  .eopt input { accent-color: #17253f; width: 16px; height: 16px; flex: none; margin-top: 2px; }
+  .eopt .el { font-weight: 400; min-width: 18px; }
+  .eqt em { color: #c0392b; font-style: italic; font-weight: 700; }
+  .eopts.letters { display: flex; gap: 10px; flex-wrap: wrap; }
+  .eopts.letters .eopt.lt { border: 1px solid #b9c1c9; border-radius: 6px; padding: 8px 16px; gap: 7px; }
+  .eopts.letters .eopt.lt:hover { border-color: #2e6da4; background: #eef5fd; }
+  .eopts.letters .eopt.lt .el { font-weight: 700; }
+  .match-legend { border: 1px solid #d5dade; background: #f6f8fb; border-radius: 8px; padding: 13px 16px; margin: 4px 0 16px; }
+  .match-legend .ml-intro { font-weight: 700; margin: 0 0 9px; font-size: 15px; }
+  .match-legend ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 14px; }
+  .match-legend li b { display: inline-block; width: 20px; }
+  .eq.match { padding: 12px 0 14px; border-bottom: 1px solid #eef1f3; }
+
+  .exam-bottom { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid #d3d9de;
+    padding: 8px 12px; z-index: 46; display: flex; align-items: center; gap: 10px; overflow-x: auto; }
+  .review-chk { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #333; white-space: nowrap; cursor: pointer; }
+  .review-chk input { width: 15px; height: 15px; }
+  .pgroup { display: flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .pgroup .plabel2 { font-size: 13px; font-weight: 700; color: #333; margin: 0 3px 0 8px; }
+  .pnum { width: 30px; height: 30px; border: none; background: #17253f; color: #fff; border-radius: 5px; cursor: pointer;
+    font-weight: 700; font-size: 12.5px; font-family: Arial; position: relative; flex: none; }
+  .pnum:hover { outline: 2px solid #6ea8e0; outline-offset: 1px; }
+  .pnum.answered { box-shadow: inset 0 -4px 0 #d3e021; }
+  .pnum.current { background: #b7d9f7; color: #17253f; }
+  .pnum.current.answered { box-shadow: inset 0 -4px 0 #8ab24a; }
+  .pnum.flag::after { content: ""; position: absolute; top: -2px; right: -2px; width: 0; height: 0;
+    border-left: 8px solid transparent; border-top: 8px solid #e53935; }
+  body.nav-collapsed .pgroup { display: none; }
+  .exam-nav-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+  .collapse-ic { background: none; border: none; cursor: pointer; font-size: 16px; color: #555; }
+  .navarrow { background: #eef1f4; border: 1px solid #cfd6dc; border-radius: 6px; width: 34px; height: 34px; cursor: pointer; font-size: 16px; color: #333; }
+  .navarrow:hover { background: #e2e8ee; }
+  .submit-ex { background: #1f2f52; color: #fff; border: none; border-radius: 6px; padding: 9px 18px; font-weight: 700; font-size: 14px; cursor: pointer; font-family: Arial; }
+  .submit-ex:hover { background: #2a4070; }
+
+  .exam-submit-overlay { position: fixed; inset: 0; z-index: 60; background: rgba(20,30,50,0.35);
+    display: none; align-items: center; justify-content: center; padding: 16px; }
+  .exam-submit-overlay.show { display: flex; }
+  .esm-card { background: #fff; border-radius: 16px; padding: 30px 44px 34px; text-align: center; max-width: 420px; width: 100%;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,.4); position: relative; font-family: Arial; }
+  .esm-close { position: absolute; top: 12px; right: 15px; border: none; background: none; font-size: 17px; cursor: pointer; color: #999; }
+  .esm-emoji { font-size: 58px; line-height: 1; }
+  .esm-q { font-size: 21px; font-weight: 800; color: #1a1a1a; margin: 16px 0 20px; }
+  .esm-btn { background: #1f2f52; color: #fff; border: none; border-radius: 9px; padding: 12px 38px; font-weight: 700; font-size: 15px; cursor: pointer; }
+  .esm-btn:hover { background: #2a4070; }
+
+  .overlay { position: fixed; inset: 0; z-index: 50; background: rgba(6,4,16,0.66);
+    display: none; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px); }
+  .overlay.open { display: flex; animation: fade .18s ease; }
+  @keyframes fade { from { opacity: 0 } to { opacity: 1 } }
+  .modal { background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 22px; box-shadow: var(--shadow);
+    max-width: 560px; width: 100%; max-height: 88vh; overflow: auto; animation: rise .22s cubic-bezier(.2,.9,.3,1); }
+  @keyframes rise { from { transform: translateY(16px); opacity: .5 } to { transform: none; opacity: 1 } }
+  .mhead { display: flex; align-items: center; gap: 12px; padding: 16px 18px 12px; position: sticky; top: 0;
+    background: var(--panel-solid); border-bottom: 1px solid var(--brd); z-index: 2; }
+  .mhead .qnum { width: 34px; height: 34px; }
+  .mhead h3 { margin: 0; font-size: 15px; font-weight: 900; flex: 1; }
+  .close { flex: none; border: none; background: var(--panel-2); color: var(--ink); cursor: pointer;
+    width: 34px; height: 34px; border-radius: 11px; font-size: 19px; line-height: 1; }
+  .close:hover { background: rgba(255,46,151,0.2); color: var(--pink); }
+  .mbody { padding: 16px 18px 22px; }
+  .q-full { font-weight: 800; font-size: 16.5px; margin: 0 0 6px; text-wrap: balance; }
+  .pickhint { color: var(--muted); font-weight: 700; font-size: 13px; margin: 0 0 14px; }
+
+  .opts { display: grid; gap: 8px; margin: 0 0 16px; }
+  .optbtn { display: flex; gap: 10px; align-items: center; padding: 12px 13px; border-radius: 12px;
+    border: 1px solid var(--brd); font-size: 14.5px; color: var(--ink); background: var(--panel);
+    cursor: pointer; font-family: var(--font); text-align: left; width: 100%; transition: border-color .12s, transform .08s, background .15s; }
+  .optbtn:not(:disabled):hover { border-color: var(--violet); transform: translateX(2px); }
+  .optbtn:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .optbtn .letter { font-weight: 900; width: 20px; flex: none; }
+  .optbtn:disabled { cursor: default; }
+  .optbtn.correct { background: var(--good-bg); border-color: var(--good); font-weight: 700; }
+  .optbtn.correct .letter { color: var(--good); }
+  .optbtn.correct::after { content: "✓ Correct"; margin-left: auto; color: var(--good); font-weight: 900; font-size: 12.5px; }
+  .optbtn.wrong { background: var(--bad-bg); border-color: var(--bad); font-weight: 700; }
+  .optbtn.wrong .letter { color: var(--bad); }
+  .optbtn.wrong::after { content: "✗ Your answer"; margin-left: auto; color: var(--bad); font-weight: 900; font-size: 12.5px; }
+  .optbtn.dim { opacity: .55; }
+  .optbtn.sel { border-color: var(--violet); background: rgba(58,99,176,0.14); font-weight: 700; }
+  .optbtn.multi .letter::before { content: "☐ "; }
+  .optbtn.multi.sel .letter::before { content: "☑ "; }
+  .checkbtn { width: 100%; margin: 0 0 16px; cursor: pointer; font-family: var(--font); border: none; border-radius: 12px;
+    padding: 12px; font-weight: 800; font-size: 15px; color: #10203c; background: linear-gradient(100deg, var(--lime), var(--cyan)); }
+  .checkbtn:disabled { opacity: .5; cursor: not-allowed; filter: grayscale(.3); }
+  .q-intro { font-size: 14px; color: var(--muted); font-weight: 600; margin: 0 0 8px; font-style: italic; }
+  .mhead .qnum { min-width: 34px; padding: 0 7px; width: auto; height: 34px; }
+
+  .result-flag { font-weight: 900; font-size: 15px; margin: 0 0 14px; display: none; }
+  .result-flag.show { display: block; }
+  .result-flag.ok { color: var(--good); } .result-flag.no { color: var(--bad); }
+
+  .proofWrap { display: none; }
+  .proofWrap.show { display: block; animation: rise .25s ease; }
+  .plabel { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; font-weight: 900; color: var(--cyan); margin: 0 0 8px; }
+  .proof { background: var(--panel-2); border: 1px solid var(--brd); border-left: 3px solid var(--cyan);
+    border-radius: 0 13px 13px 0; padding: 13px 15px; font-size: 15px; line-height: 1.65; cursor: pointer; transition: border-color .15s; }
+  .proof:hover { border-left-color: var(--pink); }
+  .proof mark { background: linear-gradient(transparent 55%, rgba(198,255,0,0.5) 55%); color: inherit; font-weight: 800; padding: 0 1px; }
+  :root[data-theme="light"] .proof mark, :root:not([data-theme="dark"]) .proof mark { background: linear-gradient(transparent 55%, rgba(34,228,255,0.4) 55%); }
+  .proof .cue { display: block; margin-top: 8px; font-size: 12.5px; color: var(--muted); font-weight: 800; }
+  .row2 { display: flex; gap: 9px; margin-top: 10px; flex-wrap: wrap; }
+  .xlate { cursor: pointer; font-family: var(--font); font-weight: 800; font-size: 13.5px; padding: 11px 14px;
+    border-radius: 12px; border: 1px solid var(--brd); background: var(--panel); color: var(--ink); transition: background .15s; }
+  .xlate:hover { background: rgba(139,92,255,0.15); border-color: var(--violet); }
+  .xlate:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .proofVN { margin-top: 10px; display: none; padding: 12px 14px; border-radius: 12px;
+    background: rgba(139,92,255,0.10); border: 1px solid var(--brd); font-size: 14.5px; line-height: 1.6; }
+  .proofVN.show { display: block; animation: rise .2s ease; }
+  .proofVN b { color: var(--violet); }
+  .listen { margin-top: 12px; width: 100%; cursor: pointer; font-family: var(--font); border: none; border-radius: 13px;
+    padding: 14px; font-weight: 900; font-size: 15px; color: #10071e; background: linear-gradient(100deg, var(--lime), var(--cyan));
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: filter .15s, transform .1s; }
+  .listen:hover { filter: brightness(1.06) } .listen:active { transform: scale(.99) }
+  .listen:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px }
+  .ts { font-variant-numeric: tabular-nums; }
+  .analysis { margin-top: 14px; border: 1px solid var(--brd); border-left: 3px solid var(--pink); border-radius: 0 12px 12px 0;
+    background: rgba(201,169,106,0.10); padding: 12px 15px; }
+  .analysis .alabel { margin: 0 0 6px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; font-weight: 900; color: var(--pink); }
+  .analysis .atext { font-size: 14.5px; line-height: 1.65; }
+  .analysis .atext mark { background: linear-gradient(transparent 55%, rgba(201,169,106,0.5) 55%); color: inherit; font-weight: 700; padding: 0 1px; }
+
+  .res-hero { text-align: center; padding: 26px 20px 8px; }
+  .res-emoji { font-size: 54px; line-height: 1; }
+  .res-score { font-size: clamp(40px, 12vw, 66px); font-weight: 900; letter-spacing: -0.02em; margin: 8px 0 0;
+    background: linear-gradient(100deg, var(--lime), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .res-score small { font-size: 22px; color: var(--muted); -webkit-text-fill-color: var(--muted); }
+  .res-msg { font-weight: 800; font-size: 17px; margin: 6px 0 0; }
+  .res-pct { color: var(--muted); font-weight: 700; font-size: 14px; margin: 4px 0 0; }
+  .res-list { padding: 8px 20px 4px; display: grid; gap: 9px; }
+  .res-row { display: flex; align-items: center; gap: 12px; }
+  .res-row .rn { font-weight: 800; font-size: 14px; min-width: 92px; }
+  .res-row .rbar { flex: 1; height: 10px; border-radius: 999px; background: var(--panel-2); overflow: hidden; }
+  .res-row .rbar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan)); border-radius: 999px; }
+  .res-row .rv { font-weight: 800; font-size: 13px; min-width: 42px; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .res-wrong { margin: 16px 20px 4px; padding: 13px 15px; border-radius: 14px; background: var(--bad-bg); border: 1px solid var(--brd); font-size: 13.5px; }
+  .res-wrong b { color: var(--bad); }
+  .res-wrong .chips { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 7px; }
+  .res-wrong .chip { background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 999px; padding: 4px 11px; font-weight: 700; font-size: 12.5px; }
+  .res-actions { display: flex; gap: 9px; padding: 16px 20px 22px; }
+  .res-actions .act { flex: 1; text-align: center; }
+
+  /* ===== Chỉnh cỡ chữ (áp dụng mọi mục) ===== */
+  :root { --zoom: 1; }
+  body:not(.exammode) #sectionArea { zoom: var(--zoom); }
+  .exam-main { zoom: var(--zoom); }
+  .mbody, #transBody, #dictBody, #resBody { zoom: var(--zoom); }
+  .fontctrl { position: fixed; left: 14px; bottom: 72px; z-index: 59; display: flex; align-items: center; gap: 5px;
+    background: var(--panel-solid); border: 1px solid var(--brd); border-radius: 999px; padding: 5px 10px 5px 12px; box-shadow: var(--shadow); font-family: var(--font); }
+  .fontctrl .fstitle { font-size: 12px; font-weight: 800; color: var(--muted); margin-right: 2px; }
+  .fontctrl button { border: none; background: var(--panel-2); color: var(--ink); cursor: pointer; width: 30px; height: 30px; border-radius: 50%; font-weight: 800; font-size: 13px; line-height: 1; }
+  .fontctrl button:hover { background: var(--violet); color: #fff; }
+  .fontctrl button:focus-visible { outline: 2px solid var(--violet); outline-offset: 2px; }
+  .fontctrl #fsLabel { font-size: 12px; font-weight: 800; color: var(--muted); min-width: 42px; text-align: center; font-variant-numeric: tabular-nums; }
+  body.exammode .fontctrl { bottom: 58px; background: #fff; border-color: #d3d9de; box-shadow: 0 8px 24px -8px rgba(0,0,0,.3); }
+  body.exammode .fontctrl .fstitle, body.exammode .fontctrl #fsLabel { color: #333; }
+  body.exammode .fontctrl button { background: #eef1f4; color: #111; }
+  body.exammode .fontctrl button:hover { background: #17253f; color: #fff; }
+
+  .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 60;
+    background: linear-gradient(100deg, var(--violet), var(--pink)); color: #fff; font-weight: 800; font-size: 14px;
+    padding: 11px 20px; border-radius: 999px; box-shadow: var(--shadow); opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none; max-width: 90vw; text-align: center; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+  canvas.cf { position: fixed; inset: 0; pointer-events: none; z-index: 58; }
+  footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 28px; font-weight: 600; }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001s !important } }
+</style>
+
+<script type="application/json" id="appdata">
+{
+  "title": "Cambridge 14",
+  "tests": [
+  { "id": 1, "name": "Test 1", "sections": [
+    {
+      "id": 1, "emoji": "🗺️", "name": "Section 1", "topic": "Everyday conversation", "audioFile": "C14T1S1.mp3", "sample": true,
+      "questions": [
+        { "n": 1, "tag": "Đề mẫu", "q": "Câu hỏi mẫu — thay bằng đề Section 1 của bạn", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "Trích đoạn chứng minh sẽ hiển thị ở đây, *phần quan trọng được tô đậm*.", "proofVN": "Đây là phần dịch tiếng Việt của trích đoạn — giúp học sinh hiểu nghĩa nhanh.", "start": "0:20", "end": "0:32" },
+        { "n": 2, "tag": "Đề mẫu", "q": "Câu hỏi mẫu số 2", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "*Trích đoạn minh hoạ* cho câu số 2.", "proofVN": "Bản dịch minh hoạ cho câu số 2.", "start": "0:40", "end": "0:52" }
+      ],
+      "vocab": [ { "w": "(sample word)", "ipa": "/wɜːd/", "pos": "(n)", "vn": "nghĩa tiếng Việt của từ", "ex": "This is an example sentence." } ],
+      "structures": [ { "s": "(sample structure) as long as ...", "vn": "miễn là ..." } ],
+      "transcript": [ { "t": "0:20", "en": "This is a sample transcript line — replace with your own.", "vn": "Đây là dòng transcript mẫu — rê chuột để hiện tiếng Việt." } ],
+      "dictation": [ { "t": "0:20", "end": "0:26", "text": "This is a sample dictation sentence." } ]
+    },
+    {
+      "id": 2, "emoji": "💼", "name": "Section 2", "topic": "Induction talk for new apprentices", "audioFile": "C14T1S2.mp3", "sample": false,
+      "questions": [
+        { "multi": true, "ns": [11, 12], "tag": "Choose TWO", "pick": 2,
+          "q": "Which TWO pieces of advice for the first week of an apprenticeship does the manager give?",
+          "opts": ["get to know colleagues", "learn from any mistakes", "ask lots of questions", "react positively to feedback", "enjoy new challenges"],
+          "answer": [0, 2],
+          "proof": "The important thing is to *check with someone if you're not sure what to do*... make an effort to *talk to as many people as possible* about their work. You'll make some new friends.",
+          "proofVN": "Điều quan trọng là hãy hỏi ai đó nếu không chắc phải làm gì (C: ask lots of questions)... hãy cố gắng nói chuyện với càng nhiều người càng tốt (A: get to know colleagues).",
+          "analysis": "*Paraphrase:* ‘talk to as many people as possible… make new friends’ → *get to know colleagues* (A); ‘check with someone if you're not sure’ → *ask lots of questions* (C).  *Traps:* B ‘learn from mistakes’ is never said; D ‘feedback’ belongs to the mentor part, not week one; E baits the word ‘challenging’ — the week ‘may be challenging’ is a warning, NOT advice to enjoy challenges.",
+          "analysisVN": "Paraphrase: ‘nói chuyện với càng nhiều người / kết bạn mới’ → get to know colleagues (A); ‘hỏi ai đó nếu không chắc’ → ask lots of questions (C). Bẫy: B ‘học từ lỗi sai’ không hề được nói; D ‘phản hồi/feedback’ thuộc phần mentor, không phải tuần đầu; E gài từ ‘challenging’ — tuần đầu ‘có thể vất vả’ là lời CẢNH BÁO, không phải khuyên tận hưởng thử thách.",
+          "start": "1:23", "end": "2:04" },
+        { "multi": true, "ns": [13, 14], "tag": "Choose TWO", "pick": 2,
+          "q": "Which TWO things does the manager say mentors can help with?",
+          "opts": ["confidence-building", "making career plans", "completing difficult tasks", "making a weekly timetable", "reviewing progress"],
+          "answer": [1, 4],
+          "proof": "they'll be asking you about *what goals you've achieved so far* as well as helping you to *identify any areas for improvement* (E). You can also *discuss your more long-term ambitions* with them (B).",
+          "proofVN": "họ sẽ hỏi bạn về các mục tiêu đã đạt được và giúp bạn nhận ra điểm cần cải thiện (E: reviewing progress). Bạn cũng có thể bàn về mục tiêu dài hạn / nghề nghiệp (B: making career plans).",
+          "analysis": "*Paraphrase:* ‘discuss your more long-term ambitions’ → *making career plans* (B); ‘what goals you've achieved… identify areas for improvement’ → *reviewing progress* (E).  *Traps:* C ‘completing difficult tasks’ is directly contradicted — ‘this doesn't mean they'll do any of your work for you’; D reuses ‘weekly’ (you MEET weekly) but that is not ‘making a weekly timetable’; A ‘confidence-building’ is not mentioned.",
+          "analysisVN": "Paraphrase: ‘bàn về mục tiêu dài hạn’ → making career plans (B); ‘mục tiêu đã đạt / điểm cần cải thiện’ → reviewing progress (E). Bẫy: C ‘làm giúp việc khó’ bị PHỦ ĐỊNH thẳng — ‘họ sẽ không làm hộ việc của bạn’; D lặp từ ‘weekly’ (bạn GẶP mentor hằng tuần) nhưng đó không phải ‘làm thời khoá biểu tuần’; A ‘xây dựng sự tự tin’ không được nhắc.",
+          "start": "2:25", "end": "2:43" },
+        { "n": 15, "match": true, "groupHead": true, "groupN": "15 – 20", "tag": "Matching",
+          "intro": "What does the manager say about each of the following aspects of the company policy for apprentices?",
+          "legend": ["It is encouraged.", "There are some restrictions.", "It is against the rules."],
+          "q": "Using the internet", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 1,
+          "proof": "you'll have *unlimited access* for research online, *but please don't use it for personal use*.",
+          "proofVN": "được truy cập không giới hạn để tra cứu, nhưng KHÔNG được dùng vào việc cá nhân → có hạn chế (B).",
+          "analysis": "*Trap on ‘unlimited access’:* it sounds like A (encouraged), but ‘*but please don't use it for personal use*’ shows a limit → *B (there are some restrictions)*.",
+          "analysisVN": "Bẫy từ ‘unlimited access’ (nghe như A – khuyến khích), nhưng ‘đừng dùng cho việc cá nhân’ cho thấy CÓ giới hạn → B (có hạn chế).",
+          "start": "3:37", "end": "3:52" },
+        { "n": 16, "match": true, "tag": "Matching", "q": "Flexible working", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 1,
+          "proof": "*some of you will be eligible for this, but it will depend on which department you're in*... don't assume you'll automatically be permitted.",
+          "proofVN": "một số người đủ điều kiện, nhưng còn tuỳ phòng ban và hoàn cảnh → có hạn chế (B).",
+          "analysis": "‘*eligible*’ sounds positive (A), but ‘*it will depend… don't assume you'll automatically be permitted*’ = conditions apply → *B (there are some restrictions)*.",
+          "analysisVN": "‘eligible/đủ điều kiện’ nghe tích cực (A), nhưng ‘còn tuỳ phòng ban… đừng cho rằng sẽ tự động được phép’ = có điều kiện → B (có hạn chế).",
+          "start": "3:55", "end": "4:17" },
+        { "n": 17, "match": true, "tag": "Matching", "q": "Booking holidays", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 2,
+          "proof": "we ask that *you don't book any holidays until after your six-month apprenticeship has finished*.",
+          "proofVN": "không được đặt lịch nghỉ cho tới khi kết thúc 6 tháng thực tập → trái quy định (C).",
+          "analysis": "‘*don't book any holidays until after the six-month apprenticeship has finished*’ = not allowed during the course → *C (against the rules)*.  Note: ‘statutory public holidays’ are a separate exception — don't be distracted.",
+          "analysisVN": "‘không được đặt lịch nghỉ cho tới khi hết 6 tháng thực tập’ = không được phép trong thời gian học → C (trái quy định). Lưu ý: ‘ngày nghỉ lễ theo luật’ là ngoại lệ riêng — đừng bị đánh lạc hướng.",
+          "start": "4:18", "end": "4:36" },
+        { "n": 18, "match": true, "tag": "Matching", "q": "Working overtime", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 0,
+          "proof": "Although you're not required to do this, it can be a valuable experience, *so we advise you to take it up if possible*.",
+          "proofVN": "không bắt buộc nhưng khuyên nên làm nếu có thể → được khuyến khích (A).",
+          "analysis": "*Trap on ‘not required’:* you might pick B, but ‘*we advise you to take it up if possible*’ = recommended → *A (it is encouraged)*.",
+          "analysisVN": "Bẫy từ ‘not required/không bắt buộc’: dễ chọn B, nhưng ‘khuyên bạn nên nhận nếu có thể’ = được khuyến khích → A.",
+          "start": "4:44", "end": "5:00" },
+        { "n": 19, "match": true, "tag": "Matching", "q": "Wearing trainers", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 0,
+          "proof": "the only restriction for shoes is on high heels... *Comfortable shoes like trainers are preferable*.",
+          "proofVN": "chỉ cấm giày cao gót; giày thoải mái như giày thể thao (trainers) được ưa chuộng → được khuyến khích (A).",
+          "analysis": "*Trap on the word ‘restriction’:* the restriction is on *high heels*, NOT trainers. ‘*Comfortable shoes like trainers are preferable*’ → *A (it is encouraged)*.",
+          "analysisVN": "Bẫy từ ‘restriction/hạn chế’: hạn chế là dành cho GIÀY CAO GÓT, không phải trainers. ‘Giày thoải mái như trainers được ưa chuộng’ → A (được khuyến khích).",
+          "start": "5:14", "end": "5:44" },
+        { "n": 20, "match": true, "tag": "Matching", "q": "Bringing food to work", "opts": ["It is encouraged.", "There are some restrictions.", "It is against the rules."], "answer": 2,
+          "proof": "Snacks and drinks are also provided, so *we've decided to introduce a no-packed lunch policy*.",
+          "proofVN": "có căng-tin trợ giá, và áp dụng chính sách KHÔNG mang cơm hộp → trái quy định (C).",
+          "analysis": "The canteen/snacks sound positive, but bringing *your own* food is banned — ‘*a no-packed lunch policy*’ → *C (against the rules)*.",
+          "analysisVN": "Căng-tin/đồ ăn nhẹ nghe tích cực, nhưng mang ĐỒ ĂN RIÊNG (cơm hộp) bị cấm — ‘chính sách không mang cơm hộp’ → C (trái quy định).",
+          "start": "5:35", "end": "6:00" }
+      ],
+      "vocab": [
+        { "w": "apprenticeship", "ipa": "/əˈprentɪʃɪp/", "pos": "(n)", "vn": "khoá học nghề / kỳ thực tập nghề", "ex": "She began an apprenticeship after school." },
+        { "w": "approachable", "ipa": "/əˈprəʊtʃəbl/", "pos": "(adj)", "vn": "dễ gần, dễ tiếp cận", "ex": "Your supervisor is very approachable." },
+        { "w": "mentor", "ipa": "/ˈmentɔː(r)/", "pos": "(n)", "vn": "người cố vấn, người dìu dắt", "ex": "Each apprentice is assigned a mentor." },
+        { "w": "probationary period", "ipa": "/prəˈbeɪʃənri ˈpɪəriəd/", "pos": "(n)", "vn": "thời gian thử việc", "ex": "After the probationary period, you may apply." },
+        { "w": "eligible", "ipa": "/ˈelɪdʒəbl/", "pos": "(adj)", "vn": "đủ điều kiện, hội đủ tiêu chuẩn", "ex": "You'll be eligible for flexible working." },
+        { "w": "statutory", "ipa": "/ˈstætʃətri/", "pos": "(adj)", "vn": "theo luật định", "ex": "statutory public holidays" },
+        { "w": "subsidised", "ipa": "/ˈsʌbsɪdaɪzd/", "pos": "(adj)", "vn": "được trợ giá", "ex": "a heavily subsidised canteen" },
+        { "w": "overtime", "ipa": "/ˈəʊvətaɪm/", "pos": "(n)", "vn": "giờ làm thêm, tăng ca", "ex": "You can do overtime during busy periods." }
+      ],
+      "structures": [
+        { "s": "be assigned + something", "vn": "được phân công / được giao (cái gì)", "ex": "Each apprentice is assigned a mentor for the whole programme." },
+        { "s": "make the most of + something", "vn": "tận dụng tối đa (cơ hội gì)", "ex": "You should make the most of every training opportunity here." },
+        { "s": "be eligible for + something", "vn": "đủ điều kiện để (nhận cái gì)", "ex": "After three months, you will be eligible for flexible working." },
+        { "s": "on a weekly / daily basis", "vn": "theo tuần / theo ngày (đều đặn)", "ex": "You will meet your mentor on a weekly basis." },
+        { "s": "as long as + clause", "vn": "miễn là ... (điều kiện)", "ex": "You may wear casual clothes as long as they are practical." }
+      ],
+      "transcript": [
+        { "t": "0:49", "en": "Good morning everyone. My name's Janet Parker and I'm the Human Resources Manager.", "vn": "Chào buổi sáng mọi người. Tôi là Janet Parker, Trưởng phòng Nhân sự." },
+        { "t": "0:56", "en": "We're very happy to welcome you to your new apprenticeship.", "vn": "Chúng tôi rất vui chào đón các bạn đến với kỳ thực tập mới." },
+        { "t": "1:07", "en": "I'd like to start with some general advice about being an apprentice.", "vn": "Tôi muốn bắt đầu bằng vài lời khuyên chung về việc làm thực tập sinh." },
+        { "t": "1:23", "en": "There will be a lot of new information to take in but don't worry too much about trying to remember everything.", "vn": "Sẽ có rất nhiều thông tin mới phải tiếp thu, nhưng đừng quá lo việc phải nhớ hết mọi thứ." },
+        { "t": "1:31", "en": "The important thing is to check with someone if you're not sure what to do.", "vn": "Điều quan trọng là hãy hỏi ai đó nếu bạn không chắc phải làm gì." },
+        { "t": "1:36", "en": "You'll find your supervisor is very approachable.", "vn": "Bạn sẽ thấy người giám sát của mình rất dễ gần." },
+        { "t": "1:49", "en": "You'll be spending time in different departments during your first week.", "vn": "Bạn sẽ trải qua thời gian ở các phòng ban khác nhau trong tuần đầu tiên." },
+        { "t": "2:05", "en": "As well as having a supervisor, you'll each be assigned a mentor.", "vn": "Ngoài người giám sát, mỗi bạn còn được phân một người cố vấn (mentor)." },
+        { "t": "2:15", "en": "and you'll meet with them on a weekly basis.", "vn": "và các bạn sẽ gặp họ hằng tuần." },
+        { "t": "2:29", "en": "they'll be asking you about what goals you've achieved so far as well as helping you to identify any areas for improvement.", "vn": "họ sẽ hỏi bạn về những mục tiêu đã đạt được, đồng thời giúp bạn nhận ra những điểm cần cải thiện." },
+        { "t": "3:40", "en": "As part of your job, you'll be doing some research online so obviously you'll have unlimited access for that.", "vn": "Là một phần công việc, bạn sẽ tra cứu trực tuyến nên đương nhiên được truy cập không giới hạn cho việc đó." },
+        { "t": "3:49", "en": "But please don't use it for personal use.", "vn": "Nhưng xin đừng dùng nó cho mục đích cá nhân." },
+        { "t": "3:55", "en": "Some of you have already asked me about flexible working.", "vn": "Một số bạn đã hỏi tôi về việc làm linh hoạt." },
+        { "t": "4:00", "en": "After your probationary three-month period, some of you will be eligible for this.", "vn": "Sau thời gian thử việc ba tháng, một số bạn sẽ đủ điều kiện cho việc này." },
+        { "t": "4:23", "en": "we ask that you don't book any holidays until after your six-month apprenticeship has finished.", "vn": "chúng tôi mong các bạn không đặt lịch nghỉ cho đến khi kết thúc 6 tháng thực tập." },
+        { "t": "4:42", "en": "You'll be expected to work a 40-hour week but there may be opportunities to do overtime during busy periods.", "vn": "Bạn sẽ làm việc 40 giờ mỗi tuần nhưng có thể có cơ hội tăng ca vào những giai đoạn bận rộn." },
+        { "t": "5:10", "en": "As you know, we don't have a formal dress code here.", "vn": "Như các bạn biết, ở đây chúng tôi không có quy định trang phục cứng nhắc." },
+        { "t": "5:19", "en": "the only restriction for shoes we have is on high heels for health and safety reasons.", "vn": "quy định duy nhất về giày là cấm giày cao gót vì lý do sức khoẻ và an toàn." },
+        { "t": "5:30", "en": "There's a heavily subsidised canteen on site where you can get hot meals or salads cheaply.", "vn": "Có một căng-tin được trợ giá nhiều tại chỗ, nơi bạn có thể mua đồ ăn nóng hoặc salad với giá rẻ." },
+        { "t": "5:40", "en": "So we've decided to introduce a no-packed lunch policy.", "vn": "Vì vậy chúng tôi quyết định áp dụng chính sách không mang cơm hộp." }
+      ],
+      "dictation": [
+        { "t": "0:56", "end": "1:00", "text": "We're very happy to welcome you to your new apprenticeship." },
+        { "t": "1:31", "end": "1:36", "text": "The important thing is to check with someone if you're not sure what to do." },
+        { "t": "3:40", "end": "3:49", "text": "As part of your job, you'll be doing some research online so obviously you'll have unlimited access for that." },
+        { "t": "5:10", "end": "5:14", "text": "As you know, we don't have a formal dress code here." },
+        { "t": "5:30", "end": "5:37", "text": "There's a heavily subsidised canteen on site where you can get hot meals or salads cheaply." }
+      ]
+    },
+    {
+      "id": 3, "emoji": "🎓", "name": "Section 3", "topic": "Academic discussion", "audioFile": "C14T1S3.mp3", "sample": true,
+      "questions": [
+        { "n": 21, "tag": "Đề mẫu", "q": "Câu hỏi mẫu — thay bằng đề Section 3", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "*Trích đoạn minh hoạ* Section 3.", "proofVN": "Bản dịch minh hoạ Section 3.", "start": "1:00", "end": "1:12" },
+        { "n": 22, "tag": "Đề mẫu", "q": "Câu hỏi mẫu số 2", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "*Trích đoạn minh hoạ* số 2.", "proofVN": "Bản dịch minh hoạ số 2.", "start": "1:20", "end": "1:32" }
+      ],
+      "vocab": [ { "w": "(sample word)", "ipa": "/wɜːd/", "pos": "(n)", "vn": "nghĩa tiếng Việt", "ex": "An example sentence." } ],
+      "structures": [ { "s": "(sample structure)", "vn": "nghĩa cấu trúc" } ],
+      "transcript": [ { "t": "1:00", "en": "This is a sample transcript line — replace with your own.", "vn": "Dòng transcript mẫu — rê chuột để hiện tiếng Việt." } ],
+      "dictation": [ { "t": "1:00", "end": "1:06", "text": "This is a sample dictation sentence." } ]
+    },
+    {
+      "id": 4, "emoji": "🔬", "name": "Section 4", "topic": "Academic lecture", "audioFile": "C14T1S4.mp3", "sample": true,
+      "questions": [
+        { "n": 31, "tag": "Đề mẫu", "q": "Câu hỏi mẫu — thay bằng đề Section 4", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "*Trích đoạn minh hoạ* Section 4.", "proofVN": "Bản dịch minh hoạ Section 4.", "start": "2:00", "end": "2:12" },
+        { "n": 32, "tag": "Đề mẫu", "q": "Câu hỏi mẫu số 2", "opts": ["Lựa chọn A", "Lựa chọn B (đáp án đúng)", "Lựa chọn C"], "answer": 1, "proof": "*Trích đoạn minh hoạ* số 2.", "proofVN": "Bản dịch minh hoạ số 2.", "start": "2:20", "end": "2:32" }
+      ],
+      "vocab": [ { "w": "(sample word)", "ipa": "/wɜːd/", "pos": "(n)", "vn": "nghĩa tiếng Việt", "ex": "An example sentence." } ],
+      "structures": [ { "s": "(sample structure)", "vn": "nghĩa cấu trúc" } ],
+      "transcript": [ { "t": "2:00", "en": "This is a sample transcript line — replace with your own.", "vn": "Dòng transcript mẫu — rê chuột để hiện tiếng Việt." } ],
+      "dictation": [ { "t": "2:00", "end": "2:06", "text": "This is a sample dictation sentence." } ]
+    }
+  ] },
+  { "id": 2, "name": "Test 2", "sections": [
+    { "id": 1, "emoji": "🗺️", "name": "Section 1", "topic": "Everyday conversation", "audioFile": "C14T2S1.mp3", "sample": true },
+    { "id": 2, "emoji": "💼", "name": "Section 2", "topic": "Talk / monologue", "audioFile": "C14T2S2.mp3", "sample": true },
+    { "id": 3, "emoji": "🎓", "name": "Section 3", "topic": "Academic discussion", "audioFile": "C14T2S3.mp3", "sample": true },
+    { "id": 4, "emoji": "🔬", "name": "Section 4", "topic": "Academic lecture", "audioFile": "C14T2S4.mp3", "sample": true }
+  ] },
+  { "id": 3, "name": "Test 3", "sections": [
+    { "id": 1, "emoji": "🗺️", "name": "Section 1", "topic": "Everyday conversation", "audioFile": "C14T3S1.mp3", "sample": true },
+    { "id": 2, "emoji": "💼", "name": "Section 2", "topic": "Talk / monologue", "audioFile": "C14T3S2.mp3", "sample": true },
+    { "id": 3, "emoji": "🎓", "name": "Section 3", "topic": "Academic discussion", "audioFile": "C14T3S3.mp3", "sample": true },
+    { "id": 4, "emoji": "🔬", "name": "Section 4", "topic": "Academic lecture", "audioFile": "C14T3S4.mp3", "sample": true }
+  ] },
+  { "id": 4, "name": "Test 4", "sections": [
+    { "id": 1, "emoji": "🗺️", "name": "Section 1", "topic": "Everyday conversation", "audioFile": "C14T4S1.mp3", "sample": true },
+    { "id": 2, "emoji": "💼", "name": "Section 2", "topic": "Talk / monologue", "audioFile": "C14T4S2.mp3", "sample": true },
+    { "id": 3, "emoji": "🎓", "name": "Section 3", "topic": "Academic discussion", "audioFile": "C14T4S3.mp3", "sample": true },
+    { "id": 4, "emoji": "🔬", "name": "Section 4", "topic": "Academic lecture", "audioFile": "C14T4S4.mp3", "sample": true }
+  ] }
+  ]
+}
+</script>
+
+<div class="wrap">
+  <header>
+    <span class="kicker" id="kicker">🎧 IELTS Listening · Full Test</span>
+    <h1>NO PAIN, NO GAIN</h1>
+    <p class="sub">IELTS Listening Practice</p>
+    <div class="overall">
+      <span>Answered: <b id="ovDone">0</b>/<b class="pt" id="ovTotal">0</b></span>
+      <span>· Correct: <b id="ovRight">0</b></span>
+    </div>
+    <div class="bar"><i id="ovBar"></i></div>
+    <div class="hdr-actions">
+      <button class="act examact" id="btnExam">🧪 Exam room (real test)</button>
+      <button class="act" id="btnExportAll">⬇️ Export this Test</button>
+      <button class="act hot" id="btnResult">🏆 View results</button>
+      <button class="act" id="btnReset">🔄 Restart</button>
+    </div>
+  </header>
+
+  <nav class="testbar" id="testbar"></nav>
+  <nav class="tabs" id="tabs"></nav>
+  <div id="sectionArea"></div>
+  <footer>Nguyễn Duy Nhất - 0932067877</footer>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="mhead"><span class="qnum" id="mNum">1</span><h3 id="mTitle">Question</h3><button class="close" id="mClose" aria-label="Close">×</button></div>
+    <div class="mbody" id="mBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="resOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resTitle">
+    <div class="mhead"><span class="qnum" id="resIcon">🏆</span><h3 id="resTitle">Your results</h3><button class="close" id="resClose" aria-label="Close">×</button></div>
+    <div id="resBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="transOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="transTitle">
+    <div class="mhead"><span class="qnum">📄</span><h3 id="transTitle">Transcript</h3><button class="close" id="transClose" aria-label="Close">×</button></div>
+    <div id="transBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="dictOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dictTitle">
+    <div class="mhead"><span class="qnum">✍️</span><h3 id="dictTitle">Dictation</h3><button class="close" id="dictClose" aria-label="Close">×</button></div>
+    <div id="dictBody"></div>
+  </div>
+</div>
+
+<div class="exam-submit-overlay" id="examSubmit">
+  <div class="esm-card">
+    <button class="esm-close" id="esmClose" aria-label="Close">✕</button>
+    <div class="esm-emoji">⏰📋</div>
+    <div class="esm-q">Do you want to submit your test?</div>
+    <button class="esm-btn" id="esmSubmit">Submit</button>
+  </div>
+</div>
+
+<div class="fontctrl" id="fontCtrl" title="Chỉnh cỡ chữ">
+  <span class="fstitle">Font size</span>
+  <button id="fsDown" aria-label="Smaller">A−</button>
+  <span id="fsLabel">100%</span>
+  <button id="fsUp" aria-label="Larger">A+</button>
+</div>
+
+<div class="toast" id="toast"></div>
+<canvas class="cf" id="cf"></canvas>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  var APP = JSON.parse($('appdata').textContent);
+  var AUDIO_BASE = 'audio/';   // khi host: MP3 nằm trong thư mục audio/ cạnh index.html
+  // Quyển (book) → tests → sections. Tương thích ngược file cũ (chỉ có "sections").
+  var TESTS = APP.tests || [{ id: 1, name: 'Test', sections: APP.sections || [] }];
+  var TID = 0;                          // Test đang chọn
+  var SECTIONS = TESTS[TID].sections;
+  var SINGLE = SECTIONS.length === 1;   // hiếm: file chỉ 1 section
+  var STUDENT = APP.student === true;   // file đã xuất cho học sinh → ẩn nút Export
+
+  // IELTS chuẩn: mỗi phần 10 câu. Section mẫu tự sinh 10 câu + placeholder.
+  function mkSample(n) {
+    return { n: n, tag: "Sample", q: "Sample question " + n + " — replace with your real question",
+      opts: ["Option A", "Option B (correct answer)", "Option C"], answer: 1,
+      proof: "The supporting quote for question " + n + " appears here, *with the key part highlighted*.",
+      proofVN: "Bản dịch tiếng Việt minh hoạ cho câu " + n + ".", start: "0:30", end: "0:42" };
+  }
+  TESTS.forEach(function (t) {
+    t.sections.forEach(function (s) {
+      if (s.sample) {
+        var base = (s.id - 1) * 10 + 1, qs = []; for (var i = 0; i < 10; i++) qs.push(mkSample(base + i)); s.questions = qs;
+        if (!s.vocab) s.vocab = [{ w: "(sample word)", ipa: "/wɜːd/", pos: "(n)", vn: "nghĩa tiếng Việt", ex: "An example sentence." }];
+        if (!s.structures) s.structures = [{ s: "(sample structure)", vn: "nghĩa cấu trúc" }];
+        if (!s.transcript) s.transcript = [{ t: "0:20", en: "Sample transcript line — replace with your own.", vn: "Dòng transcript mẫu." }];
+        if (!s.dictation) s.dictation = [{ t: "0:20", end: "0:26", text: "This is a sample dictation sentence." }];
+      }
+    });
+  });
+
+  var active = SECTIONS.length > 1 ? 1 : 0;
+  var answers = {};
+  var flags = {};
+  var currentKey = null;
+  var MODE = 'study';           // 'study' | 'exam'
+  var examTimer = null, examLeft = 0;
+  var audio = null;
+
+  var kick = $('kicker'); if (kick) kick.textContent = '🎧 ' + (APP.title || 'IELTS Listening');
+
+  function switchTest(i) {
+    if (i === TID) return;
+    TID = i; SECTIONS = TESTS[TID].sections; SINGLE = SECTIONS.length === 1; active = SECTIONS.length > 1 ? 1 : 0;
+    currentKey = null; MODE = 'study'; stopTimer(); render();
+    showToast('📘 ' + (APP.title || '') + ' · ' + TESTS[TID].name);
+  }
+  function buildTestBar() {
+    var el = $('testbar'); if (!el) return;
+    if (TESTS.length <= 1 || MODE === 'exam') { el.style.display = 'none'; return; }
+    el.style.display = '';
+    el.innerHTML = '<span class="tb-book">📘 ' + esc(APP.title || 'Book') + '</span>' +
+      TESTS.map(function (t, i) { return '<button class="tb-btn' + (i === TID ? ' active' : '') + '" data-i="' + i + '">' + esc(t.name) + '</button>'; }).join('');
+    el.querySelectorAll('.tb-btn').forEach(function (b) { b.onclick = function () { switchTest(+b.getAttribute('data-i')); }; });
+  }
+
+  // ----- cell helpers -----
+  function key(s, c) { var b = c.multi ? ('M' + s.id + ':' + c.ns.join('-')) : (s.id + ':' + c.n); return TESTS[TID].id + '/' + b; }
+  function cellNums(c) { return c.multi ? c.ns : [c.n]; }
+  function cellMax(c) { return c.multi ? c.ns.length : 1; }
+  function cellCorrect(c, chosen) {
+    if (c.multi) { if (!Array.isArray(chosen)) return 0; return chosen.filter(function (i) { return c.answer.indexOf(i) >= 0; }).length; }
+    return chosen === c.answer ? 1 : 0;
+  }
+  function cellDoneNums(c, chosen) {
+    if (c.multi) return Array.isArray(chosen) ? Math.min(chosen.length, c.pick) : 0;
+    return chosen != null ? 1 : 0;
+  }
+  function toSec(m) { var p = m.split(':'); return +p[0] * 60 + +p[1]; }
+  function addSec(m, n) { var t = toSec(m) + n, mm = Math.floor(t / 60), ss = t % 60; return mm + ':' + (ss < 10 ? '0' + ss : ss); }
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function renderProof(t) { return esc(t).replace(/\*(.+?)\*/g, '<mark>$1</mark>'); }
+  function secTotal(s) { var n = 0; s.questions.forEach(function (c) { n += cellMax(c); }); return n; }
+  function totalQ() { var n = 0; SECTIONS.forEach(function (s) { n += secTotal(s); }); return n; }
+  function answeredCount() { var n = 0; SECTIONS.forEach(function (s) { s.questions.forEach(function (c) { n += cellDoneNums(c, answers[key(s, c)]); }); }); return n; }
+  function rightCount() { var r = 0; SECTIONS.forEach(function (s) { s.questions.forEach(function (c) { r += cellCorrect(c, answers[key(s, c)]); }); }); return r; }
+  function secAnswered(s) { var n = 0; s.questions.forEach(function (c) { n += cellDoneNums(c, answers[key(s, c)]); }); return n; }
+  function secDone(s) { return secAnswered(s) === secTotal(s); }
+
+  function buildTabs() {
+    if (SINGLE) return;
+    var t = $('tabs'); t.innerHTML = '';
+    SECTIONS.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.className = 'tab' + (i === active ? ' active' : '') + (secDone(s) ? ' done' : '');
+      b.innerHTML = '<span class="emo">' + s.emoji + '</span><span class="lbl">' + s.name + '</span><span class="mini">' + secAnswered(s) + '/' + secTotal(s) + '</span>';
+      b.onclick = function () { active = i; render(); };
+      t.appendChild(b);
+    });
+  }
+
+  function render() {
+    buildTestBar();
+    buildTabs();
+    var s = SECTIONS[active];
+    document.body.classList.toggle('exammode', MODE === 'exam');
+    if (MODE === 'exam') { renderExam(s); return; }
+    renderStudy(s);
+  }
+
+  function renderStudy(s) {
+    var hasEmbedded = !!s.audioData;
+    $('sectionArea').innerHTML =
+      '<div class="sec-title"><h2>' + s.emoji + ' ' + s.name + '</h2><span>' + s.topic + '</span></div>' +
+      (s.sample && !SINGLE ? '<div class="sample-banner">✏️ <b>This section is a sample.</b> Send the questions + answers + tapescript (with timestamps) + MP3 for Section ' + s.id + ' and it will be filled with the real content.</div>' : '') +
+      '<div class="player"><div class="row"><audio id="audio" controls preload="metadata"></audio>' +
+      (hasEmbedded ? '' : '<span class="pick"><label for="file">📂 Choose MP3</label><input id="file" type="file" accept="audio/*"></span>') +
+      '</div>' + (hasEmbedded ? '' : '<p id="anote" class="anote"><b>' + s.audioFile + '</b> not found. Click “Choose MP3” to load the audio for this section (works offline).</p>') + '</div>' +
+      '<div class="tools-row">' +
+        '<button class="tbtn" id="btnTrans">📄 Transcript</button>' +
+        '<button class="tbtn" id="btnDict">✍️ Dictation</button>' +
+        (SINGLE || STUDENT ? '' : '<button class="tbtn exp" id="btnExport">⬇️ Export this section</button>') +
+      '</div>' +
+      '<div class="qlist" id="qlist"></div>' +
+      renderVocab(s);
+
+    audio = $('audio');
+    audio.src = s._blob || s.audioData || (AUDIO_BASE + s.audioFile); audio.load();
+    audio.addEventListener('error', function () { var a = $('anote'); if (a) a.classList.add('show'); });
+    audio.addEventListener('play', function () { var a = $('anote'); if (a) a.classList.remove('show'); });
+    audio.addEventListener('timeupdate', function () { if (s._stopAt != null && audio.currentTime >= s._stopAt) { audio.pause(); s._stopAt = null; } });
+
+    var fp = $('file');
+    if (fp) fp.addEventListener('change', function (e) {
+      var f = e.target.files && e.target.files[0]; if (!f) return;
+      s._file = f; var url = URL.createObjectURL(f); s._blob = url; audio.src = url; audio.load();
+      var a = $('anote'); if (a) a.classList.remove('show');
+      showToast('✅ MP3 loaded: ' + f.name);
+    });
+
+    var be = $('btnExport'); if (be) be.onclick = function () { exportSection(s); };
+    $('btnTrans').onclick = function () { openTranscript(s); };
+    $('btnDict').onclick = function () { openDictation(s); };
+
+    var ql = $('qlist');
+    s.questions.forEach(function (item, idx) {
+      var chosen = answers[key(s, item)];
+      var done = cellDoneNums(item, chosen) > 0;
+      var full = cellCorrect(item, chosen) === cellMax(item);
+      var st = !done ? '' : (full ? 'correct' : 'wrong');
+      var label = item.multi ? item.ns.join('–') : item.n;
+      var b = document.createElement('button');
+      b.className = 'qcard' + (st ? ' ' + st : '') + (item.multi ? ' wide' : ''); b.setAttribute('data-i', idx);
+      var badge = st === 'correct' ? '<span class="status c">✓ Correct</span>' : st === 'wrong' ? '<span class="status w">✗ Check</span>' : '';
+      b.innerHTML = '<span class="qnum">' + label + '</span><span class="qtext">' + esc(item.q) + '<span class="qtag">' + item.tag + '</span></span>' + badge + '<span class="chev">›</span>';
+      b.onclick = function () { openModal(s, item); };
+      ql.appendChild(b);
+    });
+
+    bindSpeak();
+    updateOverall();
+  }
+
+  function renderVocab(s) {
+    if (!s.vocab || !s.vocab.length) return '';
+    var cards = s.vocab.map(function (v) {
+      return '<div class="vcard"><div class="vw">' + esc(v.w) +
+        (v.ipa ? ' <span class="ipa">' + esc(v.ipa) + '</span>' : '') +
+        (v.pos ? ' <span class="pos">' + esc(v.pos) + '</span>' : '') +
+        '<button class="say" data-say="' + encodeURIComponent(v.w) + '" title="Listen" aria-label="Listen to pronunciation">🔈</button></div>' +
+        '<div class="vvn">' + esc(v.vn) + '</div>' +
+        (v.ex ? '<div class="vex">“' + esc(v.ex) + '”</div>' : '') + '</div>';
+    }).join('');
+    var structs = (s.structures || []).map(function (x) {
+      return '<li><b>' + esc(x.s) + '</b> <span>— ' + esc(x.vn) + '</span>' +
+        (x.ex ? '<span class="sex">e.g. “' + esc(x.ex) + '”</span>' : '') + '</li>';
+    }).join('');
+    return '<div class="vocab">' +
+      '<details class="vdetails"><summary><span class="vhead">🧠 Vocabulary &amp; Collocations</span><span class="vhint2">click to show</span></summary>' +
+      '<p class="vsub">Click 🔈 to hear the pronunciation · learn with IPA and examples</p>' +
+      '<div class="vgrid">' + cards + '</div></details>' +
+      (structs ? '<h4>🧩 Useful sentence structures</h4><ul class="structs">' + structs + '</ul>' : '') +
+      '</div>';
+  }
+
+  function bindSpeak() {
+    document.querySelectorAll('[data-say]').forEach(function (b) {
+      b.onclick = function () {
+        var w = decodeURIComponent(b.getAttribute('data-say'));
+        if ('speechSynthesis' in window) {
+          try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(w); u.lang = 'en-US'; u.rate = .9; speechSynthesis.speak(u); }
+          catch (e) { showToast('Your browser does not support text-to-speech'); }
+        } else { showToast('Your browser does not support text-to-speech'); }
+      };
+    });
+  }
+
+  function updateOverall() {
+    var done = answeredCount(), total = totalQ();
+    $('ovDone').textContent = done; $('ovTotal').textContent = total; $('ovRight').textContent = rightCount();
+    $('ovBar').style.width = (total ? done / total * 100 : 0) + '%';
+  }
+
+  /* ===== EXAM MODE — giống phuquocielts.vn ===== */
+  function qByN(s, n) { for (var i = 0; i < s.questions.length; i++) if (s.questions[i].n === n) return s.questions[i]; }
+  function parseKey(kk) { var sec = null, item = null;
+    SECTIONS.forEach(function (x) { x.questions.forEach(function (c) { if (key(x, c) === kk) { sec = x; item = c; } }); });
+    return { s: sec, item: item }; }
+  function flatKeys() { var arr = []; SECTIONS.forEach(function (sec) { sec.questions.forEach(function (item) { arr.push(key(sec, item)); }); }); return arr; }
+
+  function cellByKey(k) { var out = null; SECTIONS.forEach(function (x) { x.questions.forEach(function (c) { if (key(x, c) === k) out = c; }); }); return out; }
+
+  function examCell(s, cell) {
+    var k = key(s, cell), chosen = answers[k], anchor = 'eq' + cellNums(cell)[0];
+    var flag = '<button class="flagbtn" data-k="' + k + '" title="Mark for review">' + (flags[k] ? '🚩' : '⚑') + '</button>';
+    if (cell.multi) {
+      var boxes = cell.opts.map(function (o, i) {
+        var L = String.fromCharCode(65 + i), ck = Array.isArray(chosen) && chosen.indexOf(i) >= 0;
+        return '<label class="eopt"><input type="checkbox" data-k="' + k + '" value="' + i + '"' + (ck ? ' checked' : '') + '><span class="el">' + L + '.</span><span>' + esc(o) + '</span></label>';
+      }).join('');
+      return '<div class="eq" id="' + anchor + '" data-k="' + k + '"><div class="eqh"><span class="qlabel">' + cell.ns.join(' & ') +
+        '</span><span class="eqt">' + esc(cell.q) + ' <em>(Choose ' + numWord(cell.pick) + ')</em></span>' + flag + '</div><div class="eopts">' + boxes + '</div></div>';
+    }
+    if (cell.match) {
+      var head = '';
+      if (cell.groupHead) {
+        var leg = cell.legend.map(function (o, i) { return '<li><b>' + String.fromCharCode(65 + i) + '</b> ' + esc(o) + '</li>'; }).join('');
+        head = '<div class="match-legend">' + (cell.intro ? '<p class="ml-intro">' + esc(cell.intro) + '</p>' : '') + '<ul>' + leg + '</ul></div>';
+      }
+      var lets = cell.opts.map(function (o, i) {
+        var L = String.fromCharCode(65 + i);
+        return '<label class="eopt lt" title="' + esc(o) + '"><input type="radio" name="' + anchor + '" data-k="' + k + '" value="' + i + '"' + (chosen === i ? ' checked' : '') + '><span class="el">' + L + '</span></label>';
+      }).join('');
+      return head + '<div class="eq match" id="' + anchor + '" data-k="' + k + '"><div class="eqh"><span class="qlabel">' + cell.n +
+        '</span><span class="eqt">' + esc(cell.q) + '</span>' + flag + '</div><div class="eopts letters">' + lets + '</div></div>';
+    }
+    var radios = cell.opts.map(function (o, i) {
+      var L = String.fromCharCode(65 + i);
+      return '<label class="eopt"><input type="radio" name="' + anchor + '" data-k="' + k + '" value="' + i + '"' + (chosen === i ? ' checked' : '') + '><span class="el">' + L + '.</span><span>' + esc(o) + '</span></label>';
+    }).join('');
+    return '<div class="eq" id="' + anchor + '" data-k="' + k + '"><div class="eqh"><span class="qlabel">Question ' + cell.n + ':</span>' +
+      '<span class="eqt">' + esc(cell.q) + '</span>' + flag + '</div><div class="eopts">' + radios + '</div></div>';
+  }
+
+  function renderExam(s) {
+    var qs = s.questions, allNums = []; qs.forEach(function (c) { allNums = allNums.concat(cellNums(c)); });
+    var first = allNums[0], last = allNums[allNums.length - 1];
+    var hasEmbedded = !!s.audioData;
+    if (!currentKey || !parseKey(currentKey).s) currentKey = key(s, qs[0]);
+
+    var body = qs.map(function (cell) { return examCell(s, cell); }).join('');
+
+    $('sectionArea').innerHTML =
+      '<div class="exam-top">' +
+        '<div class="et-user"><span class="ava">👤</span> Student</div>' +
+        '<div class="et-timer" id="timer">--:--</div>' +
+        '<div class="et-ctrl"><button class="gear" id="homeBtn" title="Home">🏠 Home</button>' +
+          '<button class="gear" title="Settings">⚙</button></div>' +
+      '</div>' +
+      '<div class="exam-parthead">Part ' + s.id + ': Questions ' + first + ' – ' + last + '</div>' +
+      '<div class="exam-audiobar"><span class="ab-label">🎧 Recording</span>' +
+        '<audio id="audio" controls preload="metadata"></audio>' +
+        (hasEmbedded ? '' : '<span class="pick2"><label for="file" title="Load MP3">📂 Load MP3</label><input id="file" type="file" accept="audio/*"></span>') +
+      '</div>' +
+      '<div class="exam-main">' + body + '</div>' +
+      '<div class="exam-bottom" id="exBottom"></div>';
+
+    audio = $('audio'); audio.src = s._blob || s.audioData || (AUDIO_BASE + s.audioFile); audio.load();
+    wireExamAudio(s, hasEmbedded);
+    var goHome = function () { stopTimer(); MODE = 'study'; render(); showToast('🏠 Back to home — your answers are kept.'); };
+    var hb = $('homeBtn'); if (hb) hb.onclick = goHome;
+    var g = document.querySelector('.gear:not(#homeBtn)'); if (g) g.onclick = goHome;
+
+    $('sectionArea').querySelectorAll('.eopts input[type=radio]').forEach(function (inp) {
+      inp.addEventListener('change', function () { var k = inp.getAttribute('data-k'); answers[k] = +inp.value; currentKey = k; buildBottom(); });
+    });
+    $('sectionArea').querySelectorAll('.eopts input[type=checkbox]').forEach(function (inp) {
+      inp.addEventListener('change', function () {
+        var k = inp.getAttribute('data-k'), cell = cellByKey(k);
+        var boxes = inp.closest('.eopts').querySelectorAll('input[type=checkbox]');
+        var checked = []; boxes.forEach(function (b) { if (b.checked) checked.push(+b.value); });
+        if (cell && checked.length > cell.pick) { inp.checked = false; checked = checked.filter(function (v) { return v !== +inp.value; }); }
+        answers[k] = checked.sort(function (a, b) { return a - b; }); currentKey = k; buildBottom();
+      });
+    });
+    $('sectionArea').querySelectorAll('.flagbtn').forEach(function (b) {
+      b.onclick = function () { var k = b.getAttribute('data-k'); flags[k] = !flags[k]; b.textContent = flags[k] ? '🚩' : '⚑'; currentKey = k; buildBottom(); };
+    });
+
+    buildBottom();
+    renderTimer();
+  }
+
+  function wireExamAudio(s, hasEmbedded) {
+    var spk = $('vspk');
+    if (spk) spk.onclick = function () {
+      if (audio.paused) { var p = audio.play(); if (p && p.catch) p.catch(function () { showToast('No MP3 yet — click 📂 to load the audio'); }); }
+      else audio.pause();
+    };
+    audio.addEventListener('pause', function () { if ($('vspk')) $('vspk').textContent = '🔊'; });
+    audio.addEventListener('play', function () { if ($('vspk')) $('vspk').textContent = '⏸'; });
+    var sl = $('vslider'); if (sl) sl.oninput = function () { audio.volume = +sl.value; };
+    var fp = $('file');
+    if (fp) fp.addEventListener('change', function (e) { var f = e.target.files && e.target.files[0]; if (!f) return;
+      s._file = f; var u = URL.createObjectURL(f); s._blob = u; audio.src = u; audio.load(); });
+  }
+
+  function buildBottom() {
+    var el = $('exBottom'); if (!el) return;
+    var cur = parseKey(currentKey);
+    var groups = SECTIONS.map(function (sec) {
+      var nums = sec.questions.map(function (cell) {
+        var k = key(sec, cell), chosen = answers[k];
+        var filled = cell.multi ? (Array.isArray(chosen) && chosen.length === cell.pick) : (chosen != null);
+        return cellNums(cell).map(function (nn) {
+          var cls = 'pnum' + (filled ? ' answered' : '') + (flags[k] ? ' flag' : '') + (k === currentKey ? ' current' : '');
+          return '<button class="' + cls + '" data-k="' + k + '">' + nn + '</button>';
+        }).join('');
+      }).join('');
+      return '<div class="pgroup"><span class="plabel2">Part ' + sec.id + ':</span>' + nums + '</div>';
+    }).join('');
+    el.innerHTML =
+      '<label class="review-chk"><input type="checkbox" id="reviewChk"> Review</label>' + groups +
+      '<div class="exam-nav-right">' +
+        '<button class="collapse-ic" id="colBtn" title="Collapse / expand">⤢</button>' +
+        '<button class="navarrow" id="prevQ" title="Previous">←</button>' +
+        '<button class="navarrow" id="nextQ" title="Next">→</button>' +
+        '<button class="submit-ex" id="btnSubmit">Submit</button></div>';
+
+    el.querySelectorAll('.pnum').forEach(function (b) { b.onclick = function () { gotoKey(b.getAttribute('data-k')); }; });
+    var rc = $('reviewChk'); rc.checked = !!flags[currentKey];
+    rc.onchange = function () { flags[currentKey] = rc.checked; var fb = document.querySelector('.flagbtn[data-k="' + currentKey + '"]'); if (fb) fb.textContent = rc.checked ? '🚩' : '⚑'; buildBottom(); };
+    $('prevQ').onclick = function () { navRel(-1); };
+    $('nextQ').onclick = function () { navRel(1); };
+    $('btnSubmit').onclick = openSubmit;
+    $('colBtn').onclick = function () { document.body.classList.toggle('nav-collapsed'); };
+  }
+
+  function gotoKey(kk) {
+    var r = parseKey(kk); if (!r.s) return;
+    currentKey = kk;
+    if (SECTIONS[active].id !== r.s.id) { active = SECTIONS.indexOf(r.s); render(); }
+    else buildBottom();
+    setTimeout(function () { var el = $('eq' + cellNums(r.item)[0]); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 40);
+  }
+  function navRel(d) { var arr = flatKeys(), i = arr.indexOf(currentKey); if (i < 0) i = 0;
+    gotoKey(arr[Math.min(arr.length - 1, Math.max(0, i + d))]); }
+
+  function startExam() {
+    examLeft = (APP.examMinutes || 30) * 60;
+    stopTimer(); renderTimer();
+    examTimer = setInterval(function () {
+      examLeft--; renderTimer();
+      if (examLeft <= 0) { stopTimer(); alert('⏰ Time is up! Your test will be submitted.'); doSubmit(); }
+    }, 1000);
+  }
+  function stopTimer() { if (examTimer) { clearInterval(examTimer); examTimer = null; } }
+  function renderTimer() { var t = $('timer'); if (!t) return;
+    var m = Math.floor(examLeft / 60), sc = examLeft % 60;
+    t.textContent = m + ' minute' + (m === 1 ? '' : 's') + ' ' + (sc < 10 ? '0' : '') + sc + 's left';
+    if (examLeft > 60) t.textContent = m + ' minutes left';
+    t.classList.toggle('low', examLeft <= 120); }
+
+  function openSubmit() { $('examSubmit').classList.add('show'); }
+  function doSubmit() { $('examSubmit').classList.remove('show'); stopTimer(); MODE = 'study'; render(); openResults(); }
+
+  function numWord(n) { return ({ 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR' })[n] || ('' + n); }
+
+  function openModal(s, item) {
+    var multi = !!item.multi, k = key(s, item), answered = answers[k] != null;
+    $('mNum').textContent = multi ? item.ns.join('–') : item.n;
+    $('mTitle').textContent = s.name + ' · ' + (multi ? 'Questions ' + item.ns.join(' & ') : 'Question ' + item.n);
+
+    var opts = item.opts.map(function (o, i) {
+      var L = String.fromCharCode(65 + i);
+      return '<button class="optbtn' + (multi ? ' multi' : '') + '" data-i="' + i + '"><span class="letter">' + L + '</span><span>' + esc(o) + '</span></button>';
+    }).join('');
+    var intro = (item.intro ? '<p class="q-intro">' + esc(item.intro) + '</p>' : '');
+    var hint = multi ? '👆 Choose ' + numWord(item.pick) + ' answers, then press Check' : '👆 Choose the answer you think is correct';
+    var checkBtn = multi ? '<button class="checkbtn" id="checkBtn" disabled>✅ Check answer</button>' : '';
+
+    $('mBody').innerHTML =
+      intro +
+      '<p class="q-full">' + esc(item.q) + '</p>' +
+      '<p class="pickhint" id="pickhint">' + hint + '</p>' +
+      '<div class="opts" id="opts">' + opts + '</div>' + checkBtn +
+      '<p class="result-flag" id="flag"></p>' +
+      '<div class="proofWrap" id="proofWrap">' +
+        '<p class="plabel">🔎 Evidence in the recording</p>' +
+        '<div class="proof" id="proofBox" title="Click to play this part">' + renderProof(item.proof) +
+        '<span class="cue">👆 Click to listen · ⏱ <span class="ts">' + item.start + ' → ' + item.end + '</span></span></div>' +
+        '<div class="row2"><button class="xlate" id="xlateBtn">🌐 Translate</button></div>' +
+        '<div class="proofVN" id="proofVN"><b>Meaning:</b> ' + esc(item.proofVN || '(no translation yet)') + '</div>' +
+        '<button class="listen" id="listenBtn">🔊 Play this part <span class="ts">(' + item.start + '–' + item.end + ')</span></button>' +
+        (item.analysis ? '<div class="analysis"><p class="alabel">💡 Trap &amp; paraphrase analysis</p><div class="atext">' + renderProof(item.analysis) + '</div>' +
+          (item.analysisVN ? '<div class="row2"><button class="xlate" id="xlateA">🌐 Translate</button></div><div class="proofVN" id="analysisVN"><b>Nghĩa:</b> ' + esc(item.analysisVN) + '</div>' : '') +
+          '</div>' : '') +
+      '</div>';
+
+    if (multi) {
+      var sel = [];
+      $('opts').querySelectorAll('.optbtn').forEach(function (el) {
+        el.onclick = function () {
+          if (answers[k] != null) return;
+          var i = +el.getAttribute('data-i'), pos = sel.indexOf(i);
+          if (pos >= 0) { sel.splice(pos, 1); el.classList.remove('sel'); }
+          else { if (sel.length >= item.pick) return; sel.push(i); el.classList.add('sel'); }
+          $('checkBtn').disabled = sel.length !== item.pick;
+        };
+      });
+      $('checkBtn').onclick = function () { if (answers[k] != null) return; answers[k] = sel.slice().sort(function (a, b) { return a - b; }); afterPick(s, item, k); };
+    } else {
+      $('opts').querySelectorAll('.optbtn').forEach(function (el) {
+        el.onclick = function () { if (answers[k] != null) return; answers[k] = +el.getAttribute('data-i'); afterPick(s, item, k); };
+      });
+    }
+
+    var play = function () { playSeg(s, item.start, item.end); };
+    $('proofBox').onclick = play; $('listenBtn').onclick = play;
+    $('xlateBtn').onclick = function () {
+      var vn = $('proofVN'); var on = vn.classList.toggle('show');
+      $('xlateBtn').textContent = on ? '🌐 Hide translation' : '🌐 Translate';
+    };
+    var xa = $('xlateA');
+    if (xa) xa.onclick = function () { var el = $('analysisVN'); var on = el.classList.toggle('show'); xa.textContent = on ? '🌐 Hide translation' : '🌐 Translate'; };
+
+    if (answered) grade(s, item);
+    $('overlay').classList.add('open'); $('mClose').focus();
+  }
+
+  function afterPick(s, item, k) {
+    grade(s, item); updateOverall(); buildTabs();
+    var idx = s.questions.indexOf(item), card = document.querySelector('.qcard[data-i="' + idx + '"]');
+    if (card) { card.classList.remove('correct', 'wrong'); card.classList.add(cellCorrect(item, answers[k]) === cellMax(item) ? 'correct' : 'wrong'); }
+    if (secDone(s)) { showToast('🎉 ' + s.name + ' done! Click “View results”'); burst(); }
+  }
+
+  function grade(s, item) {
+    var k = key(s, item), chosen = answers[k], flag = $('flag');
+    $('opts').querySelectorAll('.optbtn').forEach(function (el) {
+      var i = +el.getAttribute('data-i'); el.disabled = true; el.classList.remove('sel');
+      var isAns = item.multi ? item.answer.indexOf(i) >= 0 : i === item.answer;
+      var isChosen = item.multi ? (Array.isArray(chosen) && chosen.indexOf(i) >= 0) : i === chosen;
+      if (isAns) el.classList.add('correct'); else if (isChosen) el.classList.add('wrong'); else el.classList.add('dim');
+    });
+    var cc = cellCorrect(item, chosen), mx = cellMax(item);
+    if (cc === mx) { flag.className = 'result-flag ok show'; flag.textContent = '✅ Correct!' + (mx > 1 ? ' (' + cc + '/' + mx + ')' : ''); }
+    else { flag.className = 'result-flag no show'; flag.textContent = mx > 1 ? ('❌ ' + cc + '/' + mx + ' correct.') : '❌ Not quite.'; }
+    var cb = $('checkBtn'); if (cb) cb.style.display = 'none';
+    $('pickhint').style.display = 'none';
+    $('proofWrap').classList.add('show');
+  }
+
+  function playSeg(s, start, end) {
+    if (!audio || !audio.currentSrc) { var a = $('anote'); if (a) a.classList.add('show'); showToast('🔇 No MP3 yet — please load the audio'); return; }
+    s._stopAt = toSec(end);
+    try { audio.currentTime = toSec(start); var p = audio.play();
+      if (p && p.catch) p.catch(function () { showToast('Click ▶ on the player once, then try again'); });
+      showToast('🎧 Playing ' + start + ' → ' + end);
+    } catch (e) { showToast('Could not play this segment'); }
+  }
+
+  function closeModal() { $('overlay').classList.remove('open'); if (audio) audio.pause(); }
+  $('mClose').onclick = closeModal;
+  $('overlay').onclick = function (e) { if (e.target === $('overlay')) closeModal(); };
+
+  /* ---- Transcript (hover to show Vietnamese) ---- */
+  function openTranscript(s) {
+    var lines = s.transcript || [];
+    var body = lines.map(function (ln, i) {
+      var t = ln.t ? '<span class="tt">' + ln.t + '</span>' : '';
+      return '<div class="tline" data-i="' + i + '"' + (ln.t ? ' data-t="' + ln.t + '"' : '') + '>' +
+        '<div class="tvn">🇻🇳 ' + esc(ln.vn || '') + '</div>' + t + esc(ln.en) + '</div>';
+    }).join('');
+    $('transTitle').textContent = s.name + ' · Transcript';
+    $('transBody').innerHTML = '<div class="twrap"><p class="thint">🖱️ Hover (or tap) a line to show the Vietnamese meaning · click to play from that line</p><div class="tlist">' +
+      (lines.length ? body : '<p class="thint">This section has no transcript yet.</p>') + '</div></div>';
+    $('transBody').querySelectorAll('.tline').forEach(function (el) {
+      el.onclick = function () {
+        el.classList.toggle('show');
+        var t = el.getAttribute('data-t'); if (!t) return;
+        var i = +el.getAttribute('data-i'); var next = lines[i + 1];
+        playSeg(s, t, next && next.t ? next.t : addSec(t, 6));
+      };
+    });
+    $('transOverlay').classList.add('open'); $('transClose').focus();
+  }
+  $('transClose').onclick = function () { $('transOverlay').classList.remove('open'); if (audio) audio.pause(); };
+  $('transOverlay').onclick = function (e) { if (e.target === $('transOverlay')) { $('transOverlay').classList.remove('open'); if (audio) audio.pause(); } };
+
+  /* ---- Dictation ---- */
+  function normWords(str) { return str.toLowerCase().replace(/[^a-z0-9\s']/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function openDictation(s) {
+    var items = s.dictation || [];
+    var body = items.map(function (d, i) {
+      return '<div class="dcard" data-i="' + i + '">' +
+        '<div class="dtop"><button class="dplay" data-i="' + i + '">▶ Play sentence ' + (i + 1) + '</button><span class="dnum">Listen & type</span></div>' +
+        '<input class="dinput" type="text" placeholder="Type the sentence you hear..." autocomplete="off" autocapitalize="off">' +
+        '<div class="dbtns"><button class="dcheck" data-i="' + i + '">✅ Check</button><button class="dshow" data-i="' + i + '">👁 Answer</button></div>' +
+        '<div class="dfb" data-i="' + i + '"></div></div>';
+    }).join('');
+    $('dictTitle').textContent = s.name + ' · Dictation';
+    $('dictBody').innerHTML = '<div class="dwrap"><p class="dhint">🎧 Click ▶ to play each sentence, type it, then click Check. Correct words turn green, missing/wrong words turn red.</p>' +
+      (items.length ? body : '<p class="dhint">This section has no dictation yet.</p>') + '</div>';
+    var root = $('dictBody');
+    root.querySelectorAll('.dplay').forEach(function (b) { b.onclick = function () { var d = items[+b.getAttribute('data-i')]; playSeg(s, d.t, d.end || addSec(d.t, 6)); }; });
+    root.querySelectorAll('.dcheck').forEach(function (b) { b.onclick = function () { checkDict(root, items, +b.getAttribute('data-i')); }; });
+    root.querySelectorAll('.dshow').forEach(function (b) {
+      b.onclick = function () { var i = +b.getAttribute('data-i'); var fb = root.querySelector('.dfb[data-i="' + i + '"]');
+        fb.className = 'dfb show'; fb.innerHTML = '<div class="scoreline">Answer:</div>' + esc(items[i].text); };
+    });
+    var inputs = root.querySelectorAll('.dinput');
+    inputs.forEach(function (inp, i) { inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') checkDict(root, items, i); }); });
+    $('dictOverlay').classList.add('open');
+  }
+  function checkDict(root, items, i) {
+    var card = root.querySelector('.dcard[data-i="' + i + '"]');
+    var val = card.querySelector('.dinput').value;
+    var tw = normWords(items[i].text).split(' ').filter(Boolean);
+    var uw = normWords(val).split(' ').filter(Boolean);
+    var bag = {}; uw.forEach(function (w) { bag[w] = (bag[w] || 0) + 1; });
+    var got = 0;
+    var html = tw.map(function (w) {
+      if (bag[w] > 0) { bag[w]--; got++; return '<span class="ok">' + esc(w) + '</span>'; }
+      return '<span class="miss">' + esc(w) + '</span>';
+    }).join(' ');
+    var pct = tw.length ? Math.round(got / tw.length * 100) : 0;
+    var fb = card.querySelector('.dfb'); fb.className = 'dfb show';
+    var head = pct === 100 ? '🎉 Perfect! ' : pct >= 70 ? '👍 Good job! ' : '💪 Keep trying! ';
+    fb.innerHTML = '<div class="scoreline">' + head + got + '/' + tw.length + ' words correct (' + pct + '%)</div><div>' + html + '</div>';
+    if (pct === 100) burst();
+  }
+  $('dictClose').onclick = function () { $('dictOverlay').classList.remove('open'); if (audio) audio.pause(); };
+  $('dictOverlay').onclick = function (e) { if (e.target === $('dictOverlay')) { $('dictOverlay').classList.remove('open'); if (audio) audio.pause(); } };
+
+  /* ---- Export standalone HTML with embedded MP3 ---- */
+  function sectionExportObj(s, uri) {
+    return {
+      id: s.id, emoji: s.emoji, name: s.name, topic: s.topic, audioFile: s.audioFile,
+      sample: false, questions: s.questions, vocab: s.vocab || [], structures: s.structures || [],
+      transcript: s.transcript || [], dictation: s.dictation || [], audioData: uri || null
+    };
+  }
+  function buildStudentFile(dataObj, filename) {
+    var clone = document.documentElement.cloneNode(true);
+    clone.querySelector('#appdata').textContent = JSON.stringify(dataObj);
+    clone.querySelectorAll('.overlay').forEach(function (o) { o.classList.remove('open'); });
+    downloadHtml('<!doctype html>\n' + clone.outerHTML, filename);
+  }
+
+  function exportSection(s) {
+    getAudioDataUri(s, function (uri, err) {
+      if (err === 'nofile') { alert('No MP3 for ' + s.name + ' yet.\nClick “📂 Load MP3” to load the audio first, then export.'); return; }
+      if (err) { alert('Could not read the MP3 file. Please load it again.'); return; }
+      showToast('⏳ Generating file (embedding MP3)...');
+      var data = { title: s.name + ' — ' + s.topic, single: true, student: true, sections: [sectionExportObj(s, uri)] };
+      buildStudentFile(data, 'Listening_' + s.name.replace(/\s+/g, '') + '.html');
+      setTimeout(function () { showToast('✅ File exported! Send it to students — it runs offline with sound.'); }, 400);
+    });
+  }
+
+  function exportFullTest() {
+    showToast('⏳ Generating full test (embedding MP3s)...');
+    var out = [], missing = [];
+    (function next(idx) {
+      if (idx >= SECTIONS.length) {
+        var tname = TESTS[TID].name, book = APP.title || 'IELTS';
+        var data = { title: book + ' — ' + tname, student: true, sections: out };
+        buildStudentFile(data, book.replace(/\s+/g, '') + '_' + tname.replace(/\s+/g, '') + '.html');
+        setTimeout(function () {
+          showToast(missing.length ? ('✅ Exported. No audio for: ' + missing.join(', ')) : '✅ Full test exported with all audio!');
+        }, 400);
+        return;
+      }
+      var s = SECTIONS[idx];
+      getAudioDataUri(s, function (uri, err) {
+        if (err || !uri) missing.push(s.name);
+        out.push(sectionExportObj(s, err ? null : uri));
+        next(idx + 1);
+      });
+    })(0);
+  }
+
+  function getAudioDataUri(s, cb) {
+    if (s._file) { readAsDataURL(s._file, cb); return; }
+    // try to fetch the default file sitting next to the page
+    try {
+      fetch(s._blob || s.audioData || (AUDIO_BASE + s.audioFile)).then(function (r) { if (!r.ok) throw 0; return r.blob(); })
+        .then(function (b) { readAsDataURL(b, cb); })
+        .catch(function () { cb(null, 'nofile'); });
+    } catch (e) { cb(null, 'nofile'); }
+  }
+  function readAsDataURL(blob, cb) {
+    var r = new FileReader();
+    r.onload = function () { cb(r.result); };
+    r.onerror = function () { cb(null, 'read'); };
+    r.readAsDataURL(blob);
+  }
+  function downloadHtml(html, name) {
+    var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
+  }
+
+  /* ---- Results ---- */
+  function openResults() {
+    var total = totalQ(), done = answeredCount(), right = rightCount();
+    var pct = done ? Math.round(right / done * 100) : 0, m;
+    if (done === 0) m = { e: '🤔', t: 'No answers yet', s: 'Click a question to start!' };
+    else if (pct >= 90) m = { e: '🔥', t: 'ON FIRE!', s: 'Outstanding — keep it up!' };
+    else if (pct >= 70) m = { e: '💪', t: 'Great job!', s: 'Solid work, a bit more practice for a top score!' };
+    else if (pct >= 50) m = { e: '📚', t: 'Not bad!', s: 'Over halfway — keep practising and you will improve.' };
+    else m = { e: '🤙', t: 'Keep practising!', s: 'Review the evidence for the ones you missed.' };
+
+    var rows = SECTIONS.map(function (s) {
+      var r = 0; s.questions.forEach(function (c) { r += cellCorrect(c, answers[key(s, c)]); });
+      var tot = secTotal(s), w = tot ? r / tot * 100 : 0;
+      return '<div class="res-row"><span class="rn">' + s.emoji + ' ' + s.name + '</span><span class="rbar"><i style="width:' + w + '%"></i></span><span class="rv">' + r + '/' + tot + '</span></div>';
+    }).join('');
+
+    var wrong = [];
+    SECTIONS.forEach(function (s) { s.questions.forEach(function (c) { var ch = answers[key(s, c)]; if (cellDoneNums(c, ch) > 0 && cellCorrect(c, ch) < cellMax(c)) { cellNums(c).forEach(function (nn) { wrong.push('S' + s.id + '·Q' + nn); }); } }); });
+    var wrongHtml = wrong.length ? '<div class="res-wrong"><b>To review (' + wrong.length + '):</b><div class="chips">' + wrong.map(function (x) { return '<span class="chip">' + x + '</span>'; }).join('') + '</div></div>' : '';
+
+    $('resBody').innerHTML =
+      '<div class="res-hero"><div class="res-emoji">' + m.e + '</div>' +
+      '<p class="res-score">' + right + '<small>/' + done + '</small></p>' +
+      '<p class="res-msg">' + m.t + '</p><p class="res-pct">' + pct + '% correct · ' + done + '/' + total + ' answered · ' + m.s + '</p></div>' +
+      '<div class="res-list">' + rows + '</div>' + wrongHtml +
+      '<div class="res-actions"><button class="act" id="resReview">📖 Review answers</button><button class="act hot" id="resRetry">🔄 Restart</button></div>';
+
+    $('resReview').onclick = function () { $('resOverlay').classList.remove('open'); };
+    $('resRetry').onclick = function () { doReset(); $('resOverlay').classList.remove('open'); };
+    $('resOverlay').classList.add('open'); $('resClose').focus();
+    if (done > 0 && pct >= 70) burst();
+  }
+  if (STUDENT) { var ea = $('btnExportAll'); if (ea) ea.style.display = 'none'; }
+  else { $('btnExportAll').onclick = exportFullTest; }
+  $('btnExam').onclick = function () {
+    MODE = 'exam';
+    var s0 = SECTIONS[active]; currentKey = key(s0, s0.questions[0]);
+    startExam(); render();
+    showToast('🧪 Exam room — do it like the real test, the timer is running!');
+  };
+  $('esmClose').onclick = function () { $('examSubmit').classList.remove('show'); };
+  $('examSubmit').onclick = function (e) { if (e.target === $('examSubmit')) $('examSubmit').classList.remove('show'); };
+  $('esmSubmit').onclick = doSubmit;
+
+  /* ---- Điều chỉnh cỡ chữ (mọi mục) ---- */
+  var fontScale = 1;
+  function applyFont() {
+    document.documentElement.style.setProperty('--zoom', fontScale);
+    var l = $('fsLabel'); if (l) l.textContent = Math.round(fontScale * 100) + '%';
+  }
+  $('fsUp').onclick = function () { fontScale = Math.min(1.8, Math.round((fontScale + 0.1) * 10) / 10); applyFont(); };
+  $('fsDown').onclick = function () { fontScale = Math.max(0.8, Math.round((fontScale - 0.1) * 10) / 10); applyFont(); };
+  applyFont();
+  $('btnResult').onclick = openResults;
+  $('resClose').onclick = function () { $('resOverlay').classList.remove('open'); };
+  $('resOverlay').onclick = function (e) { if (e.target === $('resOverlay')) $('resOverlay').classList.remove('open'); };
+
+  function doReset() { answers = {}; flags = {}; currentKey = null; stopTimer(); MODE = 'study'; SECTIONS.forEach(function (s) { s._stopAt = null; }); render(); showToast('🧼 Reset — good luck!'); }
+  var resetArmed = false, resetTimer = null;
+  $('btnReset').onclick = function () {
+    if (answeredCount() === 0) { doReset(); return; }
+    if (resetArmed) { resetArmed = false; if (resetTimer) clearTimeout(resetTimer); doReset(); return; }
+    resetArmed = true; showToast('⚠️ Click “Restart” again to erase all answers');
+    resetTimer = setTimeout(function () { resetArmed = false; }, 3000);
+  };
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeModal();
+      $('resOverlay').classList.remove('open');
+      $('transOverlay').classList.remove('open');
+      $('dictOverlay').classList.remove('open');
+      $('examSubmit').classList.remove('show');
+    }
+  });
+
+  var toastTimer = null;
+  function showToast(m) { var t = $('toast'); t.textContent = m; t.classList.add('show'); if (toastTimer) clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2400); }
+
+  /* confetti */
+  var cv = $('cf'), ctx = cv.getContext('2d'), parts = [], raf = null;
+  function sz() { cv.width = innerWidth; cv.height = innerHeight; } sz(); addEventListener('resize', sz);
+  var COL = ['#d8bd7b', '#c9a96a', '#3a63b0', '#6f9fd6', '#f4efe1', '#e6cf98'];
+  function burst() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    for (var i = 0; i < 130; i++) parts.push({ x: cv.width / 2, y: cv.height * 0.3, vx: (Math.random() - .5) * 15, vy: Math.random() * -13 - 4,
+      g: .38 + Math.random() * .3, s: 6 + Math.random() * 8, r: Math.random() * 6, vr: (Math.random() - .5) * .4, c: COL[i % COL.length], life: 90 + Math.random() * 40 });
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function tick() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    for (var i = parts.length - 1; i >= 0; i--) { var p = parts[i]; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr; p.life--;
+      if (p.life <= 0 || p.y > cv.height + 30) { parts.splice(i, 1); continue; }
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.fillStyle = p.c; ctx.globalAlpha = Math.max(0, Math.min(1, p.life / 40));
+      ctx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); ctx.restore(); }
+    if (parts.length) raf = requestAnimationFrame(tick); else { ctx.clearRect(0, 0, cv.width, cv.height); raf = null; }
+  }
+
+  render();
+})();
+</script>
