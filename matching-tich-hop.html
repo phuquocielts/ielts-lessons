@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matching · Lý thuyết &amp; Luyện tập · PoPoDoo</title>
+<style>
+:root{
+  --bg1:#081633;--bg2:#0b1e42;--panel:#122a52;--panel2:#16305e;--panelh:#1d3a6d;
+  --gold:#d4af37;--gold2:#f0c75e;--goldsoft:rgba(240,199,94,.12);
+  --ink:#e8eefb;--soft:#c3d0ea;--muted:#8ea1c4;--line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
+  --green:#43d19b;--green-b:rgba(67,209,155,.18);--red:#ff7b72;--red-b:rgba(255,123,114,.16);
+  --violet:#c3a9ff;--blue-soft:rgba(120,160,240,.14);
+  --en-col:#a9c2ef;--radius:16px;--fs:17px;
+  --shadow:0 10px 34px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:var(--fs);scroll-behavior:smooth}
+body{font-family:'Times New Roman',Georgia,serif;line-height:1.75;color:var(--ink);
+  background:radial-gradient(1200px 600px at 50% -10%, #12325e 0%, transparent 60%), linear-gradient(160deg,var(--bg1),var(--bg2) 55%,#0a1c3e);
+  background-attachment:fixed;min-height:100vh}
+h1,h2,h3,h4,.sans,button,nav,.badge,.lbl,.qt-num{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+.en,.en-q{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+b,strong{color:#f4f7ff}
+
+/* header */
+header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,rgba(7,17,38,.98),rgba(9,22,48,.94));backdrop-filter:blur(8px);border-bottom:1px solid var(--line2);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.head-inner{max-width:1080px;margin:0 auto;padding:.85rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0;box-shadow:0 4px 14px rgba(212,175,55,.35)}
+.head-title{flex:1;min-width:200px}
+.head-title h1{font-family:'Times New Roman',Georgia,serif;font-size:1.32rem;letter-spacing:.3px;color:var(--gold2);line-height:1.15}
+.head-title h1 b{color:var(--gold2)}
+.head-title p{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#9db3d6;margin-top:.25rem}
+.ctrls{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+.lang-toggle{display:flex;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:2px}
+.lang-toggle button{border:none;background:none;color:#cdd9f2;padding:.34rem .6rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.76rem}
+.lang-toggle button.on{background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48}
+.font-ctrl{display:flex;gap:.32rem}
+.font-ctrl button{width:36px;height:36px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:#eaf0fb;border-radius:9px;cursor:pointer;font-weight:700}
+.font-ctrl button:hover{background:var(--gold);color:#1a2b48;border-color:var(--gold)}
+#progressBar{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;transition:width .15s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:50;background:rgba(9,20,44,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav.tabs::-webkit-scrollbar{height:0}
+nav.tabs .tab-row{display:flex;max-width:1080px;margin:0 auto;padding:0 .6rem}
+nav.tabs button{flex-shrink:0;padding:.8rem 1.05rem;border:none;background:none;cursor:pointer;font-size:.86rem;font-weight:600;color:#9fb2d4;border-bottom:2px solid transparent;white-space:nowrap;transition:.18s}
+nav.tabs button:hover{color:#eaf0fb}
+nav.tabs button.active{color:var(--gold2);border-bottom-color:var(--gold)}
+
+main{max-width:1080px;margin:0 auto;padding:1.3rem 1.1rem 5rem}
+section.panel{display:none;animation:fade .35s ease}
+section.panel.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* cards / panels */
+.card,.passage,.qcard{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.15rem 1.3rem;margin-bottom:1.15rem}
+.card h2,.qcard h2{color:var(--gold2);font-family:'Times New Roman',Georgia,serif;font-size:1.4rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.55rem;letter-spacing:.2px}
+h2.en{color:var(--gold2);font-size:1.5rem}
+.gold-bar{display:inline-block;width:6px;height:1.15rem;background:linear-gradient(180deg,var(--gold2),var(--gold));border-radius:3px}
+.vi-name{color:var(--muted);font-weight:400;font-size:.9rem}
+p{margin-bottom:.7rem;color:var(--soft)}
+.card p,.passage p{color:var(--soft)}
+a{color:var(--gold2)}
+
+/* callouts */
+.note,.tipbox,.warn{border-radius:0 12px 12px 0;padding:.75rem 1rem;margin:.7rem 0;font-size:.95rem}
+.note{background:var(--goldsoft);border-left:4px solid var(--gold)}
+.tipbox{background:var(--green-b);border-left:4px solid var(--green)}
+.warn{background:var(--red-b);border-left:4px solid var(--red)}
+.note b,.tipbox b,.warn b{color:#fff}
+
+/* highlights */
+.hl{background:linear-gradient(transparent 55%, rgba(240,199,94,.42) 55%);border-radius:2px;color:#fff;padding:0 .05em}
+.hl-g{background:rgba(67,209,155,.26);border-radius:3px;padding:0 .18em;color:#eafff6}
+.hl-v{background:rgba(160,130,255,.30);border-radius:3px;padding:0 .18em;color:#f1ecff}
+
+/* tables */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line);margin:.5rem 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{background:linear-gradient(180deg,#0d2550);background:#0d2550;color:var(--gold2);padding:.6rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.82rem;text-align:left}
+td{border:1px solid var(--line);padding:.55rem .6rem;color:var(--soft);vertical-align:top}
+td.l{text-align:left}
+.keytable td.ans{font-weight:800;color:var(--gold2);text-align:center;font-family:'Segoe UI',Arial,sans-serif}
+.keytable td{text-align:center}
+.keytable td.l{text-align:left}
+
+/* examples / solutions / steps (theory) */
+.example{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin:.8rem 0}
+.ex-label{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.05em;color:var(--gold2);text-transform:uppercase;margin-bottom:.4rem}
+.solution{margin-top:.6rem;border-top:1px dashed var(--line2);padding-top:.6rem}
+.sol-body{font-size:.94rem}
+.steps{counter-reset:step;list-style:none;padding:0;margin:.4rem 0}
+.steps>li{position:relative;padding:.4rem 0 .4rem 2.2rem;border-top:1px dashed var(--line);color:var(--soft)}
+.steps>li:first-child{border-top:none}
+.steps>li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.4rem;width:1.5rem;height:1.5rem;border-radius:50%;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center}
+
+/* quick-ID tree / nodes */
+.tree{margin:.6rem 0}
+.node,.branch,.leaf{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.5rem .7rem;margin:.35rem 0;color:var(--soft)}
+.node{border-left:3px solid var(--gold)}
+.leaf{border-left:3px solid var(--green)}
+.arrow{color:var(--gold);font-weight:800}
+.lbl{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--gold2);font-size:.85rem}
+.big{font-size:1.15rem}
+.desc{color:var(--muted);font-size:.9rem}
+.meta-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.meta-chips span,.chip{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:.2rem .7rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.78rem;color:var(--soft)}
+
+/* question-type hero */
+.qt-hero{display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#0e2550);background:linear-gradient(135deg,#0e2550,#15325f);border:1px solid var(--line2);border-radius:var(--radius);padding:1.1rem 1.3rem;margin-bottom:1.1rem}
+.qt-num{width:54px;height:54px;flex-shrink:0;border-radius:14px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800}
+.qt-hero h2{margin:0;color:var(--gold2)}
+
+/* compare grid */
+.vs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin:.6rem 0}
+.vs-col{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vs-head{background:#0d2550;color:var(--gold2);padding:.6rem .8rem;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.9rem}
+.vs-body{padding:.7rem .8rem;font-size:.9rem;color:var(--soft)}
+
+/* quiz */
+.qt-hero .score-box,.score-box{background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:12px;padding:.7rem 1rem;font-family:'Segoe UI',Arial,sans-serif}
+.quiz-q{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin-bottom:.9rem}
+.quiz-q .q-head{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.8rem;margin-bottom:.4rem}
+.quiz-q .opts{display:flex;flex-direction:column;gap:.4rem;margin:.5rem 0}
+.quiz-q .opts button{text-align:left;padding:.55rem .8rem;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--ink);border-radius:9px;cursor:pointer;font-family:'Times New Roman',Georgia,serif;font-size:.95rem;transition:.15s}
+.quiz-q .opts button:hover{border-color:var(--gold);background:rgba(240,199,94,.08)}
+.quiz-q .opts button.correct{background:var(--green-b);border-color:var(--green);color:#eafff6;font-weight:700}
+.quiz-q .opts button.wrong{background:var(--red-b);border-color:var(--red);color:#ffe9e7}
+.quiz-q .opts button:disabled{cursor:default;opacity:.95}
+.q-explain{display:none;background:var(--goldsoft);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.55rem .8rem;font-size:.9rem;color:var(--soft)}
+.q-explain.show{display:block}
+.btn,button.btn{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;border:none;border-radius:10px;padding:.6rem 1.2rem;cursor:pointer;font-size:.9rem}
+.btn{background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48}
+.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--soft)}
+.btn:hover{filter:brightness(1.05)}
+
+/* ===== practice divider + wrap ===== */
+.prac-divider{display:flex;align-items:center;gap:.8rem;margin:2rem 0 1.1rem}
+.prac-divider::before,.prac-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+.prac-divider span{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.08em;color:var(--gold2);background:rgba(240,199,94,.1);border:1px solid rgba(240,199,94,.3);border-radius:999px;padding:.3rem 1rem}
+
+/* practice: test title / sub / ansstrip */
+.test-title{color:var(--gold2);font-family:'Times New Roman',Georgia,serif;font-size:1.25rem;margin:.2rem 0 .1rem}
+.test-sub{color:var(--muted);font-size:.9rem;margin-bottom:.8rem;font-style:italic}
+.section-lab{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.95rem;margin:1.4rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:.4rem}
+.ansstrip{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
+.ansstrip .ac{cursor:pointer;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:10px;padding:.35rem .65rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.82rem;transition:.15s;white-space:nowrap;color:var(--soft)}
+.ansstrip .ac:hover{border-color:var(--gold);background:rgba(240,199,94,.1)}
+.ansstrip .ac b{color:var(--gold2)}
+.ansstrip .ac .a{color:var(--green);font-weight:800;margin-left:.25rem}
+.ansstrip .ac .a.a-y{color:var(--green)} .ansstrip .ac .a.a-n{color:var(--red)} .ansstrip .ac .a.a-ng{color:#9fb2d4}
+
+/* passage */
+.passage .ptitle{text-align:center;font-family:'Times New Roman',Georgia,serif;font-weight:700;color:var(--gold2);font-size:1.15rem;margin-bottom:.9rem}
+.para{display:flex;gap:.75rem;margin-bottom:.95rem}
+.para .plabel{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin-top:.2rem}
+.para .ptext{flex:1;color:var(--soft)}
+.rlabel{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2)}
+
+/* evidence mark */
+mark.ev{background:transparent;color:inherit;border:none;border-radius:3px;padding:0;cursor:text;position:relative;transition:background .2s}
+mark.ev .qb{display:none;font-family:'Segoe UI',Arial,sans-serif;font-size:.62em;font-weight:800;background:var(--green);color:#08281c;border-radius:999px;padding:.05em .5em;margin-left:.25em;vertical-align:.15em;white-space:nowrap}
+mark.ev .note,mark.ev .evi-vi{display:none}
+mark.ev.reveal{background:rgba(240,199,94,.24);border-bottom:2px solid var(--gold);padding:.05em .12em;cursor:pointer;color:#fff}
+mark.ev.reveal .qb{display:inline}
+mark.ev.reveal.open{background:rgba(240,199,94,.42);box-shadow:0 0 0 2px var(--gold)}
+mark.ev.flash{animation:flash 1.1s ease}
+@keyframes flash{0%,100%{background:rgba(240,199,94,.24)}30%{background:rgba(240,199,94,.6)}}
+
+/* popover */
+#pop{position:absolute;z-index:200;max-width:min(680px,92vw);background:linear-gradient(180deg,#16305e,#122a52);border:1px solid var(--line2);border-top:4px solid var(--gold);border-radius:14px;box-shadow:0 16px 44px rgba(0,0,0,.55);padding:.85rem .95rem;display:none;font-size:.92rem;line-height:1.6;color:var(--ink)}
+#pop.show{display:block;animation:fade .18s ease}
+#pop .phead{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.82rem;margin-bottom:.4rem}
+#pop .pclose{position:absolute;top:.4rem;right:.5rem;cursor:pointer;color:var(--muted);font-weight:700;font-family:'Segoe UI',Arial,sans-serif;border:none;background:none;font-size:1rem}
+#pop .pv-trans{background:rgba(120,160,240,.14);border-radius:9px;padding:.55rem .65rem;margin-bottom:.6rem;font-style:italic;color:#dbe6ff}
+#pop .ansline{font-family:'Segoe UI',Arial,sans-serif;color:var(--gold2);font-size:.9rem;margin-bottom:.5rem}
+#pop .steps{display:flex;flex-direction:column;gap:.45rem;counter-reset:none;list-style:none;padding:0;margin:0}
+#pop .stp{display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;line-height:1.5}
+#pop .stp .sn{flex-shrink:0;width:1.4rem;height:1.4rem;margin-top:.05rem;border-radius:50%;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.72rem;display:flex;align-items:center;justify-content:center}
+#pop .stp b{color:#fff}
+#pop .hl-g{background:rgba(67,209,155,.30);color:#eafff6}
+#pop .hl-v{background:rgba(160,130,255,.34);color:#f1ecff}
+#popMask{position:fixed;inset:0;z-index:150;display:none}
+#popMask.show{display:block}
+
+/* questions */
+.q{display:flex;gap:.6rem;align-items:flex-start;padding:.55rem .5rem;border-radius:9px;cursor:pointer;transition:.15s;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:none}
+.q:hover{background:rgba(240,199,94,.07)}
+.q .qn{flex-shrink:0;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.9rem;min-width:1.9rem}
+.q .qbody{flex:1;color:var(--soft)}
+.q .qans{flex-shrink:0;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.8rem;background:var(--green);color:#08281c;border-radius:999px;padding:.15rem .6rem;white-space:nowrap}
+.q .qans.a-y{background:var(--green);color:#08281c} .q .qans.a-n{background:var(--red);color:#3a0c08} .q .qans.a-ng{background:#5b6b86;color:#fff}
+.q.ng.open{background:rgba(240,199,94,.14)}
+.q.ng .evi-vi,.q.ng .note{display:none}
+mark.kw{background:rgba(120,160,240,.22);border-radius:3px;padding:0 .12em;font-weight:600;color:#eaf0ff}
+.hbox{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.5rem 0;font-size:.92rem;color:var(--soft)}
+.hbox .hh{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--gold2);font-size:.82rem;margin-bottom:.3rem}
+.endlist{list-style:none;padding:0}
+.endlist li{padding:.35rem .5rem;border-radius:7px;font-size:.92rem;color:var(--soft)}
+.endlist li .el{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);margin-right:.3rem}
+.endlist li.used{background:var(--green-b)}
+.endlist li.dist{background:var(--red-b);color:#ffd9d5}
+.tag-used{font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--green);color:#08281c;padding:.05rem .45rem;border-radius:999px;margin-left:.3rem}
+.tag-dist{font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--red);color:#3a0c08;padding:.05rem .45rem;border-radius:999px;margin-left:.3rem}
+.reused{display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--gold);color:#1a2b48;padding:.1rem .5rem;border-radius:999px;margin-left:.3rem}
+
+/* bilingual visibility */
+.en-t{display:block;color:var(--en-col);border-left:2px solid rgba(160,190,240,.4);padding-left:.5rem;margin-top:.2rem;font-size:.9em}
+body.mode-vi .en-t{display:none!important}
+body.mode-en .vi{display:none!important}
+body.mode-en .en-t{color:inherit;border-left:none;padding-left:0;margin-top:0}
+body.mode-en #pop .pv-trans{display:none}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:'Segoe UI',Arial,sans-serif;font-weight:700;padding:1.4rem;border-top:1px solid var(--line)}
+footer b{color:var(--gold2)}
+
+@media print{header,nav.tabs,footer,.lang-toggle,.font-ctrl{display:none!important}section.panel{display:block!important}}
+@media(max-width:600px){.head-title h1{font-size:1.05rem}.card,.passage,.qcard{padding:.95rem}main{padding:.9rem .7rem 4rem}.para .plabel{width:26px;height:26px}}
+</style>
+</head>
+<body class="mode-both">
+<header>
+  <div class="head-inner">
+    <div class="logo">NDN</div>
+    <div class="head-title">
+      <h1><b>N.D.N · PoPoDoo</b></h1>
+      <p>English &amp; IELTS · IELTS Reading — Matching</p>
+    </div>
+    <div class="ctrls">
+      <div class="font-ctrl"><button id="fMinus" title="Giảm cỡ chữ">A−</button><button id="fPlus" title="Tăng cỡ chữ">A+</button></div>
+    </div>
+  </div>
+  <div id="progressBar"></div>
+</header>
+<nav class="tabs"><div class="tab-row" id="tabRow"><button data-panel="p-overview" class="active">🏠 Tổng quan</button><button data-panel="p-headings">📑 Headings</button><button data-panel="p-info">🔎 Information</button><button data-panel="p-features">👤 Features</button><button data-panel="p-endings">🔗 Sentence Endings</button><button data-panel="p-compare">⚖️ So sánh</button><button data-panel="p-strategy">🧭 Chiến lược</button><button data-panel="p-quiz">🎯 Practice Hub</button></div></nav>
+<main><section class="panel show" id="p-overview">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Đặc điểm chung của nhóm Matching</h2>
+    <p>Trong 14 dạng câu hỏi IELTS Reading, nhóm <b class="en">Matching</b> (nối/ghép) là nhóm khiến học sinh mất điểm nhiều nhất, vì cả 4 dạng đều <span class="hl">không cho phép tìm đáp án theo thứ tự đoạn văn một cách máy móc</span> (trừ Sentence Endings thường theo thứ tự), và đều dựa trên <b class="en">paraphrase</b> — đề bài gần như không bao giờ lặp lại từ ngữ trong bài đọc.</p>
+    <div class="note"><b>🎯 Mục tiêu sau bài học:</b> Nhìn vào bất kỳ bộ câu hỏi Matching nào trong Cambridge IELTS, bạn xác định được ngay: (1) dạng gì, (2) đọc theo cách nào, (3) bẫy nằm ở đâu.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bảng nhận diện nhanh 4 dạng</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Dạng bài</th><th>Đề bài yêu cầu nối…</th><th>Dấu hiệu nhận diện trong đề</th><th>Đơn vị đọc</th><th>Đáp án theo thứ tự?</th></tr>
+      <tr><td><b class="en">1. Matching Headings</b><br>Nối tiêu đề</td><td>Tiêu đề (i, ii, iii…) ↔ đoạn văn (A, B, C…)</td><td><i class="en">"Choose the correct heading for each paragraph…"</i> + danh sách <span class="en">List of Headings</span> đánh số La Mã</td><td><b>Ý chính</b> của cả đoạn</td><td>❌ Không</td></tr>
+      <tr><td><b class="en">2. Matching Information</b><br>Nối thông tin</td><td>Mẩu thông tin ↔ đoạn văn chứa nó</td><td><i class="en">"Which paragraph contains the following information?"</i> + có thể kèm <span class="en">NB You may use any letter more than once</span></td><td><b>Chi tiết</b> nằm bất kỳ đâu trong đoạn</td><td>❌ Không</td></tr>
+      <tr><td><b class="en">3. Matching Features</b><br>Nối đặc điểm</td><td>Nhận định ↔ "chủ thể" (người, năm, quốc gia, lý thuyết…)</td><td>Danh sách chủ thể trong khung (<span class="en">List of Researchers / A–E</span>); chủ thể thường là <b>danh từ riêng</b></td><td>Câu/cụm câu quanh <b>tên riêng</b></td><td>❌ Không</td></tr>
+      <tr><td><b class="en">4. Matching Sentence Endings</b><br>Nối kết câu</td><td>Nửa đầu câu ↔ nửa cuối câu (A–G)</td><td><i class="en">"Complete each sentence with the correct ending"</i>; số kết câu <b>nhiều hơn</b> số câu hỏi</td><td>Câu chứa thông tin của nửa đầu câu</td><td>✅ Thường theo thứ tự bài đọc</td></tr>
+    </table></div>
+    <div class="tipbox"><b>💡 Ghi nhớ lõi:</b> Headings hỏi <b>"Đoạn này nói về CÁI GÌ?"</b> — Information hỏi <b>"Chi tiết này nằm Ở ĐÂU?"</b> — Features hỏi <b>"AI/CÁI NÀO gắn với nhận định này?"</b> — Sentence Endings hỏi <b>"Câu này KẾT THÚC thế nào cho đúng cả ngữ pháp lẫn ý?"</b></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Lộ trình bài học</h2>
+    <ul class="clean">
+      <li><b>Phần 1–4:</b> Quy trình từng bước cho mỗi dạng + ví dụ minh họa có lời giải + bẫy kinh điển của Cambridge.</li>
+      <li><b>Phần So sánh:</b> Bảng giống – khác toàn diện, và mổ xẻ cặp dễ nhầm nhất: <span class="en">Headings vs Information</span>.</li>
+      <li><b>Phần Chiến lược:</b> Sơ đồ quyết định nên làm dạng nào trước, phân bổ thời gian theo band mục tiêu.</li>
+      <li><b>Practice Hub:</b> 12 câu trắc nghiệm kiểm tra tư duy chiến lược, có giải thích và báo cáo kết quả.</li>
+    </ul>
+  </div>
+</section><section class="panel" id="p-headings">
+  <div class="qt-hero">
+    <div class="qt-num">1</div>
+    <div>
+      <h2 class="en">Matching Headings</h2>
+      <div class="vi-name">Nối tiêu đề với đoạn văn</div>
+      <p class="desc">Chọn từ <span class="en">List of Headings</span> (i, ii, iii…) một tiêu đề tóm tắt đúng <b>ý chính</b> của mỗi đoạn văn (A, B, C…). Số tiêu đề luôn <b>nhiều hơn</b> số đoạn — luôn có tiêu đề "mồi nhử".</p>
+      <div class="meta-chips"><span>Kỹ năng: Skimming + Tóm tắt ý chính</span><span>Độ khó: ★★★★☆</span><span>Vị trí: Thường đứng TRƯỚC bài đọc</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất dạng bài</h2>
+    <p>Cambridge dùng dạng này để kiểm tra khả năng <b>phân biệt ý chính (main idea) với chi tiết phụ (supporting details)</b>. Một tiêu đề đúng phải bao quát <span class="hl">toàn bộ đoạn</span>; tiêu đề sai thường chỉ khớp với <span class="hl">một chi tiết nhỏ</span> trong đoạn — đây chính là bẫy số một.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 6 bước</h2>
+    <ol class="steps">
+      <li><b>Đọc danh sách tiêu đề TRƯỚC</b>, gạch chân từ khóa và <i>khái quát hóa</i> từng tiêu đề bằng 2–3 từ tiếng Việt (VD: <i class="en">"The financial burden of urban expansion"</i> → "chi phí / mở rộng đô thị").</li>
+      <li><b>Nhóm các tiêu đề gần nghĩa nhau</b> thành cặp/cụm (VD: hai tiêu đề cùng nói về "nguyên nhân"). Cambridge cố tình đặt 2–3 tiêu đề "sinh đôi" — nhận diện trước sẽ tránh nhầm sau.</li>
+      <li><b>Đọc từng đoạn theo cấu trúc:</b> câu đầu + câu cuối + quét nhanh phần giữa để bắt <span class="en">signal words</span> (<i class="en">however, therefore, in contrast…</i>). Câu chủ đề <b>không phải lúc nào cũng là câu đầu</b> — khoảng 30% trường hợp nó nằm sau <i class="en">however</i> ở câu 2–3.</li>
+      <li><b>Tự tóm tắt đoạn bằng 1 câu ngắn của riêng bạn</b> TRƯỚC KHI nhìn lại danh sách tiêu đề. Đây là bước quyết định: nếu nhìn tiêu đề trước, não sẽ bị "mớm" và khớp từ khóa một cách mù quáng.</li>
+      <li><b>So khớp bản tóm tắt của bạn với tiêu đề</b> — chọn tiêu đề bao phủ CẢ đoạn, loại tiêu đề chỉ khớp 1 chi tiết.</li>
+      <li><b>Làm đoạn dễ trước, đoạn khó sau.</b> Mỗi tiêu đề đã dùng, gạch bỏ (trừ khi đề cho phép dùng lại — hiếm). Đoạn khó nhất để cuối, khi lựa chọn đã thu hẹp.</li>
+    </ol>
+    <div class="warn"><b>⛔ Sai lầm chí mạng:</b> Đọc đoạn văn trước rồi mới đọc tiêu đề → phải đọc lại đoạn nhiều lần → cháy giờ. Luôn đọc <b>tiêu đề trước, đoạn văn sau</b>.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example — tự biên soạn theo phong cách Cambridge</div>
+      <p><b class="en">List of Headings:</b></p>
+      <ul class="clean">
+        <li><span class="en"><b>i</b> — A surprising cause of sleep loss</span></li>
+        <li><span class="en"><b>ii</b> — The health consequences of poor sleep</span></li>
+        <li><span class="en"><b>iii</b> — How much sleep people actually need</span></li>
+      </ul>
+      <div class="passage en"><b>Paragraph A.</b> For decades, doctors blamed stress and caffeine for the modern epidemic of sleeplessness. <span class="hl">Yet recent research points to an unexpected culprit: the faint blue glow of evening screen use.</span> Even thirty minutes of exposure, scientists found, can delay the release of melatonin. Stress, it turns out, plays a far smaller role than screens do.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: i</b> — <i class="en">A surprising cause of sleep loss</i>.</p>
+          <p><b>Cách tư duy:</b> Tóm tắt đoạn bằng lời của mình: <i>"nguyên nhân bất ngờ gây mất ngủ = ánh sáng xanh, không phải stress"</i>. Từ <span class="hl">unexpected culprit</span> paraphrase thành <span class="hl-g">surprising cause</span>.</p>
+          <p><b>Bẫy:</b> Đoạn có nhắc <i class="en">melatonin</i> (liên quan sức khỏe) → học sinh Band 5 dễ chọn <b>ii</b> vì khớp từ khóa "health". Nhưng <b>ii</b> chỉ khớp <i>một chi tiết</i>, không phải ý chính của cả đoạn.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> 4 bẫy kinh điển</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Bẫy</th><th>Cambridge làm gì</th><th>Cách hóa giải</th></tr>
+      <tr><td><b>Bẫy chi tiết</b> (Detail trap)</td><td>Tiêu đề sai khớp hoàn hảo với 1 câu trong đoạn</td><td>Hỏi: "Tiêu đề này có bao phủ 70%+ nội dung đoạn không?"</td></tr>
+      <tr><td><b>Bẫy từ khóa</b> (Keyword trap)</td><td>Tiêu đề sai chứa đúng từ xuất hiện trong đoạn; tiêu đề đúng dùng toàn từ đồng nghĩa</td><td>Trùng từ = nghi ngờ; paraphrase = tin tưởng</td></tr>
+      <tr><td><b>Bẫy câu đầu</b> (First-sentence trap)</td><td>Câu đầu chỉ là câu nối/bối cảnh; ý chính nằm sau <i class="en">however/but</i></td><td>Luôn đọc đến hết câu chứa từ nối tương phản đầu tiên</td></tr>
+      <tr><td><b>Bẫy tiêu đề sinh đôi</b> (Twin headings)</td><td>Hai tiêu đề gần nghĩa, khác nhau 1 sắc thái (nguyên nhân ↔ hậu quả; quá khứ ↔ hiện tại)</td><td>Nhóm cặp sinh đôi ngay từ bước 2; xác định chính xác sắc thái khác biệt</td></tr>
+    </table></div>
+    <div class="tipbox"><b>💡 Mẹo:</b> Nếu phân vân giữa 2 tiêu đề cho 1 đoạn, đừng quyết ngay — rất có thể một trong hai thuộc về đoạn khác. Làm tiếp các đoạn còn lại, đáp án sẽ tự "khóa" lại.</div>
+  </div>
+<div class="prac-divider"><span>✍️ LUYỆN TẬP · Practice</span></div><div class="prac-wrap">
+  
+  <h2 class="test-title">TEST 1 · Matching Headings</h2>
+  <p class="test-sub">The Comeback of the Cargo Sail — Nối tiêu đề (i–ix) với đoạn (A–F)</p>
+
+  <div class="ansstrip">
+    <div class="ac" data-jump="1"><b>Đoạn A</b><span class="a">iv</span></div>
+    <div class="ac" data-jump="2"><b>Đoạn B</b><span class="a">i</span></div>
+    <div class="ac" data-jump="3"><b>Đoạn C</b><span class="a">v</span></div>
+    <div class="ac" data-jump="4"><b>Đoạn D</b><span class="a">ii</span></div>
+    <div class="ac" data-jump="5"><b>Đoạn E</b><span class="a">iii</span></div>
+    <div class="ac" data-jump="6"><b>Đoạn F</b><span class="a">vii</span></div>
+  </div>
+
+  <div class="section-lab">Reading Passage</div>
+  <div class="passage">
+    <div class="ptitle">The Comeback of the Cargo Sail</div>
+
+    <div class="para"><span class="plabel">A</span><div class="ptext">For more than a century, the world's goods have travelled the oceans in vast steel vessels burning heavy fuel oil, one of the dirtiest fuels in existence. Today the international shipping industry moves roughly ninety per cent of traded goods and, in doing so, <mark class="ev" data-q="1">releases almost a billion tonnes of carbon dioxide every year<span class="evi-vi">thải ra gần một tỷ tấn khí carbon dioxide mỗi năm</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn A → tiêu đề iv</span><span class="en-t">Answer: Paragraph A → heading iv</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn A:</b> ngành vận tải biển thải CO₂ khổng lồ, đang thành vấn đề cấp bách.</span><span class="en-t"><b>Summarise A:</b> shipping emits huge amounts of CO₂ and this is becoming urgent.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> đây là <span class='hl-v'>thách thức môi trường</span> quá lớn, không thể phớt lờ.</span><span class="en-t"><b>Main idea:</b> this is an <span class='hl-v'>environmental challenge</span> too large to ignore.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề iv:</b> "impossible to ignore" ↔ <span class='hl-g'>too large to overlook</span>.</span><span class="en-t"><b>Match heading iv:</b> "impossible to ignore" ↔ <span class='hl-g'>too large to overlook</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> đoạn không nhắc luật pháp → loại tiêu đề vi.</span><span class="en-t"><b>Eliminate trap:</b> the paragraph never mentions law → rule out heading vi.</span></div></div></div></span></mark> — a figure comparable to the emissions of an entire large nation. As governments and consumers alike demand cleaner supply chains, the pressure on ship owners to reduce this environmental burden has become impossible to ignore. What was once dismissed as an unavoidable cost of global trade is <mark class="ev" data-q="1">now widely regarded as one of the most urgent problems the industry must solve<span class="evi-vi">nay được xem rộng rãi là một trong những vấn đề cấp bách nhất mà ngành phải giải quyết</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn A → tiêu đề iv</span><span class="en-t">Answer: Paragraph A → heading iv</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn A:</b> ngành vận tải biển thải CO₂ khổng lồ, đang thành vấn đề cấp bách.</span><span class="en-t"><b>Summarise A:</b> shipping emits huge amounts of CO₂ and this is becoming urgent.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> đây là <span class='hl-v'>thách thức môi trường</span> quá lớn, không thể phớt lờ.</span><span class="en-t"><b>Main idea:</b> this is an <span class='hl-v'>environmental challenge</span> too large to ignore.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề iv:</b> "most urgent problems" ↔ <span class='hl-g'>a challenge too large to overlook</span>.</span><span class="en-t"><b>Match heading iv:</b> "most urgent problems" ↔ <span class='hl-g'>a challenge too large to overlook</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> đoạn không nhắc luật pháp → loại tiêu đề vi.</span><span class="en-t"><b>Eliminate trap:</b> the paragraph never mentions law → rule out heading vi.</span></div></div></div></span></mark>.</div></div>
+
+    <div class="para"><span class="plabel">B</span><div class="ptext">The irony is that the solution may lie in the industry's own distant past. Long before the steam engine, merchant fleets crossed every ocean powered entirely by the wind. Great sailing ships carried tea, spices and grain across thousands of miles at no fuel cost whatsoever. Yet by the early twentieth century <mark class="ev" data-q="2">these elegant vessels had all but vanished. Steam, and later diesel, offered something the wind could not: reliability<span class="evi-vi">những con tàu thanh lịch ấy gần như biến mất hết. Hơi nước, rồi sau đó là dầu diesel, mang lại thứ mà gió không có: độ tin cậy</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn B → tiêu đề i</span><span class="en-t">Answer: Paragraph B → heading i</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn B:</b> tàu buồm biến mất vì hơi nước/diesel đáng tin cậy hơn.</span><span class="en-t"><b>Summarise B:</b> sailing ships vanished because steam/diesel were more reliable.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> <span class='hl-v'>lý do một nguồn năng lượng bị bỏ</span> = độ tin cậy.</span><span class="en-t"><b>Main idea:</b> <span class='hl-v'>why a power source was abandoned</span> = reliability.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề i:</b> "vanished" ↔ <span class='hl-g'>abandoned</span>; "reliability" ↔ <span class='hl-g'>dependability</span>.</span><span class="en-t"><b>Match heading i:</b> "vanished" ↔ <span class='hl-g'>abandoned</span>; "reliability" ↔ <span class='hl-g'>dependability</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> chi tiết tea/spices chỉ dẫn dắt → đừng chọn tiêu đề "lịch sử chung chung".</span><span class="en-t"><b>Eliminate trap:</b> tea/spices are just lead-in detail → don't pick a "general history" heading.</span></div></div></div></span></mark>. A steamship could keep to a fixed timetable regardless of the weather, and in an age obsessed with speed and predictability, the sailing ship came to seem hopelessly old-fashioned.</div></div>
+
+    <div class="para"><span class="plabel">C</span><div class="ptext">Now, however, <mark class="ev" data-q="3">engineers are giving that forgotten power source a thoroughly modern makeover<span class="evi-vi">các kỹ sư đang khoác cho nguồn năng lượng bị lãng quên đó một diện mạo hiện đại hoàn toàn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn C → tiêu đề v</span><span class="en-t">Answer: Paragraph C → heading v</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn C:</b> kỹ sư hiện đại hóa sức gió (wing sails, rotor sails, máy tính).</span><span class="en-t"><b>Summarise C:</b> engineers modernise wind power (wing sails, rotor sails, computers).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> <span class='hl-v'>ý tưởng cũ dựng lại bằng kỹ thuật mới</span>.</span><span class="en-t"><b>Main idea:</b> <span class='hl-v'>old ideas rebuilt with new engineering</span>.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề v:</b> "forgotten power source + modern makeover" ↔ <span class='hl-g'>old ideas rebuilt with new engineering</span>.</span><span class="en-t"><b>Match heading v:</b> "forgotten power source + modern makeover" ↔ <span class='hl-g'>old ideas rebuilt with new engineering</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> tiêu đề bao cả "cũ" lẫn "mới" → khớp toàn đoạn.</span><span class="en-t"><b>Check:</b> the heading covers both "old" and "new" → matches the whole paragraph.</span></div></div></div></span></mark>. The billowing canvas of old has given way to rigid "wing sails" modelled on aircraft wings, and to towering cylinders known as rotor sails that spin to generate thrust. These devices are controlled not by teams of sailors hauling on ropes but by computers that adjust them automatically to squeeze the maximum push from every gust. Crucially, none of these systems is meant to replace the engine entirely; instead they work alongside it, cutting the amount of fuel a ship needs to burn while leaving its schedule untouched.</div></div>
+
+    <div class="para"><span class="plabel">D</span><div class="ptext">For ship owners, <mark class="ev" data-q="4">the appeal is ultimately financial. Fuel is by far the largest running cost of any cargo vessel, and even a modest reduction translates into enormous savings<span class="evi-vi">suy cho cùng, sức hấp dẫn là ở tài chính. Nhiên liệu là chi phí vận hành lớn nhất của bất kỳ tàu hàng nào, và chỉ giảm một chút cũng đem lại khoản tiết kiệm khổng lồ</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn D → tiêu đề ii</span><span class="en-t">Answer: Paragraph D → heading ii</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn D:</b> dùng gió giúp tiết kiệm nhiên liệu — chi phí lớn nhất.</span><span class="en-t"><b>Summarise D:</b> using wind saves fuel — the largest cost.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> <span class='hl-v'>lập luận về tài chính</span>.</span><span class="en-t"><b>Main idea:</b> <span class='hl-v'>a financial argument</span>.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề ii:</b> "financial / savings / cost" ↔ <span class='hl-g'>financial argument</span>.</span><span class="en-t"><b>Match heading ii:</b> "financial / savings / cost" ↔ <span class='hl-g'>financial argument</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> xác nhận cả đoạn nói về tiền, không chỉ câu đầu.</span><span class="en-t"><b>Check:</b> confirm the whole paragraph is about money, not just the first sentence.</span></div></div></div></span></mark> over the lifetime of a ship. Trials on working vessels have recorded fuel savings of between ten and thirty per cent depending on the route and the strength of the prevailing winds. With the price of low-carbon fuels expected to climb steeply in the coming years, and with new charges being levied on the most polluting ships, the case for harnessing free wind grows stronger with every passing season.</div></div>
+
+    <div class="para"><span class="plabel">E</span><div class="ptext"><mark class="ev" data-q="5">Not everyone is convinced. Critics point out that wind assistance works best on certain routes and in certain seasons<span class="evi-vi">Không phải ai cũng bị thuyết phục. Những người phê phán chỉ ra rằng hỗ trợ bằng gió chỉ hiệu quả nhất trên một số tuyến và một số mùa nhất định</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn E → tiêu đề iii</span><span class="en-t">Answer: Paragraph E → heading iii</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn E:</b> nhiều người hoài nghi (chỉ hiệu quả vài tuyến, thiết bị nặng/đắt).</span><span class="en-t"><b>Summarise E:</b> many are sceptical (works on only some routes; heavy, costly gear).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> <span class='hl-v'>lý do vẫn còn hoài nghi</span>.</span><span class="en-t"><b>Main idea:</b> <span class='hl-v'>reasons for continuing scepticism</span>.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề iii:</b> "Not everyone is convinced / Sceptics argue" ↔ <span class='hl-g'>scepticism</span>.</span><span class="en-t"><b>Match heading iii:</b> "Not everyone is convinced / Sceptics argue" ↔ <span class='hl-g'>scepticism</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> "heavy and expensive" ≠ nguy hiểm cho thủy thủ → loại tiêu đề viii.</span><span class="en-t"><b>Eliminate trap:</b> "heavy and expensive" ≠ danger to crews → rule out heading viii.</span></div></div></div></span></mark>; a device that performs brilliantly in the open Atlantic may sit useless in the calm waters of the tropics. The equipment is also heavy and expensive to install, and space on deck is precious. Sceptics argue that the reported savings, impressive as they sound, have mostly been gathered under favourable conditions and may prove disappointing once the technology is deployed across an entire fleet operating year-round in unpredictable weather.</div></div>
+
+    <div class="para"><span class="plabel">F</span><div class="ptext">Whatever the doubters say, <mark class="ev" data-q="6">momentum is building. A growing number of shipping companies have placed orders for wind-assisted vessels… Analysts predict that within two decades a significant share of the global fleet will carry some form of sail<span class="evi-vi">đà tiến đang hình thành. Ngày càng nhiều công ty vận tải đặt hàng tàu có hỗ trợ gió… Các nhà phân tích dự đoán rằng trong hai thập kỷ tới, một phần đáng kể đội tàu toàn cầu sẽ mang một dạng buồm nào đó</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Đoạn F → tiêu đề vii</span><span class="en-t">Answer: Paragraph F → heading vii</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Tóm tắt đoạn F:</b> đà tăng; dự đoán 20 năm tới nhiều tàu có buồm.</span><span class="en-t"><b>Summarise F:</b> momentum is growing; within 20 years many ships will carry sails.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Ý bao trùm:</b> <span class='hl-v'>lạc quan về tương lai nhưng dè dặt</span>.</span><span class="en-t"><b>Main idea:</b> <span class='hl-v'>cautious optimism about the future</span>.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp tiêu đề vii:</b> "predict / will" ↔ optimism; "if they are right" ↔ <span class='hl-g'>cautious</span>.</span><span class="en-t"><b>Match heading vii:</b> "predict / will" ↔ optimism; "if they are right" ↔ <span class='hl-g'>cautious</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra sắc thái:</b> chữ "cautious" khớp giọng dự đoán dè dặt.</span><span class="en-t"><b>Check nuance:</b> "cautious" matches the guarded, predictive tone.</span></div></div></div></span></mark>. If they are right, the twenty-first century may witness one of the more unexpected reversals in the history of technology: the return, in high-tech form, of a power source our ancestors took for granted.</div></div>
+  </div>
+
+  <div class="section-lab">List of Headings</div>
+  <div class="qcard">
+    <div class="q" data-jump="2"><span class="qn">i</span><div class="qbody">A power source <mark class="kw">abandoned</mark> in the name of <mark class="kw">dependability</mark></div><span class="qans">Đoạn B</span></div>
+    <div class="q" data-jump="4"><span class="qn">ii</span><div class="qbody">The <mark class="kw">financial</mark> argument for change</div><span class="qans">Đoạn D</span></div>
+    <div class="q" data-jump="5"><span class="qn">iii</span><div class="qbody">Reasons for continuing <mark class="kw">scepticism</mark></div><span class="qans">Đoạn E</span></div>
+    <div class="q" data-jump="1"><span class="qn">iv</span><div class="qbody">An <mark class="kw">environmental challenge</mark> too large to <mark class="kw">overlook</mark></div><span class="qans">Đoạn A</span></div>
+    <div class="q" data-jump="3"><span class="qn">v</span><div class="qbody"><mark class="kw">Old ideas rebuilt</mark> with <mark class="kw">new engineering</mark></div><span class="qans">Đoạn C</span></div>
+    <div class="q"><span class="qn">vi</span><div class="qbody">The role of international law <span class="tag-dist">mồi nhử</span></div></div>
+    <div class="q" data-jump="6"><span class="qn">vii</span><div class="qbody">Cautious <mark class="kw">optimism</mark> about what is to come</div><span class="qans">Đoạn F</span></div>
+    <div class="q"><span class="qn">viii</span><div class="qbody">The dangers faced by modern crews <span class="tag-dist">mồi nhử</span></div></div>
+    <div class="q"><span class="qn">ix</span><div class="qbody">How sea transport compares with air travel <span class="tag-dist">mồi nhử</span></div></div>
+  </div>
+</div></section><section class="panel" id="p-info">
+  <div class="qt-hero">
+    <div class="qt-num">2</div>
+    <div>
+      <h2 class="en">Matching Information</h2>
+      <div class="vi-name">Nối thông tin với đoạn văn chứa nó</div>
+      <p class="desc">Đề cho các mẩu thông tin (một sự kiện, con số, ví dụ, lý do, so sánh…) — nhiệm vụ: tìm <b>đoạn văn nào chứa</b> thông tin đó. Thông tin có thể nằm ở <b>bất kỳ vị trí nào</b> trong đoạn, kể cả 1 câu duy nhất giữa đoạn.</p>
+      <div class="meta-chips"><span>Kỹ năng: Scanning + Paraphrase</span><span>Độ khó: ★★★★★</span><span>NB: một đoạn có thể dùng 2 lần</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất dạng bài</h2>
+    <p>Đây là dạng <b>ngược chiều với Matching Headings</b>: thay vì tóm tắt ý chính, bạn phải định vị <b>chi tiết cụ thể</b>. Cambridge kiểm tra kỹ năng <span class="en">scanning</span> kết hợp <span class="en">paraphrase recognition</span> — vì mẩu thông tin trong đề <b>không bao giờ</b> dùng nguyên văn từ ngữ của bài đọc.</p>
+    <p>Điểm khiến dạng này khó nhất bảng: <span class="hl">câu hỏi KHÔNG theo thứ tự bài đọc</span>, và một đoạn có thể chứa 2 đáp án (khi đề ghi <i class="en">NB You may use any letter more than once</i>), trong khi có đoạn không chứa đáp án nào.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 6 bước</h2>
+    <ol class="steps">
+      <li><b>Giải mã "loại thông tin"</b> trong từng câu hỏi trước khi tìm: <i class="en">a reason for…</i> (một lý do), <i class="en">an example of…</i> (một ví dụ), <i class="en">a comparison between…</i> (một sự so sánh), <i class="en">a reference to…</i> (một sự đề cập), <i class="en">how/why…</i> Loại thông tin quyết định bạn tìm <b>cấu trúc gì</b>: lý do → <i class="en">because, due to, this explains</i>; ví dụ → <i class="en">for instance, such as</i>; so sánh → <i class="en">more than, unlike, whereas</i>.</li>
+      <li><b>Gạch từ khóa "mỏ neo"</b> (anchor keywords) trong câu hỏi — ưu tiên danh từ cụ thể, số liệu, tên riêng — rồi <b>dự đoán từ đồng nghĩa</b> mà bài đọc có thể dùng.</li>
+      <li><b>Làm dạng này SAU các dạng khác</b> của cùng passage (nếu có). Sau khi làm Headings / T-F-NG, bạn đã có "bản đồ" nội dung từng đoạn trong đầu → định vị nhanh gấp đôi.</li>
+      <li><b>Scan có định hướng:</b> đoán trước thông tin thuộc phần đầu / giữa / cuối bài dựa vào logic văn bản (nguyên nhân thường ở nửa đầu, giải pháp và đánh giá thường ở nửa cuối), rồi mới quét từng đoạn.</li>
+      <li><b>Xác minh bằng câu bằng chứng:</b> tìm được đoạn nghi ngờ → đọc kỹ câu chứa từ khóa + 1 câu trước và sau. Chỉ chốt khi <b>toàn bộ</b> các thành phần của câu hỏi đều xuất hiện (dưới dạng paraphrase).</li>
+      <li><b>Câu tìm mãi không ra → bỏ qua, làm câu khác trước.</b> Các câu sau sẽ loại trừ dần các đoạn, quay lại câu khó với phạm vi hẹp hơn.</li>
+    </ol>
+    <div class="warn"><b>⛔ Bẫy nguy hiểm nhất:</b> Khớp MỘT từ khóa rồi chốt luôn. Câu hỏi yêu cầu <i class="en">"a reason why bees navigate by sunlight"</i> — đoạn B có nhắc <i class="en">bees</i> và <i class="en">sunlight</i> nhưng KHÔNG có <b>lý do</b> → đáp án nằm ở đoạn khác. Phải khớp đủ: chủ đề + loại thông tin.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example</div>
+      <p><b class="en">Question:</b> <i class="en">Which paragraph contains <b>an example of a species that benefited from urban environments</b>?</i></p>
+      <div class="passage en"><b>Paragraph C.</b> Cities are usually portrayed as ecological deserts. <span class="hl">The peregrine falcon, however, has flourished among skyscrapers, which mimic the cliff faces of its natural habitat</span> and offer an endless supply of pigeons.</div>
+      <div class="passage en"><b>Paragraph D.</b> Not all species adapt so readily. Amphibians, whose permeable skin absorbs pollutants, have declined sharply in urban ponds, and many songbirds abandon territories once noise exceeds a critical threshold.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: C.</b></p>
+          <p><b>Giải mã loại thông tin:</b> <i class="en">an example</i> (một ví dụ cụ thể) + <i class="en">benefited</i> (được hưởng lợi) + <i class="en">urban environments</i>.</p>
+          <p><b>Chuỗi paraphrase:</b> <span class="hl">peregrine falcon</span> = ví dụ về loài; <span class="hl">flourished</span> = <span class="hl-g">benefited</span>; <span class="hl">among skyscrapers</span> = <span class="hl-g">urban environments</span>.</p>
+          <p><b>Bẫy:</b> Đoạn D cũng đầy từ khóa "loài vật + đô thị" (<i class="en">amphibians, urban ponds, songbirds</i>) nhưng nói về loài <b>bị hại</b> (declined, abandon) — ngược hướng với <i class="en">benefited</i>. Học sinh scan ẩu sẽ chọn D vì thấy nhiều từ khóa hơn.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bảng "loại thông tin → tín hiệu cần quét"</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Đề hỏi (EN)</th><th>Nghĩa là tìm…</th><th>Tín hiệu ngôn ngữ trong bài đọc</th></tr>
+      <tr><td class="en">a reason / why / an explanation</td><td>lý do, lời giải thích</td><td class="en">because, since, due to, this is why, the cause of, stems from</td></tr>
+      <tr><td class="en">an example / a case</td><td>ví dụ cụ thể</td><td class="en">for instance, such as, one illustration, tên riêng/loài/sản phẩm cụ thể</td></tr>
+      <tr><td class="en">a comparison / a contrast</td><td>sự so sánh, đối chiếu</td><td class="en">more/less than, unlike, whereas, in contrast, compared with, so sánh hơn -er</td></tr>
+      <tr><td class="en">a description of a process / how</td><td>mô tả cách thức</td><td class="en">first, then, by + V-ing, chuỗi động từ hành động</td></tr>
+      <tr><td class="en">a reference to / a mention of</td><td>một sự đề cập (có thể rất ngắn!)</td><td>Chỉ cần 1 câu, thậm chí 1 mệnh đề — thường giấu giữa đoạn</td></tr>
+      <tr><td class="en">a prediction / future…</td><td>dự đoán tương lai</td><td class="en">will, is likely to, could, in the coming decades, forecast</td></tr>
+      <tr><td class="en">figures / statistics</td><td>số liệu</td><td>Con số, %, phân số, <span class="en">double, halved, threefold</span></td></tr>
+    </table></div>
+  </div>
+<div class="prac-divider"><span>✍️ LUYỆN TẬP · Practice</span></div><div class="prac-wrap">
+  
+  <h2 class="test-title">TEST 2 · Matching Information</h2>
+  <p class="test-sub">Inside the Mind of the Octopus — Chi tiết nào nằm ở đoạn nào (A–G)</p>
+
+  <div class="ansstrip">
+    <div class="ac" data-jump="7"><b>7</b><span class="a">A</span></div>
+    <div class="ac" data-jump="8"><b>8</b><span class="a">D</span></div>
+    <div class="ac" data-jump="9"><b>9</b><span class="a">E</span></div>
+    <div class="ac" data-jump="10"><b>10</b><span class="a">C</span></div>
+    <div class="ac" data-jump="11"><b>11</b><span class="a">F</span></div>
+    <div class="ac" data-jump="12"><b>12</b><span class="a">B</span></div>
+    <div class="ac" data-jump="13"><b>13</b><span class="a">E</span></div>
+  </div>
+
+  <div class="section-lab">Reading Passage</div>
+  <div class="passage">
+    <div class="ptitle">Inside the Mind of the Octopus</div>
+
+    <div class="para"><span class="plabel">A</span><div class="ptext">The octopus is, by almost any measure, one of the strangest animals on Earth. It belongs to a group of molluscs called cephalopods, which also includes squid and cuttlefish, and it <mark class="ev" data-q="7">shares a distant common ancestor with the humble garden snail<span class="evi-vi">có chung một tổ tiên xa xưa với loài ốc sên vườn khiêm tốn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 7 → Đoạn A</span><span class="en-t">Answer: Q7 → Paragraph A</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> một sự đề cập về <span class='hl-v'>quan hệ họ hàng</span>.</span><span class="en-t"><b>Info type:</b> a reference to a <span class='hl-v'>relationship / kinship</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> relationship / more familiar creatures.</span><span class="en-t"><b>Keywords:</b> relationship / more familiar creatures.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn A — <span class='hl-g'>shares a common ancestor with the garden snail</span>.</span><span class="en-t"><b>Scan detail:</b> paragraph A — <span class='hl-g'>shares a common ancestor with the garden snail</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> đúng chủ đề (loài quen thuộc) + đúng loại (a reference).</span><span class="en-t"><b>Full match:</b> right topic (familiar creatures) + right type (a reference).</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy:</b> không đoạn nào khác nói quan hệ họ hàng.</span><span class="en-t"><b>Eliminate trap:</b> no other paragraph mentions kinship.</span></div></div></div></span></mark>. Yet unlike its shelled relatives, the octopus has evolved a soft, boneless body and a level of intelligence that has astonished the scientists who study it. With eight arms, three hearts and blue blood, it seems almost to have been designed to defy expectation.</div></div>
+
+    <div class="para"><span class="plabel">B</span><div class="ptext">Perhaps the most extraordinary feature of octopus biology is the way its nervous system is arranged. <mark class="ev" data-q="12">A human brain sits in sole command of the body, issuing instructions to the limbs. The octopus, by contrast, distributes the majority of its nerve cells not in its central brain but along its arms<span class="evi-vi">Bộ não người nắm quyền chỉ huy duy nhất toàn cơ thể, ra lệnh cho các chi. Ngược lại, bạch tuộc phân bố phần lớn tế bào thần kinh không phải ở não trung tâm mà dọc theo các xúc tu</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 12 → Đoạn B</span><span class="en-t">Answer: Q12 → Paragraph B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> một <span class='hl-v'>sự so sánh với con người</span>.</span><span class="en-t"><b>Info type:</b> a <span class='hl-v'>comparison with a human</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> comparison / human being → quét tín hiệu so sánh.</span><span class="en-t"><b>Keywords:</b> comparison / human being → scan for comparison signals.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn B — "human brain… <span class='hl-g'>by contrast</span>… the octopus…".</span><span class="en-t"><b>Scan detail:</b> paragraph B — "human brain… <span class='hl-g'>by contrast</span>… the octopus…".</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> "by contrast" = đối chiếu người vs bạch tuộc.</span><span class="en-t"><b>Full match:</b> "by contrast" = human vs octopus contrast.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Mẹo:</b> với "a comparison", tìm by contrast / unlike / whereas.</span><span class="en-t"><b>Tip:</b> for "a comparison", look for by contrast / unlike / whereas.</span></div></div></div></span></mark>. Each arm contains its own cluster of neurons and can, to a remarkable degree, taste, touch and even make simple decisions without waiting for orders from the brain. Researchers describe the animal as having, in effect, nine brains working in loose cooperation.</div></div>
+
+    <div class="para"><span class="plabel">C</span><div class="ptext">This unusual arrangement gives the octopus abilities that seem almost magical. It can change the colour and even the texture of its skin in a fraction of a second, melting into a background of coral or sand so completely that a predator swimming past may notice nothing at all. Astonishingly, it achieves this camouflage despite being, as far as scientists can tell, completely colour-blind. <mark class="ev" data-q="10">Exactly how a colour-blind animal matches its surroundings so precisely remains one of the great unsolved puzzles of marine biology<span class="evi-vi">chính xác vì sao một loài mù màu lại hòa vào môi trường chuẩn xác đến vậy vẫn là một trong những bí ẩn lớn chưa có lời giải của sinh học biển</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 10 → Đoạn C</span><span class="en-t">Answer: Q10 → Paragraph C</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> mô tả <span class='hl-v'>một bí ẩn chưa giải được</span>.</span><span class="en-t"><b>Info type:</b> a description of <span class='hl-v'>an unsolved puzzle</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> puzzle / not yet solved.</span><span class="en-t"><b>Keywords:</b> puzzle / not yet solved.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn C — <span class='hl-g'>one of the great unsolved puzzles</span>.</span><span class="en-t"><b>Scan detail:</b> paragraph C — <span class='hl-g'>one of the great unsolved puzzles</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> paraphrase gần như 1-1.</span><span class="en-t"><b>Full match:</b> an almost 1-to-1 paraphrase.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy:</b> không đoạn khác nói "chưa giải được".</span><span class="en-t"><b>Eliminate trap:</b> no other paragraph says "unsolved".</span></div></div></div></span></mark>.</div></div>
+
+    <div class="para"><span class="plabel">D</span><div class="ptext">In captivity, octopuses have earned a reputation as escape artists. Aquarium keepers tell of specimens that <mark class="ev" data-q="8">squeezed their entire body through a gap barely wider than a coin — a feat made possible by the complete absence of any bones<span class="evi-vi">ép cả cơ thể qua một khe hở chỉ rộng hơn một đồng xu — kỳ tích có được nhờ hoàn toàn không có xương</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 8 → Đoạn D</span><span class="en-t">Answer: Q8 → Paragraph D</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> lời <span class='hl-v'>giải thích CÁCH (how)</span>.</span><span class="en-t"><b>Info type:</b> an <span class='hl-v'>explanation of HOW</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> pass through very small spaces.</span><span class="en-t"><b>Keywords:</b> pass through very small spaces.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn D — <span class='hl-g'>squeezed through a gap barely wider than a coin</span>.</span><span class="en-t"><b>Scan detail:</b> paragraph D — <span class='hl-g'>squeezed through a gap barely wider than a coin</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> chủ đề (chui khe) + loại (giải thích: nhờ <span class='hl-g'>absence of bones</span>).</span><span class="en-t"><b>Full match:</b> topic (fitting through gaps) + type (explanation: due to <span class='hl-g'>absence of bones</span>).</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy:</b> chỉ D nêu cả hiện tượng lẫn nguyên nhân.</span><span class="en-t"><b>Eliminate trap:</b> only D gives both the phenomenon and the cause.</span></div></div></div></span></mark> — and of others that learned to lift the lid of their tank and slither across the floor to a neighbouring tank in search of food. One famous individual at a research laboratory was found to be responsible for a series of nightly power failures; it had discovered that squirting a jet of water at a particular lamp would short the electrical circuit.</div></div>
+
+    <div class="para"><span class="plabel">E</span><div class="ptext">Such stories are more than mere entertainment. They point to a capacity for learning that is rare among invertebrates. In controlled experiments, octopuses have solved mazes, opened screw-top jars to reach a crab inside, and <mark class="ev" data-q="9">recalled the solution when tested again several weeks later<span class="evi-vi">nhớ lại cách giải khi được kiểm tra lại vài tuần sau đó</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 9 → Đoạn E (dùng lần 1)</span><span class="en-t">Answer: Q9 → Paragraph E (use 1)</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> nhắc tới <span class='hl-v'>trí nhớ qua thời gian</span>.</span><span class="en-t"><b>Info type:</b> a mention of <span class='hl-v'>memory over time</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> remember over a period of time.</span><span class="en-t"><b>Keywords:</b> remember over a period of time.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn E — <span class='hl-g'>recalled… several weeks later</span>.</span><span class="en-t"><b>Scan detail:</b> paragraph E — <span class='hl-g'>recalled… several weeks later</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> nhớ lại sau nhiều tuần = nhớ qua thời gian.</span><span class="en-t"><b>Full match:</b> recalling weeks later = remembering over time.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Lưu ý:</b> đoạn E còn được dùng cho câu 13.</span><span class="en-t"><b>Note:</b> paragraph E is also used for Q13.</span></div></div></div></span></mark>. Some have even shown signs of <mark class="ev" data-q="13">recognising and behaving differently towards individual human keepers<span class="evi-vi">nhận ra và cư xử khác nhau với từng người chăm sóc</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 13 → Đoạn E (dùng lần 2)</span><span class="en-t">Answer: Q13 → Paragraph E (use 2)</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> một <span class='hl-v'>gợi ý phân biệt từng người</span>.</span><span class="en-t"><b>Info type:</b> a <span class='hl-v'>suggestion of telling people apart</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> tell individual people apart.</span><span class="en-t"><b>Keywords:</b> tell individual people apart.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn E — <span class='hl-g'>recognising… individual human keepers</span>.</span><span class="en-t"><b>Scan detail:</b> paragraph E — <span class='hl-g'>recognising… individual human keepers</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> nhận ra từng người chăm sóc.</span><span class="en-t"><b>Full match:</b> recognising each keeper.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy:</b> đoạn E dùng lần 2 (đã dùng câu 9) — đừng loại; đoạn G là đoạn nhiễu.</span><span class="en-t"><b>Eliminate trap:</b> E is used again (already Q9) — don't rule it out; G is a distractor.</span></div></div></div></span></mark>, greeting one with an outstretched arm while spraying another with a jet of water.</div></div>
+
+    <div class="para"><span class="plabel">F</span><div class="ptext">All of this intelligence, however, is packed into a startlingly short life. Most octopus species live only one or two years. The female typically lays her eggs, guards them without eating until they hatch, and then dies of exhaustion shortly afterwards; the male, too, survives only a few months after mating. This brief existence means that whatever an octopus learns, it must learn alone and quickly, <mark class="ev" data-q="11">for there is no opportunity for a parent to pass its knowledge to the young<span class="evi-vi">bởi không có cơ hội nào để cha mẹ truyền lại kiến thức cho con</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 11 → Đoạn F</span><span class="en-t">Answer: Q11 → Paragraph F</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Loại thông tin:</b> một <span class='hl-v'>lý do (reason)</span>.</span><span class="en-t"><b>Info type:</b> a <span class='hl-v'>reason</span>.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Từ khóa:</b> cannot be taught by parents.</span><span class="en-t"><b>Keywords:</b> cannot be taught by parents.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Quét chi tiết:</b> đoạn F — <span class='hl-g'>no opportunity for a parent to pass its knowledge</span> (tín hiệu "for…").</span><span class="en-t"><b>Scan detail:</b> paragraph F — <span class='hl-g'>no opportunity for a parent to pass its knowledge</span> (signal "for…").</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Khớp đủ:</b> nguyên nhân = bố mẹ chết trước khi con lớn.</span><span class="en-t"><b>Full match:</b> the cause = parents die before the young grow up.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy:</b> đây là quan hệ nhân quả, không chỉ mô tả.</span><span class="en-t"><b>Eliminate trap:</b> this is cause–effect, not mere description.</span></div></div></div></span></mark>.</div></div>
+
+    <div class="para"><span class="plabel">G</span><div class="ptext">It is this combination of brilliance and brevity that so fascinates researchers. Here is a creature that evolved intelligence along a completely separate path from our own, that thinks with its whole body rather than a single brain, and that must cram a lifetime of discovery into a matter of months. Studying the octopus, many biologists believe, may be the closest we will ever come to meeting a mind that is genuinely alien. <span style="color:var(--muted);font-style:italic">(Đoạn G không chứa đáp án nào — đoạn "nhiễu".)</span></div></div>
+  </div>
+
+  <div class="section-lab">Questions 7–13</div>
+  <div class="qcard">
+    <div class="q" data-jump="7"><span class="qn">7</span><div class="qbody">a <mark class="kw">reference</mark> to the octopus's <mark class="kw">relationship</mark> with <mark class="kw">more familiar creatures</mark></div><span class="qans">A</span></div>
+    <div class="q" data-jump="8"><span class="qn">8</span><div class="qbody">an <mark class="kw">explanation of how</mark> the octopus is able to <mark class="kw">pass through very small spaces</mark></div><span class="qans">D</span></div>
+    <div class="q" data-jump="9"><span class="qn">9</span><div class="qbody">a mention of the octopus's ability to <mark class="kw">remember</mark> something <mark class="kw">over a period of time</mark></div><span class="qans">E</span></div>
+    <div class="q" data-jump="10"><span class="qn">10</span><div class="qbody">a description of a <mark class="kw">puzzle</mark> that scientists have <mark class="kw">not yet been able to solve</mark></div><span class="qans">C</span></div>
+    <div class="q" data-jump="11"><span class="qn">11</span><div class="qbody">the <mark class="kw">reason why</mark> an octopus <mark class="kw">cannot be taught by its parents</mark></div><span class="qans">F</span></div>
+    <div class="q" data-jump="12"><span class="qn">12</span><div class="qbody">a <mark class="kw">comparison</mark> between the octopus's body and that of a <mark class="kw">human being</mark></div><span class="qans">B</span></div>
+    <div class="q" data-jump="13"><span class="qn">13</span><div class="qbody">the suggestion that octopuses can <mark class="kw">tell individual people apart</mark></div><span class="qans">E</span></div>
+  </div>
+</div></section><section class="panel" id="p-features">
+  <div class="qt-hero">
+    <div class="qt-num">3</div>
+    <div>
+      <h2 class="en">Matching Features</h2>
+      <div class="vi-name">Nối đặc điểm / nhận định với chủ thể</div>
+      <p class="desc">Đề cho một khung danh sách "chủ thể" (nhà nghiên cứu, quốc gia, năm, lý thuyết, loài vật…) và các nhận định — nhiệm vụ: nối mỗi nhận định với đúng chủ thể. Chủ thể thường là <b>danh từ riêng viết hoa</b> → dễ định vị nhất trong 4 dạng.</p>
+      <div class="meta-chips"><span>Kỹ năng: Scanning tên riêng + Đọc kỹ cục bộ</span><span>Độ khó: ★★★☆☆</span><span>Một chủ thể có thể dùng nhiều lần</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất dạng bài</h2>
+    <p>Dạng "dễ thở" nhất nhóm Matching <b>nếu biết cách</b>, vì chủ thể (tên người, năm, địa danh) là những "cột mốc" <span class="hl">không thể paraphrase</span> — <i class="en">Dr. Chen</i> trong đề vẫn là <i class="en">Chen</i> trong bài. Phần bị paraphrase là <b>nhận định</b> đi kèm. Cambridge kiểm tra: bạn có gán đúng <b>ai nói gì / cái gì có đặc điểm gì</b> khi nhiều chủ thể xuất hiện đan xen trong cùng một đoạn không.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 5 bước</h2>
+    <ol class="steps">
+      <li><b>Quét toàn bài, khoanh tròn vị trí MỌI lần xuất hiện của từng chủ thể.</b> Lưu ý: một chủ thể có thể xuất hiện 2–3 nơi, và lần xuất hiện sau có thể chỉ là đại từ (<i class="en">he, she, they, this team, the Danish group</i>).</li>
+      <li><b>Lập "bản đồ chủ thể"</b> ngay bên lề: Chen → đoạn B, D; Miller → đoạn C… (10–15 giây, tiết kiệm hàng phút sau đó).</li>
+      <li><b>Đọc từng nhận định trong đề</b>, gạch từ khóa nội dung (không phải tên — tên đã ở danh sách rồi), dự đoán paraphrase.</li>
+      <li><b>Đến từng vị trí trên bản đồ, đọc kỹ cục bộ</b> (câu chứa tên + câu trước/sau) và đối chiếu với nhận định. Chú ý các động từ quy gán: <i class="en">argues, claims, discovered, rejected, was the first to…</i></li>
+      <li><b>Kiểm tra "bẫy hoán đổi"</b>: nhận định có đúng là của chủ thể này, hay của chủ thể đứng cạnh trong cùng câu/đoạn? Đặc biệt cảnh giác với cấu trúc <i class="en">"Unlike Chen, Miller believes…"</i> và các đại từ <i class="en">he/they</i> đứng xa danh từ gốc.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example</div>
+      <p><b class="en">Question:</b> <i class="en">Match the statement with the correct researcher (A: Chen — B: Miller):</i><br>
+      <i class="en">"Early results should be treated with caution."</i></p>
+      <div class="passage en">Chen's team announced that the therapy reduced symptoms in 70% of patients, a figure she called "transformative". <span class="hl">Miller, however, noted that the trial involved only forty volunteers and warned against drawing firm conclusions at this stage.</span></div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: B (Miller).</b></p>
+          <p><b>Chuỗi paraphrase:</b> <span class="hl">warned against drawing firm conclusions at this stage</span> = <span class="hl-g">early results should be treated with caution</span>. Từ <i class="en">only forty volunteers</i> củng cố ý "thận trọng".</p>
+          <p><b>Bẫy hoán đổi:</b> Câu hỏi nói về "kết quả ban đầu" — kết quả là <b>của Chen</b>, nên học sinh vội sẽ chọn A. Nhưng người đưa ra <b>thái độ thận trọng</b> là Miller. Luôn hỏi: "Ai là chủ ngữ của hành động/quan điểm trong nhận định?"</p>
+        </div>
+      </details>
+    </div>
+    <div class="tipbox"><b>💡 Mẹo:</b> Khi danh sách chủ thể ngắn hơn nhiều so với số nhận định (VD 3 nhà nghiên cứu, 6 nhận định) → chắc chắn có chủ thể được dùng ≥2 lần. Đừng loại chủ thể đã dùng!</div>
+  </div>
+<div class="prac-divider"><span>✍️ LUYỆN TẬP · Practice</span></div><div class="prac-wrap">
+  
+  <h2 class="test-title">TEST 3 · Matching Features</h2>
+  <p class="test-sub">The Serious Business of Play — Nối nhận định với nhà nghiên cứu (A–D)</p>
+
+  <div class="ansstrip">
+    <div class="ac" data-jump="14"><b>14</b><span class="a">A</span></div>
+    <div class="ac" data-jump="15"><b>15</b><span class="a">B</span></div>
+    <div class="ac" data-jump="16"><b>16</b><span class="a">D</span></div>
+    <div class="ac" data-jump="17"><b>17</b><span class="a">C</span></div>
+    <div class="ac" data-jump="18"><b>18</b><span class="a">A</span></div>
+    <div class="ac" data-jump="19"><b>19</b><span class="a">D</span></div>
+    <div class="ac" data-jump="20"><b>20</b><span class="a">B</span></div>
+  </div>
+
+  <div class="section-lab">Reading Passage</div>
+  <div class="passage">
+    <div class="ptitle">The Serious Business of Play</div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">Few behaviours are as universal, or as puzzling, as play. Kittens pounce on balls of wool, young otters slide repeatedly down muddy banks, and human children invent elaborate games with no obvious purpose. For decades, scientists have argued about why animals and children devote so much energy to an activity that appears, on the surface, to achieve nothing.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">One of the earliest modern theories came from <span class="rlabel">Dr. Elena Fischer</span> <b>(A)</b>, who <mark class="ev" data-q="14">argued that play is essentially practice for adult life… a child playing "shop" is quietly learning the social rules of buying and selling<span class="evi-vi">lập luận rằng chơi về bản chất là sự tập dượt cho đời sống trưởng thành… một đứa trẻ chơi 'bán hàng' đang âm thầm học các quy tắc xã hội của việc mua bán</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 14 → A · Fischer</span><span class="en-t">Answer: Q14 → A · Fischer</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Fischer (A) — tên không paraphrase được.</span><span class="en-t"><b>Anchor the name:</b> Fischer (A) — names can't be paraphrased.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu quanh tên Fischer nói "practice for adult life".</span><span class="en-t"><b>Locate:</b> near Fischer's name — "practice for adult life".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>rehearsal for adult skills</span> ↔ <span class='hl-g'>practice for adult life</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>rehearsal for adult skills</span> ↔ <span class='hl-g'>practice for adult life</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> đây là luận điểm gốc của Fischer.</span><span class="en-t"><b>Check:</b> this is Fischer's core claim.</span></div></div></div></span></mark>. Fischer maintained that play only looks purposeless; in reality every game is preparation for a serious task to come. She was also convinced that <mark class="ev" data-q="18">intelligent species tend to play far more than simple ones<span class="evi-vi">những loài thông minh có xu hướng chơi nhiều hơn hẳn các loài đơn giản</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 18 → A · Fischer (dùng lần 2)</span><span class="en-t">Answer: Q18 → A · Fischer (use 2)</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Fischer (A).</span><span class="en-t"><b>Anchor the name:</b> Fischer (A).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu "intelligent species… play far more".</span><span class="en-t"><b>Locate:</b> "intelligent species… play far more".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>loài thông minh chơi nhiều hơn</span> ↔ <span class='hl-g'>intelligent species play far more</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>more intelligent species play more</span> ↔ <span class='hl-g'>intelligent species play far more</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> tên dùng lại là bình thường (chủ thể ít hơn số nhận định).</span><span class="en-t"><b>Check:</b> reused names are normal (fewer researchers than statements).</span></div></div></div></span></mark>.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0"><span class="rlabel">Professor Ravi Anand</span> <b>(B)</b> took issue with this account. He pointed out that much of what children do during play — <mark class="ev" data-q="20">spinning until dizzy, for example, or repeating a nonsense rhyme — bears no resemblance to any adult skill<span class="evi-vi">quay đến chóng mặt chẳng hạn, hay lặp đi lặp lại một câu vè vô nghĩa — chẳng giống bất kỳ kỹ năng nào của người lớn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 20 → B · Anand</span><span class="en-t">Answer: Q20 → B · Anand</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Anand (B).</span><span class="en-t"><b>Anchor the name:</b> Anand (B).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> ví dụ quay chóng mặt / vè vô nghĩa.</span><span class="en-t"><b>Locate:</b> examples of spinning dizzy / nonsense rhymes.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>không giống kỹ năng người lớn</span> ↔ <span class='hl-g'>bears no resemblance to any adult skill</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>not like any adult skill</span> ↔ <span class='hl-g'>bears no resemblance to any adult skill</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Bẫy hoán đổi chủ thể:</b> Silva/Fischer nói "chuẩn bị cho tương lai" — KHÁC ý này; đây là nhận định riêng của Anand.</span><span class="en-t"><b>Wrong-attribution trap:</b> Silva/Fischer talk about "preparing for the future" — DIFFERENT; this is Anand's own claim.</span></div></div></div></span></mark>. For Anand, <mark class="ev" data-q="15">the primary function of play is not practice but the development of the brain itself<span class="evi-vi">chức năng chính của việc chơi không phải là tập dượt mà là sự phát triển của chính bộ não</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 15 → B · Anand</span><span class="en-t">Answer: Q15 → B · Anand</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Anand (B).</span><span class="en-t"><b>Anchor the name:</b> Anand (B).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu "primary function… development of the brain".</span><span class="en-t"><b>Locate:</b> "primary function… development of the brain".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>chief value / shapes brain</span> ↔ <span class='hl-g'>primary function / development of the brain</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>chief value / shapes brain</span> ↔ <span class='hl-g'>primary function / development of the brain</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> khớp nghĩa, không cần trùng từ.</span><span class="en-t"><b>Check:</b> match meaning, not identical words.</span></div></div></div></span></mark>. Vigorous physical play, he argued, floods the growing brain with stimulation, forging connections between nerve cells that would otherwise never form.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0"><span class="rlabel">Dr. Marta Silva</span> <b>(C)</b> approached the question from a different angle entirely. Her research focused on rough-and-tumble games in which children pretend to fight. Through these games, she concluded, <mark class="ev" data-q="17">children learn to read others' emotions, to control their own aggression, and to repair a friendship after a quarrel<span class="evi-vi">trẻ học cách đọc cảm xúc người khác, kiểm soát tính hung hăng của mình, và hàn gắn tình bạn sau một cuộc cãi vã</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 17 → C · Silva</span><span class="en-t">Answer: Q17 → C · Silva</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Silva (C).</span><span class="en-t"><b>Anchor the name:</b> Silva (C).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu về trò giả vờ đánh nhau.</span><span class="en-t"><b>Locate:</b> the passage on pretend-fighting games.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>manage conflict</span> ↔ <span class='hl-g'>control aggression / repair a friendship after a quarrel</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>manage conflict</span> ↔ <span class='hl-g'>control aggression / repair a friendship after a quarrel</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> một cụm "manage conflict" gói cả hai ý.</span><span class="en-t"><b>Check:</b> "manage conflict" bundles both ideas.</span></div></div></div></span></mark> — lessons that no amount of solitary practice could ever teach. On one point, however, she agreed with Fischer: play, whatever else it does, helps prepare the young for the demands of later life.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">The most provocative position was that of <span class="rlabel">Professor Tom Halloran</span> <b>(D)</b>, who questioned whether play needs a purpose at all. Rather than serving some hidden function, <mark class="ev" data-q="16">play might be a sign, not a cause, of wellbeing — a luxury enjoyed by the young of species fortunate enough to be well fed and safe<span class="evi-vi">chơi có thể là dấu hiệu, chứ không phải nguyên nhân, của sự khỏe mạnh — một thứ xa xỉ mà con non của những loài đủ may mắn được ăn no và an toàn mới được hưởng</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 16 → D · Halloran (dùng lần 1)</span><span class="en-t">Answer: Q16 → D · Halloran (use 1)</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Halloran (D).</span><span class="en-t"><b>Anchor the name:</b> Halloran (D).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu "a sign, not a cause, of wellbeing".</span><span class="en-t"><b>Locate:</b> "a sign, not a cause, of wellbeing".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>kết quả của sức khỏe tốt, không phải phương tiện</span> ↔ <span class='hl-g'>a sign, not a cause</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>result of good health, not a means</span> ↔ <span class='hl-g'>a sign, not a cause</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> Halloran còn được dùng cho câu 19.</span><span class="en-t"><b>Check:</b> Halloran is also used for Q19.</span></div></div></div></span></mark>. Halloran was careful to add that <mark class="ev" data-q="19">this did not make play worthless: a reliable signal of good health, he noted, is valuable to scientists even if the behaviour itself achieves nothing<span class="evi-vi">điều đó không khiến việc chơi thành vô giá trị: một tín hiệu đáng tin về sức khỏe tốt, ông lưu ý, vẫn có giá trị với nhà khoa học ngay cả khi bản thân hành vi đó chẳng đạt được gì</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 19 → D · Halloran (dùng lần 2)</span><span class="en-t">Answer: Q19 → D · Halloran (use 2)</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Neo tên riêng:</b> Halloran (D).</span><span class="en-t"><b>Anchor the name:</b> Halloran (D).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> câu "did not make play worthless…".</span><span class="en-t"><b>Locate:</b> "did not make play worthless…".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>So nội dung:</b> <span class='hl-v'>không vô giá trị dù không có chức năng</span> ↔ <span class='hl-g'>did not make play worthless… even if achieves nothing</span>.</span><span class="en-t"><b>Compare:</b> <span class='hl-v'>not worthless even with no function</span> ↔ <span class='hl-g'>did not make play worthless… even if achieves nothing</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Kiểm tra:</b> đọc hết đoạn của một người vì họ có thể có nhiều nhận định.</span><span class="en-t"><b>Check:</b> read a researcher's whole paragraph — they may hold several claims.</span></div></div></div></span></mark>.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">Despite their disagreements, the researchers share more than they might admit. All accept that play is far too widespread, and far too costly in time and energy, to be a mere accident of evolution. The debate, then, is not over whether play matters, but over the precise reason why.</div></div>
+  </div>
+
+  <div class="section-lab">Questions 14–20</div>
+  <div class="qcard">
+    <div class="q" data-jump="14"><span class="qn">14</span><div class="qbody">Play is essentially a <mark class="kw">rehearsal for skills</mark> that will be <mark class="kw">needed in adulthood</mark>.</div><span class="qans">A · Fischer</span></div>
+    <div class="q" data-jump="15"><span class="qn">15</span><div class="qbody">The <mark class="kw">chief value</mark> of play lies in the way it <mark class="kw">shapes the developing brain</mark>.</div><span class="qans">B · Anand</span></div>
+    <div class="q" data-jump="16"><span class="qn">16</span><div class="qbody">Play may be the <mark class="kw">result of good health</mark> rather than a <mark class="kw">means of achieving</mark> anything.</div><span class="qans">D · Halloran</span></div>
+    <div class="q" data-jump="17"><span class="qn">17</span><div class="qbody">Certain games teach children how to <mark class="kw">manage conflict</mark> with other people.</div><span class="qans">C · Silva</span></div>
+    <div class="q" data-jump="18"><span class="qn">18</span><div class="qbody"><mark class="kw">More intelligent species</mark> tend to engage in a <mark class="kw">greater amount of play</mark>.</div><span class="qans">A · Fischer</span></div>
+    <div class="q" data-jump="19"><span class="qn">19</span><div class="qbody">Play <mark class="kw">cannot be dismissed as worthless</mark> even if it serves <mark class="kw">no direct function</mark>.</div><span class="qans">D · Halloran</span></div>
+    <div class="q" data-jump="20"><span class="qn">20</span><div class="qbody">Some forms of play <mark class="kw">do not resemble any skill used by adults</mark>.</div><span class="qans">B · Anand</span></div>
+  </div>
+</div></section><section class="panel" id="p-endings">
+  <div class="qt-hero">
+    <div class="qt-num">4</div>
+    <div>
+      <h2 class="en">Matching Sentence Endings</h2>
+      <div class="vi-name">Nối nửa đầu câu với kết câu đúng</div>
+      <p class="desc">Đề cho các nửa đầu câu (theo <b>thứ tự bài đọc</b>) và một danh sách kết câu A–G (nhiều hơn số câu hỏi). Nhiệm vụ: chọn kết câu đúng cả về <b>nội dung bài đọc</b> lẫn <b>ngữ pháp</b>.</p>
+      <div class="meta-chips"><span>Kỹ năng: Scanning + Ngữ pháp + Đọc kỹ</span><span>Độ khó: ★★★☆☆</span><span>✅ Đáp án thường theo thứ tự bài đọc</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất dạng bài — "bộ lọc kép"</h2>
+    <p>Đây là dạng duy nhất trong nhóm cho bạn <b>hai bộ lọc</b> để loại đáp án:</p>
+    <ul class="clean">
+      <li><b>Bộ lọc 1 — Ngữ pháp:</b> kết câu phải nối được trơn tru với nửa đầu câu (chủ ngữ – động từ hòa hợp, giới từ khớp, cấu trúc <span class="en">that/which/to-V/V-ing</span> hợp lệ). Bộ lọc này loại được 1–3 phương án <b>trước cả khi đọc bài</b>.</li>
+      <li><b>Bộ lọc 2 — Nội dung:</b> câu hoàn chỉnh phải đúng với thông tin trong bài đọc. Cẩn thận: nhiều kết câu tạo ra câu <span class="hl">đúng ngữ pháp, nghe rất hợp lý theo lẽ thường</span> — nhưng bài đọc không nói vậy. Đây là bẫy chủ lực.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 5 bước</h2>
+    <ol class="steps">
+      <li><b>Đọc nửa đầu câu, gạch từ khóa</b>, xác định nó cần loại kết thúc ngữ pháp nào (danh từ? mệnh đề <span class="en">that</span>? <span class="en">to-V</span>?…).</li>
+      <li><b>Chạy bộ lọc ngữ pháp:</b> gạch ngay các kết câu không thể ghép nối về mặt cấu trúc.</li>
+      <li><b>Định vị trong bài đọc</b> bằng từ khóa của nửa đầu câu. Tận dụng lợi thế lớn nhất của dạng này: <span class="hl">câu 1 nằm trước câu 2, câu 2 nằm trước câu 3</span> trong bài đọc → phạm vi tìm kiếm thu hẹp dần.</li>
+      <li><b>Đọc kỹ câu bằng chứng, tự hoàn thành câu bằng lời của mình</b>, rồi mới so với các kết câu còn lại. Giống Matching Headings: tự trả lời trước, nhìn phương án sau.</li>
+      <li><b>Đọc lại câu hoàn chỉnh lần cuối</b> — kiểm tra cả nghĩa lẫn ngữ pháp. Nếu câu ghép xong nghe "gượng", khả năng cao là sai.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example</div>
+      <p><b class="en">Sentence beginning:</b> <i class="en">"Cork oak trees are able to survive forest fires because…"</i></p>
+      <p><b class="en">Endings:</b></p>
+      <ul class="clean">
+        <li><span class="en"><b>A</b> — of the exceptionally thick bark that insulates the trunk.</span></li>
+        <li><span class="en"><b>B</b> — they growing in regions with heavy rainfall.</span></li>
+        <li><span class="en"><b>C</b> — of the deep root system that stores water underground.</span></li>
+      </ul>
+      <div class="passage en">The cork oak owes its remarkable resilience to a layer of bark up to thirty centimetres thick. <span class="hl">When flames sweep through the forest, this spongy armour shields the living tissue beneath</span>, allowing the tree to regenerate within months.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: A.</b></p>
+          <p><b>Bộ lọc 1 — ngữ pháp:</b> <b>B</b> sai ngay cấu trúc (<i class="en">because they growing</i> ✗) → loại trước khi đọc bài.</p>
+          <p><b>Bộ lọc 2 — nội dung:</b> <b>C</b> ghép vào rất "hợp lý theo lẽ thường" (rễ sâu trữ nước → chống cháy?) và đúng ngữ pháp — nhưng bài đọc <b>không hề nói</b>. Bằng chứng chỉ ủng hộ A: <span class="hl">spongy armour shields the living tissue</span> = <span class="hl-g">thick bark insulates the trunk</span>.</p>
+        </div>
+      </details>
+    </div>
+    <div class="warn"><b>⛔ Nguyên tắc vàng:</b> "Nghe hợp lý" ≠ "bài đọc nói vậy". Mọi đáp án phải có <b>câu bằng chứng</b> chỉ ra được.</div>
+  </div>
+<div class="prac-divider"><span>✍️ LUYỆN TẬP · Practice</span></div><div class="prac-wrap">
+  
+  <h2 class="test-title">TEST 4 · Matching Sentence Endings</h2>
+  <p class="test-sub">Building a City on Water — Nối nửa đầu câu với kết câu đúng (A–H)</p>
+
+  <div class="ansstrip">
+    <div class="ac" data-jump="21"><b>21</b><span class="a">B</span></div>
+    <div class="ac" data-jump="22"><b>22</b><span class="a">A</span></div>
+    <div class="ac" data-jump="23"><b>23</b><span class="a">D</span></div>
+    <div class="ac" data-jump="24"><b>24</b><span class="a">E</span></div>
+    <div class="ac" data-jump="25"><b>25</b><span class="a">F</span></div>
+  </div>
+
+  <div class="section-lab">Reading Passage</div>
+  <div class="passage">
+    <div class="ptitle">Building a City on Water</div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">The Italian city of Venice is one of the most improbable settlements ever created. Spread across more than a hundred small islands in a shallow coastal lagoon, it has no solid ground to speak of, no roads in the ordinary sense, and a foundation of soft mud. That such a place became one of the wealthiest and most powerful cities of medieval Europe is a testament to the ingenuity of its builders.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">The story begins in the fifth century, when waves of invaders swept across the Italian mainland. The people of the surrounding region, desperate for safety, <mark class="ev" data-q="21">fled into the marshy lagoon, reasoning that attackers on horseback would never pursue them across the treacherous mud and water<span class="evi-vi">chạy vào đầm lầy, với suy tính rằng quân địch cưỡi ngựa sẽ không bao giờ đuổi theo họ qua vùng bùn lầy và nước hiểm trở</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 21 → kết câu B</span><span class="en-t">Answer: Q21 → ending B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc nửa đầu câu:</b> dân đầu tiên vào đầm lầy <b>vì…</b> → cần một lý do.</span><span class="en-t"><b>Read the stem:</b> early settlers moved into the lagoon <b>because…</b> → need a reason.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn kể dân chạy trốn quân xâm lược.</span><span class="en-t"><b>Locate:</b> the passage on people fleeing invaders.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Lọc ngữ pháp:</b> "because" + mệnh đề đầy đủ → B ghép trơn.</span><span class="en-t"><b>Grammar filter:</b> "because" + a full clause → B joins smoothly.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lọc nội dung:</b> <span class='hl-v'>kẻ thù không đuổi theo qua bùn/nước</span> ↔ <span class='hl-g'>attackers would never pursue them across the mud and water</span>.</span><span class="en-t"><b>Content filter:</b> <span class='hl-v'>invaders wouldn't follow across mud/water</span> ↔ <span class='hl-g'>attackers would never pursue them across the mud and water</span>.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại thừa:</b> C (gần tuyến thương mại) — bài nói chạy để TRỐN.</span><span class="en-t"><b>Drop distractor:</b> C (nearer trade routes) — the text says they fled to ESCAPE.</span></div></div></div></span></mark>. What began as a temporary refuge gradually became a permanent home.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">Building on mud presented an obvious problem: any heavy structure placed on such soft ground would simply sink. The Venetians solved this by <mark class="ev" data-q="23">driving huge numbers of wooden poles, or piles, deep into the mud until they reached a firmer layer of clay beneath<span class="evi-vi">đóng vô số cọc gỗ xuống sâu trong bùn cho tới khi chạm lớp sét cứng hơn bên dưới</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 23 → kết câu D</span><span class="en-t">Answer: Q23 → ending D</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc nửa đầu câu:</b> xây đá an toàn <b>một khi…</b> → cần một điều kiện.</span><span class="en-t"><b>Read the stem:</b> stone could be built safely <b>once…</b> → need a condition.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn đóng cọc tới lớp sét cứng.</span><span class="en-t"><b>Locate:</b> the passage on driving piles to firm clay.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Lọc ngữ pháp:</b> "once" + mệnh đề → D hợp.</span><span class="en-t"><b>Grammar filter:</b> "once" + a clause → D fits.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lọc nội dung:</b> <span class='hl-v'>cọc đóng tới lớp sét cứng</span> ↔ <span class='hl-g'>poles… reached a firmer layer of clay</span>.</span><span class="en-t"><b>Content filter:</b> <span class='hl-v'>piles driven to firm clay</span> ↔ <span class='hl-g'>poles… reached a firmer layer of clay</span>.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Kiểm tra:</b> đúng cả nghĩa lẫn logic thời gian.</span><span class="en-t"><b>Check:</b> correct in meaning and in time logic.</span></div></div></div></span></mark>. On top of these piles they laid wooden platforms, and on the platforms they built in stone. Remarkably, the wood did not rot. <mark class="ev" data-q="22">Because the piles were completely submerged, they were cut off from the oxygen that decay-causing organisms need<span class="evi-vi">Vì các cọc bị ngập hoàn toàn, chúng bị cắt khỏi lượng oxy mà các sinh vật gây mục cần đến</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 22 → kết câu A</span><span class="en-t">Answer: Q22 → ending A</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc nửa đầu câu:</b> cọc gỗ không mục <b>vì…</b> → cần một lý do.</span><span class="en-t"><b>Read the stem:</b> the wooden piles didn't decay <b>because…</b> → need a reason.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn về đóng cọc, gỗ không mục.</span><span class="en-t"><b>Locate:</b> the passage on piles and non-rotting wood.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Lọc ngữ pháp:</b> "because" + mệnh đề → A hợp.</span><span class="en-t"><b>Grammar filter:</b> "because" + a clause → A fits.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lọc nội dung:</b> <span class='hl-v'>bị nước bịt kín khỏi không khí</span> ↔ <span class='hl-g'>submerged… cut off from the oxygen</span>.</span><span class="en-t"><b>Content filter:</b> <span class='hl-v'>sealed off from air by water</span> ↔ <span class='hl-g'>submerged… cut off from the oxygen</span>.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại bẫy G:</b> "gỗ xử lý sẵn" nghe hợp lý nhưng bài KHÔNG nói → lý do thật là thiếu oxy.</span><span class="en-t"><b>Trap G:</b> "wood specially treated" sounds plausible but the text NEVER says it → the real reason is lack of oxygen.</span></div></div></div></span></mark>, and over time the constant flow of mineral-rich water gradually turned the wood almost as hard as stone.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">Fresh water posed another challenge, for the lagoon itself was salt. <mark class="ev" data-q="24">The Venetians could not sink ordinary wells, since these would fill only with brackish water unfit to drink<span class="evi-vi">Người Venice không thể đào giếng thường, vì chúng chỉ đầy nước lợ không uống được</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 24 → kết câu E</span><span class="en-t">Answer: Q24 → ending E</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc nửa đầu câu:</b> không dựa vào giếng <b>vì…</b> → cần một lý do.</span><span class="en-t"><b>Read the stem:</b> they couldn't rely on wells <b>because…</b> → need a reason.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn về nước lợ trong đầm.</span><span class="en-t"><b>Locate:</b> the passage on brackish lagoon water.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Lọc ngữ pháp:</b> "because" + mệnh đề → E hợp.</span><span class="en-t"><b>Grammar filter:</b> "because" + a clause → E fits.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lọc nội dung:</b> <span class='hl-v'>nước ngầm quá mặn</span> ↔ <span class='hl-g'>brackish water unfit to drink</span>.</span><span class="en-t"><b>Content filter:</b> <span class='hl-v'>ground water too salty</span> ↔ <span class='hl-g'>brackish water unfit to drink</span>.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Kiểm tra:</b> brackish = hơi mặn.</span><span class="en-t"><b>Check:</b> brackish = slightly salty.</span></div></div></div></span></mark>. Instead they built ingenious rainwater collection systems in which every open square was designed to funnel rain down through layers of sand, which filtered it, into a stone-lined tank below.</div></div>
+
+    <div class="para"><div class="ptext" style="padding-left:0">Today, however, the city that once conquered the water faces a growing threat from it. Sea levels are rising, the ancient city is slowly sinking, and the floods that used to come rarely now arrive with alarming frequency. Engineers have built <mark class="ev" data-q="25">a vast system of mobile barriers that can be raised across the lagoon's entrances to hold back the highest tides<span class="evi-vi">một hệ thống rào chắn di động khổng lồ có thể nâng lên chắn ngang các cửa đầm để ngăn những đợt thủy triều cao nhất</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 25 → kết câu F</span><span class="en-t">Answer: Q25 → ending F</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc nửa đầu câu:</b> rào chắn được xây <b>để…</b> → cần một mục đích.</span><span class="en-t"><b>Read the stem:</b> the barriers were built <b>in order to…</b> → need a purpose.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn về rào chắn di động.</span><span class="en-t"><b>Locate:</b> the passage on mobile barriers.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Lọc ngữ pháp:</b> "in order to" + động từ nguyên thể "hold" → F hợp.</span><span class="en-t"><b>Grammar filter:</b> "in order to" + bare infinitive "hold" → F fits.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lọc nội dung:</b> <span class='hl-v'>ngăn thủy triều cao</span> ↔ <span class='hl-g'>to hold back the highest tides</span>.</span><span class="en-t"><b>Content filter:</b> <span class='hl-v'>hold back high tides</span> ↔ <span class='hl-g'>to hold back the highest tides</span>.</span></div></div><div class="stp"><span class="sn">5</span><div><span class="vi"><b>Loại thừa:</b> H (dân số tăng) — bài không nhắc.</span><span class="en-t"><b>Drop distractor:</b> H (population growth) — not mentioned.</span></div></div></div></span></mark>, though many fear that even this will not be enough to preserve Venice for future generations.</div></div>
+  </div>
+
+  <div class="section-lab">Questions 21–25</div>
+  <div class="qcard">
+    <div class="q" data-jump="21"><span class="qn">21</span><div class="qbody">The <mark class="kw">early settlers moved into the lagoon</mark> because…</div><span class="qans">B</span></div>
+    <div class="q" data-jump="22"><span class="qn">22</span><div class="qbody">The <mark class="kw">wooden piles</mark> beneath the city <mark class="kw">did not decay</mark> because…</div><span class="qans">A</span></div>
+    <div class="q" data-jump="23"><span class="qn">23</span><div class="qbody"><mark class="kw">Heavy stone structures</mark> could safely be <mark class="kw">built on the mud</mark> once…</div><span class="qans">D</span></div>
+    <div class="q" data-jump="24"><span class="qn">24</span><div class="qbody">The people of Venice <mark class="kw">could not depend on wells</mark> because…</div><span class="qans">E</span></div>
+    <div class="q" data-jump="25"><span class="qn">25</span><div class="qbody">The <mark class="kw">barriers</mark> now protecting the city were <mark class="kw">built in order to</mark>…</div><span class="qans">F</span></div>
+  </div>
+
+  <div class="section-lab">List of Endings</div>
+  <div class="qcard">
+    <ul class="endlist">
+      <li class="used"><span class="el">A</span>they were sealed off from the air by the water around them. <span class="tag-used">Câu 22</span></li>
+      <li class="used"><span class="el">B</span>the invaders would not follow them across the mud and water. <span class="tag-used">Câu 21</span></li>
+      <li class="dist"><span class="el">C</span>they wanted to be closer to important trade routes. <span class="tag-dist">mồi nhử</span> — bài nói dân chạy để TRỐN kẻ thù, không vì thương mại.</li>
+      <li class="used"><span class="el">D</span>the poles had been driven down to a firmer layer of clay. <span class="tag-used">Câu 23</span></li>
+      <li class="used"><span class="el">E</span>the only available ground water was too salty to drink. <span class="tag-used">Câu 24</span></li>
+      <li class="used"><span class="el">F</span>hold back the highest tides from the streets of the city. <span class="tag-used">Câu 25</span></li>
+      <li class="dist"><span class="el">G</span>the wood used had been specially treated beforehand. <span class="tag-dist">mồi nhử</span> — nghe hợp lý nhưng bài nói gỗ không mục do THIẾU OXY.</li>
+      <li class="dist"><span class="el">H</span>the population of the mainland was rapidly growing. <span class="tag-dist">mồi nhử</span> — bài không nhắc dân số tăng như một lý do.</li>
+    </ul>
+  </div>
+</div></section><section class="panel" id="p-compare">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Điểm GIỐNG nhau của cả 4 dạng</h2>
+    <ul class="clean">
+      <li><b>Đều là bài toán paraphrase:</b> đáp án đúng hầu như luôn dùng từ đồng nghĩa/cấu trúc khác với đề; phương án chứa từ trùng khớp nguyên văn thường là mồi nhử.</li>
+      <li><b>Đều có phương án thừa</b> (tiêu đề thừa, kết câu thừa, đoạn không dùng, chủ thể dùng lặp) → không thể "đếm cua trong lỗ" bằng loại trừ đơn thuần.</li>
+      <li><b>Đều đòi hỏi bằng chứng văn bản:</b> quy trình cuối cùng luôn là <span class="en">Locate → Verify evidence → Check trap → Confirm</span>.</li>
+      <li><b>Đều nên áp dụng nguyên tắc "tự trả lời trước, nhìn phương án sau"</b> để tránh bị phương án "mớm" tư duy.</li>
+      <li><b>Đều thưởng cho người quản lý thời gian tốt:</b> câu khó bỏ qua làm sau, vì các câu khác sẽ thu hẹp lựa chọn.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bảng so sánh KHÁC nhau toàn diện</h2>
+    <div class="table-wrap"><table>
+      <tr><th></th><th>1. Headings</th><th>2. Information</th><th>3. Features</th><th>4. Sentence Endings</th></tr>
+      <tr><td><b>Câu hỏi cốt lõi</b></td><td>Đoạn này nói về <b>cái gì</b>?</td><td>Chi tiết này <b>ở đâu</b>?</td><td>Nhận định này thuộc về <b>ai/cái nào</b>?</td><td>Câu này <b>kết thúc</b> thế nào?</td></tr>
+      <tr><td><b>Cấp độ đọc</b></td><td>Ý chính toàn đoạn</td><td>Chi tiết trong đoạn</td><td>Câu quanh tên riêng</td><td>1–2 câu bằng chứng</td></tr>
+      <tr><td><b>Kỹ năng chủ đạo</b></td><td class="en">Skimming + summarising</td><td class="en">Scanning + paraphrase</td><td class="en">Scanning proper nouns</td><td class="en">Scanning + grammar</td></tr>
+      <tr><td><b>Điểm neo định vị</b></td><td>Cấu trúc đoạn (câu đầu/cuối, từ nối)</td><td>Từ khóa nội dung (dễ bị paraphrase)</td><td>Tên riêng, số, năm (khó paraphrase → neo chắc nhất)</td><td>Từ khóa nửa đầu câu + thứ tự</td></tr>
+      <tr><td><b>Đáp án theo thứ tự bài đọc?</b></td><td>❌</td><td>❌</td><td>❌</td><td>✅ (thường)</td></tr>
+      <tr><td><b>Dùng lại phương án?</b></td><td>Hiếm khi</td><td>Có (khi có <span class="en">NB</span>)</td><td>Thường xuyên</td><td>Không</td></tr>
+      <tr><td><b>Bẫy đặc trưng</b></td><td>Tiêu đề khớp chi tiết, không khớp ý chính</td><td>Khớp từ khóa nhưng sai <i>loại</i> thông tin</td><td>Gán nhầm quan điểm cho chủ thể đứng cạnh</td><td>Kết câu hợp lý ngoài đời nhưng bài không nói</td></tr>
+      <tr><td><b>Nên đọc gì trước?</b></td><td>Danh sách tiêu đề</td><td>Câu hỏi (giải mã loại thông tin)</td><td>Danh sách chủ thể → quét vị trí</td><td>Nửa đầu câu + lọc ngữ pháp kết câu</td></tr>
+      <tr><td><b>Thời điểm làm tối ưu</b></td><td>ĐẦU TIÊN (xây bản đồ bài đọc)</td><td>SAU CÙNG (tận dụng bản đồ)</td><td>Linh hoạt, khá độc lập</td><td>Linh hoạt, tận dụng tính thứ tự</td></tr>
+      <tr><td><b>Độ khó điển hình</b></td><td>★★★★☆</td><td>★★★★★</td><td>★★★☆☆</td><td>★★★☆☆</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Mổ xẻ cặp dễ nhầm nhất: Headings vs Information</h2>
+    <p>Hai dạng này trông giống nhau (đều nối "cái gì đó" với đoạn A, B, C…) nhưng tư duy <b>ngược chiều nhau 180°</b>:</p>
+    <div class="vs-grid">
+      <div class="vs-col">
+        <div class="vs-head">Matching Headings — đi từ ĐOẠN → Ý</div>
+        <div class="vs-body">
+          <p>Bạn đọc <b>cả đoạn</b>, nén nó thành <b>một ý chính</b>, rồi tìm tiêu đề khớp.</p>
+          <p>Hướng tư duy: <span class="en">bottom-up → generalise</span> (từ chi tiết khái quát lên).</p>
+          <p>Chi tiết nhỏ trong đoạn = <b>nhiễu</b>, phải biết bỏ qua.</p>
+        </div>
+      </div>
+      <div class="vs-col alt">
+        <div class="vs-head">Matching Information — đi từ Ý → ĐOẠN</div>
+        <div class="vs-body">
+          <p>Bạn cầm <b>một chi tiết</b> trong tay, đi "săn" xem nó nằm ở đoạn nào.</p>
+          <p>Hướng tư duy: <span class="en">top-down → locate</span> (từ đề bài truy xuống văn bản).</p>
+          <p>Chi tiết nhỏ trong đoạn = <b>chính là đáp án</b>, phải biết tóm lấy.</p>
+        </div>
+      </div>
+    </div>
+    <div class="note"><b>📌 Hệ quả thực chiến:</b> Cùng một câu văn trong bài đọc có thể là "nhiễu cần bỏ qua" khi làm Headings, nhưng lại là "đáp án vàng" khi làm Information. Vì vậy khi passage có CẢ hai dạng: làm <b>Headings trước</b> (hiểu khung), <b>Information sau</b> (soi chi tiết) — làm ngược lại là tự đọc bài hai lần từ đầu.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Và một cặp "anh em" nữa: Features vs Sentence Endings</h2>
+    <p>Cả hai đều là <b>nối nhận định với "một mẩu" cho sẵn</b>, đều dựa vào scanning + đọc kỹ cục bộ. Khác biệt then chốt:</p>
+    <ul class="clean">
+      <li><b>Features</b> có neo là <b>tên riêng không thể paraphrase</b> → định vị dễ, nhưng phải cảnh giác <b>gán nhầm chủ thể</b> (đại từ, cấu trúc so sánh <i class="en">unlike X, Y…</i>).</li>
+      <li><b>Sentence Endings</b> không có neo tên riêng, nhưng bù lại có <b>bộ lọc ngữ pháp</b> và <b>tính thứ tự</b> — hai công cụ mà Features không có.</li>
+    </ul>
+  </div>
+</section><section class="panel" id="p-strategy">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Sơ đồ quyết định: gặp bài Matching, xử lý theo nhánh nào?</h2>
+    <div class="tree">
+      <div class="node q">Đề yêu cầu nối cái gì?</div>
+      <div class="arrow">↓</div>
+      <div class="branch">
+        <div>
+          <div class="lbl">TIÊU ĐỀ ↔ ĐOẠN</div>
+          <div class="node">Matching Headings</div>
+          <div class="arrow">↓</div>
+          <div class="node leaf">Đọc tiêu đề trước → skim từng đoạn → tự tóm tắt → khớp ý chính, né bẫy chi tiết</div>
+        </div>
+        <div>
+          <div class="lbl">CHI TIẾT ↔ ĐOẠN</div>
+          <div class="node">Matching Information</div>
+          <div class="arrow">↓</div>
+          <div class="node leaf">Giải mã LOẠI thông tin → scan có định hướng → xác minh đủ mọi thành phần</div>
+        </div>
+        <div>
+          <div class="lbl">NHẬN ĐỊNH ↔ TÊN RIÊNG</div>
+          <div class="node">Matching Features</div>
+          <div class="arrow">↓</div>
+          <div class="node leaf">Lập bản đồ tên riêng → đọc kỹ quanh tên → kiểm tra bẫy gán nhầm chủ thể</div>
+        </div>
+        <div>
+          <div class="lbl">NỬA CÂU ↔ KẾT CÂU</div>
+          <div class="node">Sentence Endings</div>
+          <div class="arrow">↓</div>
+          <div class="node leaf">Lọc ngữ pháp trước → định vị theo thứ tự → tự hoàn thành câu → đối chiếu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Thứ tự làm bài khi 1 passage có nhiều dạng</h2>
+    <ol class="steps">
+      <li><b>Matching Headings</b> (nếu có) — làm đầu tiên. Vừa lấy điểm, vừa xây "bản đồ nội dung" từng đoạn phục vụ các dạng sau.</li>
+      <li><b>Các dạng theo thứ tự</b> (Sentence Endings, T/F/NG, completion…) — làm giữa, vì tính thứ tự giúp đọc bài một lượt từ trên xuống.</li>
+      <li><b>Matching Features</b> — làm khi tiện, vì khá độc lập (neo tên riêng).</li>
+      <li><b>Matching Information</b> — làm SAU CÙNG. Lúc này bạn đã biết đoạn nào nói gì → tốc độ định vị tăng gấp đôi, và các đoạn "đã dùng" cho dạng khác gợi ý phạm vi tìm.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quản lý thời gian theo band mục tiêu</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Band mục tiêu</th><th>Thời gian / 1 câu Matching</th><th>Ngưỡng bỏ qua (skip)</th><th>Chiến lược khuyến nghị</th></tr>
+      <tr><td><b>5.0 – 5.5</b></td><td>~2 phút</td><td>2,5 phút</td><td>Ưu tiên Features + Sentence Endings (dễ định vị). Với Headings, chỉ đọc câu đầu + cuối mỗi đoạn. Chấp nhận đoán có cơ sở các câu khó để giữ giờ cho dạng khác.</td></tr>
+      <tr><td><b>6.0 – 6.5</b></td><td>~1,5 phút</td><td>2 phút</td><td>Làm đủ quy trình từng dạng; tập kỹ năng nhóm "tiêu đề sinh đôi" và giải mã loại thông tin. Câu khó đánh dấu, quay lại cuối giờ.</td></tr>
+      <tr><td><b>7.0 – 7.5</b></td><td>~1,2 phút</td><td>1,5 phút</td><td>Tự tóm tắt đoạn thành thạo trước khi nhìn tiêu đề; xác minh đủ 100% bằng chứng, không chốt theo cảm giác.</td></tr>
+      <tr><td><b>8.0+</b></td><td>&lt;1 phút</td><td>1,5 phút</td><td>Đọc một lượt hiểu sâu (close reading có tốc độ) rồi làm tất cả các dạng gần như đồng thời; dành thời gian dư kiểm tra bẫy.</td></tr>
+    </table></div>
+    <div class="note"><b>📌 Nguyên tắc chung:</b> Mỗi passage tối đa 20 phút. Một câu Matching Information "cứng đầu" có thể ngốn 4–5 phút nếu bạn không tự đặt ngưỡng bỏ qua, khiến bạn không kịp làm các passage sau.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Checklist tự kiểm trước khi chốt đáp án (dùng cho cả 4 dạng)</h2>
+    <ul class="clean">
+      <li>Tôi có <b>câu bằng chứng</b> cụ thể trong bài đọc không? (Không có = chưa được chốt.)</li>
+      <li>Đáp án khớp <b>toàn bộ</b> yêu cầu (chủ đề + loại thông tin + chủ thể + sắc thái), hay chỉ khớp một từ khóa?</li>
+      <li>Phương án tôi chọn có <b>trùng từ nguyên văn</b> với bài đọc không? (Trùng nhiều = kiểm tra lại, có thể là mồi.)</li>
+      <li>Tôi đã kiểm tra <b>phương án gần nghĩa</b> còn lại chưa? Vì sao nó sai?</li>
+      <li>Với Sentence Endings: câu ghép xong có đúng ngữ pháp và trơn tru không?</li>
+    </ul>
+  </div>
+</section><section class="panel" id="p-quiz">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Practice Hub — 12 câu kiểm tra tư duy chiến lược</h2>
+    <p>Chọn đáp án cho từng câu. Hệ thống chấm ngay, giải thích ngay, và lưu kết quả trên máy của bạn.</p>
+    <div class="score-box">
+      <div class="sans" style="font-size:.85rem;letter-spacing:.05em">ĐIỂM HIỆN TẠI</div>
+      <div class="big"><span id="scoreNow">0</span>/12</div>
+      <div class="sans" id="bestScore" style="font-size:.8rem;color:#c9d3ea"></div>
+    </div>
+    <div id="quizWrap"></div>
+    <div id="quizReport" class="card"></div>
+    <div style="text-align:center;margin-top:1rem">
+      <button class="btn" id="btnFinish">📊 Xem báo cáo kết quả</button>
+      <button class="btn ghost" id="btnReset">↺ Làm lại từ đầu</button>
+    </div>
+  </div>
+</section></main>
+<div id="popMask"></div>
+<div id="pop"><button class="pclose" id="popClose">✕</button><div class="phead" id="popHead"></div><div id="popBody"></div></div>
+<footer>N.D.N - 0932067877</footer>
+<script>
+(function(){
+"use strict";
+var LS_KEY = "popodoo_matching_integrated_v1";
+
+/* ---------- state ---------- */
+function loadState(){
+  try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveState(s){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(s)); }catch(e){}
+}
+var state = loadState();
+state.answers = state.answers || {};
+state.fontSize = state.fontSize || 17;
+  state.mode = state.mode || "both";
+
+/* ---------- font size ---------- */
+function applyFont(){
+  document.documentElement.style.setProperty("--fs", state.fontSize + "px");
+}
+applyFont();
+document.getElementById("fPlus").addEventListener("click", function(){
+  if(state.fontSize < 22){ state.fontSize += 1; applyFont(); saveState(state); }
+});
+document.getElementById("fMinus").addEventListener("click", function(){
+  if(state.fontSize > 13){ state.fontSize -= 1; applyFont(); saveState(state); }
+});
+
+/* ---------- tabs ---------- */
+var tabRow = document.getElementById("tabRow");
+tabRow.addEventListener("click", function(e){
+  var btn = e.target.closest("button[data-panel]");
+  if(!btn) return;
+  clearAll();
+  var panels = document.querySelectorAll("section.panel");
+  var tabs = tabRow.querySelectorAll("button");
+  panels.forEach(function(p){ p.classList.remove("show"); });
+  tabs.forEach(function(t){ t.classList.remove("active"); });
+  btn.classList.add("active");
+  document.getElementById(btn.dataset.panel).classList.add("show");
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+/* ---------- reading progress bar ---------- */
+window.addEventListener("scroll", function(){
+  var h = document.documentElement;
+  var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.max(0, pct)) + "%";
+}, {passive:true});
+
+/* ---------- quiz data ---------- */
+/* type: nhóm câu hỏi để báo cáo (headings / info / features / endings / compare) */
+var QUIZ = [
+  {type:"compare", q:"Bạn thấy đề bài: “Which paragraph contains the following information?” kèm dòng “NB You may use any letter more than once”. Đây là dạng nào?",
+   opts:["Matching Headings","Matching Information","Matching Features","Matching Sentence Endings"], a:1,
+   ex:"Cụm “Which paragraph contains the following information” + NB dùng lại chữ cái là dấu hiệu đặc trưng của Matching Information. Matching Headings sẽ có “List of Headings” đánh số La Mã."},
+  {type:"headings", q:"Trong Matching Headings, một tiêu đề khớp hoàn hảo với MỘT câu trong đoạn nhưng không phản ánh cả đoạn. Bạn nên:",
+   opts:["Chọn ngay vì có bằng chứng rõ ràng","Nghi ngờ — đây có thể là bẫy chi tiết (detail trap)","Chọn nếu câu đó là câu đầu đoạn","Bỏ qua đoạn này, làm đoạn khác"], a:1,
+   ex:"Tiêu đề đúng phải bao phủ Ý CHÍNH của cả đoạn. Tiêu đề chỉ khớp một chi tiết là bẫy kinh điển nhất của dạng này."},
+  {type:"headings", q:"Thứ tự đọc tối ưu khi làm Matching Headings là:",
+   opts:["Đọc kỹ toàn bài → đọc tiêu đề → khớp","Đọc tiêu đề trước → skim từng đoạn → tự tóm tắt → khớp","Đọc câu đầu mọi đoạn → chọn nhanh theo trực giác","Đọc đoạn nào khớp từ khóa với tiêu đề đầu tiên"], a:1,
+   ex:"Đọc tiêu đề trước giúp bạn biết cần chú ý điều gì khi skim; tự tóm tắt trước khi nhìn lại danh sách giúp tránh bị các tiêu đề “mớm” tư duy."},
+  {type:"headings", q:"Ý chính của một đoạn văn trong Matching Headings thường nằm ở đâu?",
+   opts:["Luôn luôn ở câu đầu tiên","Luôn luôn ở câu cuối cùng","Thường ở câu đầu, nhưng khoảng 1/3 trường hợp nằm sau từ nối tương phản như however","Ở chính giữa đoạn"], a:2,
+   ex:"Câu đầu hay là câu chủ đề, nhưng Cambridge thích đặt câu dẫn/bối cảnh trước rồi mới “bẻ lái” bằng however — ý chính nằm sau cú bẻ lái đó (bẫy câu đầu)."},
+  {type:"info", q:"Câu hỏi Matching Information yêu cầu tìm “a reason why urban farming has grown”. Đoạn E nhắc đến urban farming nhưng chỉ mô tả quy mô của nó. Kết luận đúng là:",
+   opts:["Chọn E vì có từ khóa urban farming","Chưa chọn E — vì đoạn thiếu LOẠI thông tin cần tìm (lý do)","Chọn E vì quy mô lớn ngụ ý có lý do phát triển","Loại E vĩnh viễn khỏi mọi câu hỏi khác"], a:1,
+   ex:"Phải khớp đủ hai tầng: chủ đề (urban farming) + loại thông tin (a reason). Khớp từ khóa mà thiếu loại thông tin là bẫy số một của dạng này. E vẫn có thể là đáp án của câu khác."},
+  {type:"info", q:"Vì sao nên làm Matching Information SAU các dạng khác của cùng passage?",
+   opts:["Vì nó được chấm nhiều điểm hơn","Vì đáp án của nó luôn nằm ở cuối bài","Vì sau khi làm các dạng khác, bạn đã có “bản đồ nội dung” từng đoạn, định vị chi tiết nhanh hơn nhiều","Vì đề thi quy định như vậy"], a:2,
+   ex:"Matching Information không theo thứ tự và đòi định vị chi tiết — thứ trở nên dễ hơn hẳn khi bạn đã nắm khung nội dung nhờ làm Headings hoặc các dạng theo thứ tự trước đó."},
+  {type:"info", q:"Đề hỏi “a comparison between two building materials”. Tín hiệu ngôn ngữ nào trong bài đọc đáng để quét nhất?",
+   opts:["for instance, such as","whereas, more durable than, unlike","because, due to","will, is likely to"], a:1,
+   ex:"“A comparison” → tìm cấu trúc so sánh/đối chiếu: whereas, unlike, so sánh hơn (-er / more … than). for instance là tín hiệu của ví dụ; because của lý do; will của dự đoán."},
+  {type:"features", q:"Lợi thế định vị lớn nhất của Matching Features so với các dạng Matching khác là gì?",
+   opts:["Đáp án luôn theo thứ tự bài đọc","Chủ thể thường là danh từ riêng — gần như không thể paraphrase","Chỉ cần đọc câu đầu mỗi đoạn","Không bao giờ có phương án dùng lại"], a:1,
+   ex:"Tên người, năm, địa danh là “cột mốc” giữ nguyên giữa đề và bài đọc, nên scan cực nhanh. (Ngược lại: đáp án KHÔNG theo thứ tự, và chủ thể RẤT hay được dùng lại.)"},
+  {type:"features", q:"Bài đọc viết: “Unlike Tanaka, who saw the data as conclusive, Novak urged further trials.” Nhận định “believed the evidence was decisive” thuộc về ai?",
+   opts:["Novak — vì tên đứng gần nhận định hơn","Tanaka — vì cấu trúc “unlike Tanaka, who saw the data as conclusive” gán quan điểm đó cho Tanaka","Cả hai người","Không ai cả"], a:1,
+   ex:"conclusive = decisive. Mệnh đề quan hệ “who saw the data as conclusive” bổ nghĩa cho Tanaka. Đây là bẫy hoán đổi chủ thể bằng cấu trúc “Unlike X, Y…” — bẫy đặc trưng của Matching Features."},
+  {type:"endings", q:"“Bộ lọc kép” của Matching Sentence Endings gồm:",
+   opts:["Từ vựng và phát âm","Ngữ pháp và nội dung bài đọc","Tốc độ và trực giác","Ý chính và chi tiết"], a:1,
+   ex:"Bước 1 loại các kết câu không ghép nối được về ngữ pháp; bước 2 xác minh câu hoàn chỉnh đúng với thông tin bài đọc. Kết câu “đúng ngữ pháp + nghe hợp lý ngoài đời” nhưng bài không nói là bẫy chủ lực."},
+  {type:"endings", q:"Đặc điểm nào giúp Matching Sentence Endings dễ định vị hơn Matching Information?",
+   opts:["Các câu hỏi thường theo đúng thứ tự thông tin trong bài đọc","Không có phương án thừa","Có thể trả lời mà không cần đọc bài","Kết câu luôn lặp nguyên văn từ của bài đọc"], a:0,
+   ex:"Sentence Endings là dạng Matching duy nhất (thường) theo thứ tự: đáp án câu 2 nằm sau đáp án câu 1 trong bài — phạm vi tìm kiếm thu hẹp dần. Information thì hoàn toàn không theo thứ tự."},
+  {type:"compare", q:"Một passage có cả Matching Headings và Matching Information. Chiến lược tối ưu là:",
+   opts:["Làm Information trước vì khó hơn, để dành sức","Làm Headings trước để nắm khung nội dung, rồi dùng “bản đồ” đó làm Information","Làm song song hai dạng cùng lúc","Thứ tự không ảnh hưởng gì"], a:1,
+   ex:"Headings đi từ đoạn → ý (xây bản đồ); Information đi từ ý → đoạn (cần bản đồ để tra). Làm Headings trước nghĩa là chỉ phải đọc kỹ bài MỘT lần thay vì hai lần."}
+];
+
+/* ---------- render quiz ---------- */
+var quizWrap = document.getElementById("quizWrap");
+var TYPE_NAME = {headings:"Matching Headings", info:"Matching Information", features:"Matching Features", endings:"Sentence Endings", compare:"So sánh & chiến lược"};
+
+function renderQuiz(){
+  quizWrap.innerHTML = "";
+  QUIZ.forEach(function(item, qi){
+    var box = document.createElement("div");
+    box.className = "quiz-q";
+    var head = document.createElement("div");
+    head.className = "q-head";
+    head.textContent = "Câu " + (qi+1) + " · [" + TYPE_NAME[item.type] + "]";
+    var qtext = document.createElement("p");
+    qtext.textContent = item.q;
+    qtext.style.marginBottom = ".6rem";
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    var explain = document.createElement("div");
+    explain.className = "q-explain";
+    explain.textContent = "💡 " + item.ex;
+
+    item.opts.forEach(function(opt, oi){
+      var b = document.createElement("button");
+      b.textContent = String.fromCharCode(65+oi) + ". " + opt;
+      b.addEventListener("click", function(){ answer(qi, oi, opts, explain); });
+      opts.appendChild(b);
+    });
+
+    box.appendChild(head); box.appendChild(qtext); box.appendChild(opts); box.appendChild(explain);
+    quizWrap.appendChild(box);
+
+    /* restore saved answer */
+    if(state.answers[qi] !== undefined){
+      paint(qi, state.answers[qi], opts, explain);
+    }
+  });
+  updateScore();
+}
+
+function answer(qi, oi, optsEl, explainEl){
+  if(state.answers[qi] !== undefined) return;
+  state.answers[qi] = oi;
+  saveState(state);
+  paint(qi, oi, optsEl, explainEl);
+  updateScore();
+}
+
+function paint(qi, oi, optsEl, explainEl){
+  var buttons = optsEl.querySelectorAll("button");
+  buttons.forEach(function(b, i){
+    b.disabled = true;
+    if(i === QUIZ[qi].a) b.classList.add("correct");
+    if(i === oi && oi !== QUIZ[qi].a) b.classList.add("wrong");
+  });
+  explainEl.classList.add("show");
+}
+
+function currentScore(){
+  var s = 0;
+  Object.keys(state.answers).forEach(function(k){
+    if(state.answers[k] === QUIZ[k].a) s++;
+  });
+  return s;
+}
+
+function updateScore(){
+  var s = currentScore();
+  document.getElementById("scoreNow").textContent = s;
+  if(state.best === undefined || s > state.best){
+    if(Object.keys(state.answers).length === QUIZ.length){ state.best = s; saveState(state); }
+  }
+  document.getElementById("bestScore").textContent = (state.best !== undefined) ? ("Kỷ lục của bạn: " + state.best + "/12") : "";
+}
+
+/* ---------- report ---------- */
+document.getElementById("btnFinish").addEventListener("click", function(){
+  var done = Object.keys(state.answers).length;
+  var rep = document.getElementById("quizReport");
+  if(done < QUIZ.length){
+    rep.style.display = "block";
+    rep.innerHTML = "<h2><span class='gold-bar'></span> Báo cáo kết quả</h2><p>Bạn mới hoàn thành <b>" + done + "/12</b> câu. Hãy làm hết để nhận báo cáo chi tiết theo từng dạng bài nhé!</p>";
+    rep.scrollIntoView({behavior:"smooth"});
+    return;
+  }
+  /* per-type breakdown */
+  var byType = {};
+  QUIZ.forEach(function(item, qi){
+    byType[item.type] = byType[item.type] || {right:0, total:0};
+    byType[item.type].total++;
+    if(state.answers[qi] === item.a) byType[item.type].right++;
+  });
+  var s = currentScore();
+  state.best = Math.max(state.best || 0, s); saveState(state);
+
+  var verdict, advice;
+  if(s >= 11){ verdict = "🏆 Xuất sắc — tư duy chiến lược Band 8+"; advice = "Bạn đã nắm chắc bản chất cả 4 dạng. Bước tiếp theo: luyện tốc độ với đề Cambridge thật, mục tiêu dưới 1 phút/câu."; }
+  else if(s >= 8){ verdict = "👍 Khá vững — nền tảng Band 6.5–7.0"; advice = "Xem lại phần giải thích các câu sai, đặc biệt chú ý bẫy đặc trưng của dạng bạn yếu nhất bên dưới."; }
+  else if(s >= 5){ verdict = "🔄 Cần củng cố — quanh Band 5.5–6.0"; advice = "Đọc lại kỹ tab của (các) dạng có tỉ lệ đúng thấp nhất, sau đó làm lại quiz. Tập trung vào quy trình từng bước trước khi luyện đề."; }
+  else { verdict = "📚 Bắt đầu lại từ nền tảng"; advice = "Hãy học lần lượt từng tab theo thứ tự 1 → 4, làm chậm các ví dụ minh họa (che lời giải, tự làm trước), rồi quay lại quiz."; }
+
+  var rows = "";
+  Object.keys(byType).forEach(function(t){
+    var r = byType[t];
+    var pct = Math.round(r.right/r.total*100);
+    var flag = pct === 100 ? "✅" : (pct >= 50 ? "🟡" : "🔴");
+    rows += "<tr><td>" + TYPE_NAME[t] + "</td><td>" + r.right + "/" + r.total + "</td><td>" + flag + " " + pct + "%</td></tr>";
+  });
+
+  rep.style.display = "block";
+  rep.innerHTML =
+    "<h2><span class='gold-bar'></span> Báo cáo kết quả cá nhân</h2>" +
+    "<p style='font-size:1.1rem'><b>Tổng điểm: " + s + "/12</b> — " + verdict + "</p>" +
+    "<div class='table-wrap'><table><tr><th>Nhóm kiến thức</th><th>Đúng</th><th>Tỉ lệ</th></tr>" + rows + "</table></div>" +
+    "<div class='tipbox'><b>🧭 Lời khuyên:</b> " + advice + "</div>";
+  rep.scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("btnReset").addEventListener("click", function(){
+  if(!confirm("Xóa toàn bộ câu trả lời và làm lại từ đầu?")) return;
+  state.answers = {};
+  saveState(state);
+  document.getElementById("quizReport").style.display = "none";
+  renderQuiz();
+});
+
+
+/* ---------- bilingual mode ---------- */
+function applyMode(){
+  document.body.className="mode-"+(state.mode||"both");
+  document.querySelectorAll("#langToggle button").forEach(function(b){b.classList.toggle("on",b.dataset.mode===state.mode);});
+}
+var _lt=document.getElementById("langToggle");
+if(_lt){ _lt.addEventListener("click",function(e){var b=e.target.closest("button[data-mode]"); if(!b)return; state.mode=b.dataset.mode; saveState(state); applyMode();}); }
+applyMode();
+
+/* ---------- practice annotated ---------- */
+var pop=document.getElementById("pop"), popMask=document.getElementById("popMask");
+var popHead=document.getElementById("popHead"), popBody=document.getElementById("popBody");
+var activeEv=null, openEl=null;
+function revealEv(ev){ if(!ev)return; hidePop(); if(activeEv&&activeEv!==ev){activeEv.classList.remove("reveal","open");} activeEv=ev; ev.classList.add("reveal"); }
+function clearReveal(){ if(activeEv){activeEv.classList.remove("reveal","open"); activeEv=null;} }
+function showPop(el){ var noteEl=el.querySelector(".note"); if(!noteEl)return; var viEl=el.querySelector(".evi-vi"); if(openEl&&openEl!==el)openEl.classList.remove("open"); openEl=el; el.classList.add("open"); popHead.innerHTML="Explain"; var html=""; if(viEl){html+='<div class="pv-trans">'+viEl.innerHTML+'</div>';} html+=noteEl.innerHTML; popBody.innerHTML=html; pop.style.display="block"; pop.classList.add("show"); popMask.classList.add("show"); var r=el.getBoundingClientRect(); var scY=window.pageYOffset||document.documentElement.scrollTop; var scX=window.pageXOffset||document.documentElement.scrollLeft; var pw=pop.offsetWidth, ph=pop.offsetHeight, vw=document.documentElement.clientWidth; var left=scX+r.left; if(left+pw>scX+vw-10)left=scX+vw-pw-10; if(left<scX+8)left=scX+8; var top=scY+r.bottom+8; if(r.bottom+ph+16>document.documentElement.clientHeight&&r.top-ph-8>0){top=scY+r.top-ph-8;} pop.style.left=left+"px"; pop.style.top=top+"px"; }
+function hidePop(){ pop.classList.remove("show"); pop.style.display="none"; popMask.classList.remove("show"); if(openEl){openEl.classList.remove("open"); openEl=null;} }
+function clearAll(){ hidePop(); clearReveal(); }
+if(document.getElementById("popClose")) document.getElementById("popClose").addEventListener("click",hidePop);
+if(popMask) popMask.addEventListener("click",hidePop);
+document.addEventListener("click",function(e){
+  var ev=e.target.closest("mark.ev");
+  if(ev&&ev.classList.contains("reveal")){ e.preventDefault(); if(pop.classList.contains("show")&&ev.classList.contains("open")){hidePop();}else{showPop(ev);} return; }
+  var jumper=e.target.closest("[data-jump]");
+  if(jumper){ var q=jumper.getAttribute("data-jump"); var panel=jumper.closest("section.panel"); var target=panel?panel.querySelector('mark.ev[data-q="'+q+'"]'):null; if(target){revealEv(target); target.scrollIntoView({behavior:"smooth",block:"center"}); target.classList.add("flash"); setTimeout(function(){target.classList.remove("flash");},1200);} else if(jumper.querySelector(".note")){clearReveal(); showPop(jumper);} }
+});
+window.addEventListener("resize",hidePop);
+
+renderQuiz();
+})();
+</script>
+</body>
+</html>
