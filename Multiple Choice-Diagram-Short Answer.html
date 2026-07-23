@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ · Diagram · Short Answer — Lý thuyết &amp; Luyện tập · PoPoDoo</title>
+<style>
+:root{
+  --bg1:#081633;--bg2:#0b1e42;--panel:#122a52;--panel2:#16305e;--panelh:#1d3a6d;
+  --gold:#d4af37;--gold2:#f0c75e;--goldsoft:rgba(240,199,94,.12);
+  --ink:#e8eefb;--soft:#c3d0ea;--muted:#8ea1c4;--line:rgba(255,255,255,.10);--line2:rgba(255,255,255,.16);
+  --green:#43d19b;--green-b:rgba(67,209,155,.18);--red:#ff7b72;--red-b:rgba(255,123,114,.16);
+  --violet:#c3a9ff;--blue-soft:rgba(120,160,240,.14);
+  --en-col:#a9c2ef;--radius:16px;--fs:17px;
+  --shadow:0 10px 34px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:var(--fs);scroll-behavior:smooth}
+body{font-family:'Times New Roman',Georgia,serif;line-height:1.75;color:var(--ink);
+  background:radial-gradient(1200px 600px at 50% -10%, #12325e 0%, transparent 60%), linear-gradient(160deg,var(--bg1),var(--bg2) 55%,#0a1c3e);
+  background-attachment:fixed;min-height:100vh}
+h1,h2,h3,h4,.sans,button,nav,.badge,.lbl,.qt-num{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+.en,.en-q{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}
+b,strong{color:#f4f7ff}
+
+/* header */
+header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg,rgba(7,17,38,.98),rgba(9,22,48,.94));backdrop-filter:blur(8px);border-bottom:1px solid var(--line2);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+.head-inner{max-width:1080px;margin:0 auto;padding:.85rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0;box-shadow:0 4px 14px rgba(212,175,55,.35)}
+.head-title{flex:1;min-width:200px}
+.head-title h1{font-family:'Times New Roman',Georgia,serif;font-size:1.32rem;letter-spacing:.3px;color:var(--gold2);line-height:1.15}
+.head-title h1 b{color:var(--gold2)}
+.head-title p{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:#9db3d6;margin-top:.25rem}
+.ctrls{display:flex;gap:.55rem;align-items:center;flex-wrap:wrap}
+.lang-toggle{display:flex;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;padding:2px}
+.lang-toggle button{border:none;background:none;color:#cdd9f2;padding:.34rem .6rem;border-radius:8px;cursor:pointer;font-weight:700;font-size:.76rem}
+.lang-toggle button.on{background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48}
+.font-ctrl{display:flex;gap:.32rem}
+.font-ctrl button{width:36px;height:36px;border:1px solid var(--line2);background:rgba(255,255,255,.05);color:#eaf0fb;border-radius:9px;cursor:pointer;font-weight:700}
+.font-ctrl button:hover{background:var(--gold);color:#1a2b48;border-color:var(--gold)}
+#progressBar{height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%;transition:width .15s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:50;background:rgba(9,20,44,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav.tabs::-webkit-scrollbar{height:0}
+nav.tabs .tab-row{display:flex;max-width:1080px;margin:0 auto;padding:0 .6rem}
+nav.tabs button{flex-shrink:0;padding:.8rem 1.05rem;border:none;background:none;cursor:pointer;font-size:.86rem;font-weight:600;color:#9fb2d4;border-bottom:2px solid transparent;white-space:nowrap;transition:.18s}
+nav.tabs button:hover{color:#eaf0fb}
+nav.tabs button.active{color:var(--gold2);border-bottom-color:var(--gold)}
+
+main{max-width:1080px;margin:0 auto;padding:1.3rem 1.1rem 5rem}
+section.panel{display:none;animation:fade .35s ease}
+section.panel.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* cards / panels */
+.card,.passage,.qcard{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.15rem 1.3rem;margin-bottom:1.15rem}
+.card h2,.qcard h2{color:var(--gold2);font-family:'Times New Roman',Georgia,serif;font-size:1.4rem;margin-bottom:.6rem;display:flex;align-items:center;gap:.55rem;letter-spacing:.2px}
+h2.en{color:var(--gold2);font-size:1.5rem}
+.gold-bar{display:inline-block;width:6px;height:1.15rem;background:linear-gradient(180deg,var(--gold2),var(--gold));border-radius:3px}
+.vi-name{color:var(--muted);font-weight:400;font-size:.9rem}
+p{margin-bottom:.7rem;color:var(--soft)}
+.card p,.passage p{color:var(--soft)}
+a{color:var(--gold2)}
+
+/* callouts */
+.note,.tipbox,.warn{border-radius:0 12px 12px 0;padding:.75rem 1rem;margin:.7rem 0;font-size:.95rem}
+.note{background:var(--goldsoft);border-left:4px solid var(--gold)}
+.tipbox{background:var(--green-b);border-left:4px solid var(--green)}
+.warn{background:var(--red-b);border-left:4px solid var(--red)}
+.note b,.tipbox b,.warn b{color:#fff}
+
+/* highlights */
+.hl{background:linear-gradient(transparent 55%, rgba(240,199,94,.42) 55%);border-radius:2px;color:#fff;padding:0 .05em}
+.hl-g{background:rgba(67,209,155,.26);border-radius:3px;padding:0 .18em;color:#eafff6}
+.hl-v{background:rgba(160,130,255,.30);border-radius:3px;padding:0 .18em;color:#f1ecff}
+
+/* tables */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line);margin:.5rem 0}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th{background:linear-gradient(180deg,#0d2550);background:#0d2550;color:var(--gold2);padding:.6rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.82rem;text-align:left}
+td{border:1px solid var(--line);padding:.55rem .6rem;color:var(--soft);vertical-align:top}
+td.l{text-align:left}
+.keytable td.ans{font-weight:800;color:var(--gold2);text-align:center;font-family:'Segoe UI',Arial,sans-serif}
+.keytable td{text-align:center}
+.keytable td.l{text-align:left}
+
+/* examples / solutions / steps (theory) */
+.example{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.85rem 1rem;margin:.8rem 0}
+.ex-label{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.05em;color:var(--gold2);text-transform:uppercase;margin-bottom:.4rem}
+.solution{margin-top:.6rem;border-top:1px dashed var(--line2);padding-top:.6rem}
+.sol-body{font-size:.94rem}
+.steps{counter-reset:step;list-style:none;padding:0;margin:.4rem 0}
+.steps>li{position:relative;padding:.4rem 0 .4rem 2.2rem;border-top:1px dashed var(--line);color:var(--soft)}
+.steps>li:first-child{border-top:none}
+.steps>li::before{counter-increment:step;content:counter(step);position:absolute;left:0;top:.4rem;width:1.5rem;height:1.5rem;border-radius:50%;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center}
+
+/* quick-ID tree / nodes */
+.tree{margin:.6rem 0}
+.node,.branch,.leaf{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.5rem .7rem;margin:.35rem 0;color:var(--soft)}
+.node{border-left:3px solid var(--gold)}
+.leaf{border-left:3px solid var(--green)}
+.arrow{color:var(--gold);font-weight:800}
+.lbl{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--gold2);font-size:.85rem}
+.big{font-size:1.15rem}
+.desc{color:var(--muted);font-size:.9rem}
+.meta-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.meta-chips span,.chip{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;padding:.2rem .7rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.78rem;color:var(--soft)}
+
+/* question-type hero */
+.qt-hero{display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#0e2550);background:linear-gradient(135deg,#0e2550,#15325f);border:1px solid var(--line2);border-radius:var(--radius);padding:1.1rem 1.3rem;margin-bottom:1.1rem}
+.qt-num{width:54px;height:54px;flex-shrink:0;border-radius:14px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800}
+.qt-hero h2{margin:0;color:var(--gold2)}
+
+/* compare grid */
+.vs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.9rem;margin:.6rem 0}
+.vs-col{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vs-head{background:#0d2550;color:var(--gold2);padding:.6rem .8rem;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.9rem}
+.vs-body{padding:.7rem .8rem;font-size:.9rem;color:var(--soft)}
+
+/* quiz */
+.qt-hero .score-box,.score-box{background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:12px;padding:.7rem 1rem;font-family:'Segoe UI',Arial,sans-serif}
+.quiz-q{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;margin-bottom:.9rem}
+.quiz-q .q-head{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.8rem;margin-bottom:.4rem}
+.quiz-q .opts{display:flex;flex-direction:column;gap:.4rem;margin:.5rem 0}
+.quiz-q .opts button{text-align:left;padding:.55rem .8rem;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--ink);border-radius:9px;cursor:pointer;font-family:'Times New Roman',Georgia,serif;font-size:.95rem;transition:.15s}
+.quiz-q .opts button:hover{border-color:var(--gold);background:rgba(240,199,94,.08)}
+.quiz-q .opts button.correct{background:var(--green-b);border-color:var(--green);color:#eafff6;font-weight:700}
+.quiz-q .opts button.wrong{background:var(--red-b);border-color:var(--red);color:#ffe9e7}
+.quiz-q .opts button:disabled{cursor:default;opacity:.95}
+.q-explain{display:none;background:var(--goldsoft);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.55rem .8rem;font-size:.9rem;color:var(--soft)}
+.q-explain.show{display:block}
+.btn,button.btn{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;border:none;border-radius:10px;padding:.6rem 1.2rem;cursor:pointer;font-size:.9rem}
+.btn{background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48}
+.btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--soft)}
+.btn:hover{filter:brightness(1.05)}
+
+/* ===== practice divider + wrap ===== */
+.prac-divider{display:flex;align-items:center;gap:.8rem;margin:2rem 0 1.1rem}
+.prac-divider::before,.prac-divider::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+.prac-divider span{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.08em;color:var(--gold2);background:rgba(240,199,94,.1);border:1px solid rgba(240,199,94,.3);border-radius:999px;padding:.3rem 1rem}
+
+/* practice: test title / sub / ansstrip */
+.test-title{color:var(--gold2);font-family:'Times New Roman',Georgia,serif;font-size:1.25rem;margin:.2rem 0 .1rem}
+.test-sub{color:var(--muted);font-size:.9rem;margin-bottom:.8rem;font-style:italic}
+.section-lab{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.95rem;margin:1.4rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--gold);display:flex;align-items:center;gap:.4rem}
+.ansstrip{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
+.ansstrip .ac{cursor:pointer;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:10px;padding:.35rem .65rem;font-family:'Segoe UI',Arial,sans-serif;font-size:.82rem;transition:.15s;white-space:nowrap;color:var(--soft)}
+.ansstrip .ac:hover{border-color:var(--gold);background:rgba(240,199,94,.1)}
+.ansstrip .ac b{color:var(--gold2)}
+.ansstrip .ac .a{color:var(--green);font-weight:800;margin-left:.25rem}
+.ansstrip .ac .a.a-y{color:var(--green)} .ansstrip .ac .a.a-n{color:var(--red)} .ansstrip .ac .a.a-ng{color:#9fb2d4}
+
+/* passage */
+.passage .ptitle{text-align:center;font-family:'Times New Roman',Georgia,serif;font-weight:700;color:var(--gold2);font-size:1.15rem;margin-bottom:.9rem}
+.para{display:flex;gap:.75rem;margin-bottom:.95rem}
+.para .plabel{flex-shrink:0;width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin-top:.2rem}
+.para .ptext{flex:1;color:var(--soft)}
+.rlabel{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2)}
+
+/* evidence mark */
+mark.ev{background:transparent;color:inherit;border:none;border-radius:3px;padding:0;cursor:text;position:relative;transition:background .2s}
+mark.ev .qb{display:none;font-family:'Segoe UI',Arial,sans-serif;font-size:.62em;font-weight:800;background:var(--green);color:#08281c;border-radius:999px;padding:.05em .5em;margin-left:.25em;vertical-align:.15em;white-space:nowrap}
+mark.ev .note,mark.ev .evi-vi{display:none}
+mark.ev.reveal{background:rgba(240,199,94,.24);border-bottom:2px solid var(--gold);padding:.05em .12em;cursor:pointer;color:#fff}
+mark.ev.reveal .qb{display:inline}
+mark.ev.reveal.open{background:rgba(240,199,94,.42);box-shadow:0 0 0 2px var(--gold)}
+mark.ev.flash{animation:flash 1.1s ease}
+@keyframes flash{0%,100%{background:rgba(240,199,94,.24)}30%{background:rgba(240,199,94,.6)}}
+
+/* popover */
+#pop{position:absolute;z-index:200;max-width:min(680px,92vw);background:linear-gradient(180deg,#16305e,#122a52);border:1px solid var(--line2);border-top:4px solid var(--gold);border-radius:14px;box-shadow:0 16px 44px rgba(0,0,0,.55);padding:.85rem .95rem;display:none;font-size:.92rem;line-height:1.6;color:var(--ink)}
+#pop.show{display:block;animation:fade .18s ease}
+#pop .phead{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.82rem;margin-bottom:.4rem}
+#pop .pclose{position:absolute;top:.4rem;right:.5rem;cursor:pointer;color:var(--muted);font-weight:700;font-family:'Segoe UI',Arial,sans-serif;border:none;background:none;font-size:1rem}
+#pop .pv-trans{background:rgba(120,160,240,.14);border-radius:9px;padding:.55rem .65rem;margin-bottom:.6rem;font-style:italic;color:#dbe6ff}
+#pop .ansline{font-family:'Segoe UI',Arial,sans-serif;color:var(--gold2);font-size:.9rem;margin-bottom:.5rem}
+#pop .steps{display:flex;flex-direction:column;gap:.45rem;counter-reset:none;list-style:none;padding:0;margin:0}
+#pop .stp{display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;line-height:1.5}
+#pop .stp .sn{flex-shrink:0;width:1.4rem;height:1.4rem;margin-top:.05rem;border-radius:50%;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.72rem;display:flex;align-items:center;justify-content:center}
+#pop .stp b{color:#fff}
+#pop .hl-g{background:rgba(67,209,155,.30);color:#eafff6}
+#pop .hl-v{background:rgba(160,130,255,.34);color:#f1ecff}
+#popMask{position:fixed;inset:0;z-index:150;display:none}
+#popMask.show{display:block}
+
+/* questions */
+.q{display:flex;gap:.6rem;align-items:flex-start;padding:.55rem .5rem;border-radius:9px;cursor:pointer;transition:.15s;border-bottom:1px dashed var(--line)}
+.q:last-child{border-bottom:none}
+.q:hover{background:rgba(240,199,94,.07)}
+.q .qn{flex-shrink:0;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);font-size:.9rem;min-width:1.9rem}
+.q .qbody{flex:1;color:var(--soft)}
+.q .qans{flex-shrink:0;font-family:'Segoe UI',Arial,sans-serif;font-weight:800;font-size:.8rem;background:var(--green);color:#08281c;border-radius:999px;padding:.15rem .6rem;white-space:nowrap}
+.q .qans.a-y{background:var(--green);color:#08281c} .q .qans.a-n{background:var(--red);color:#3a0c08} .q .qans.a-ng{background:#5b6b86;color:#fff}
+.q.ng.open{background:rgba(240,199,94,.14)}
+.q.ng .evi-vi,.q.ng .note{display:none}
+mark.kw{background:rgba(120,160,240,.22);border-radius:3px;padding:0 .12em;font-weight:600;color:#eaf0ff}
+.hbox{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem;margin:.5rem 0;font-size:.92rem;color:var(--soft)}
+.hbox .hh{font-family:'Segoe UI',Arial,sans-serif;font-weight:700;color:var(--gold2);font-size:.82rem;margin-bottom:.3rem}
+.endlist{list-style:none;padding:0}
+.endlist li{padding:.35rem .5rem;border-radius:7px;font-size:.92rem;color:var(--soft)}
+.endlist li .el{font-family:'Segoe UI',Arial,sans-serif;font-weight:800;color:var(--gold2);margin-right:.3rem}
+.endlist li.used{background:var(--green-b)}
+.endlist li.dist{background:var(--red-b);color:#ffd9d5}
+.tag-used{font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--green);color:#08281c;padding:.05rem .45rem;border-radius:999px;margin-left:.3rem}
+.tag-dist{font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--red);color:#3a0c08;padding:.05rem .45rem;border-radius:999px;margin-left:.3rem}
+.reused{display:inline-block;font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:700;background:var(--gold);color:#1a2b48;padding:.1rem .5rem;border-radius:999px;margin-left:.3rem}
+
+/* bilingual visibility */
+.en-t{display:block;color:var(--en-col);border-left:2px solid rgba(160,190,240,.4);padding-left:.5rem;margin-top:.2rem;font-size:.9em}
+body.mode-vi .en-t{display:none!important}
+body.mode-en .vi{display:none!important}
+body.mode-en .en-t{color:inherit;border-left:none;padding-left:0;margin-top:0}
+body.mode-en #pop .pv-trans{display:none}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem;font-family:'Segoe UI',Arial,sans-serif;font-weight:700;padding:1.4rem;border-top:1px solid var(--line)}
+footer b{color:var(--gold2)}
+
+@media print{header,nav.tabs,footer,.lang-toggle,.font-ctrl{display:none!important}section.panel{display:block!important}}
+@media(max-width:600px){.head-title h1{font-size:1.05rem}.card,.passage,.qcard{padding:.95rem}main{padding:.9rem .7rem 4rem}.para .plabel{width:26px;height:26px}}
+
+/* --- classes specific to MCQ / Diagram / Short Answer --- */
+.qbox{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;margin:.55rem 0;color:var(--soft)}
+.qbox b{color:#fff}
+.opts-demo{list-style:none;padding:0;margin:.45rem 0}
+.opts-demo li{padding:.45rem .75rem;border:1px solid var(--line2);border-radius:9px;margin-bottom:.35rem;background:rgba(255,255,255,.04);font-family:'Segoe UI',Arial,sans-serif;font-size:.9rem;color:var(--soft)}
+.opts-demo li.ok{border-color:var(--green);background:var(--green-b);color:#eafff6}
+.opts-demo li.no{border-color:var(--red);background:var(--red-b);color:#ffe4e1}
+.opts-demo li b{color:var(--gold2)}
+.diagram{display:flex;justify-content:center;margin:.7rem 0}
+.diagram svg{max-width:100%;height:auto}
+.vs-col.alt .vs-head{background:linear-gradient(145deg,var(--gold2),var(--gold));color:#1a2b48}
+ul.clean{list-style:none;padding-left:0}
+ul.clean li{padding-left:1.4rem;position:relative;margin-bottom:.45rem;color:var(--soft)}
+ul.clean li::before{content:"\25C6";color:var(--gold);position:absolute;left:.2rem;font-size:.7rem;top:.4rem}
+.example .passage{font-style:italic;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;margin:.5rem 0;box-shadow:none;color:var(--soft)}
+/* diagram number pins inside practice svg */
+.dlbl:hover circle{filter:brightness(1.15)}
+
+/* ===== ẩn đáp án phần luyện tập — chỉ hiện khi bấm ===== */
+.ansstrip .ac{position:relative}
+.ansstrip .ac:not(.revealed) .a{color:transparent!important;position:relative}
+.ansstrip .ac:not(.revealed) .a::after{content:"?";position:absolute;left:0;right:0;text-align:center;color:var(--muted);font-weight:800}
+.ansstrip .ac.revealed{border-color:var(--gold);background:rgba(240,199,94,.12)}
+.q:not(.revealed) .qans{color:transparent!important;background:rgba(255,255,255,.09)!important;box-shadow:none!important;position:relative}
+.q:not(.revealed) .qans::after{content:"?";position:absolute;left:0;right:0;text-align:center;color:var(--muted);font-weight:800}
+.q .qans{transition:.18s}
+/* MCQ: phương án đúng chỉ tô xanh sau khi bấm */
+.opt-ok{border-radius:6px;padding:.1rem .3rem;font-weight:700}
+.q.revealed .opt-ok{background:var(--green-b);color:#eafff6;box-shadow:inset 0 0 0 1px var(--green)}
+/* gợi ý bấm */
+.q:not(.revealed) .qans,.ansstrip .ac:not(.revealed) .a{cursor:pointer}
+</style>
+</head>
+<body class="mode-both">
+<header>
+  <div class="head-inner">
+    <div class="logo">NDN</div>
+    <div class="head-title">
+      <h1><b>N.D.N · PoPoDoo</b></h1>
+      <p>English &amp; IELTS · IELTS Reading — MCQ · Diagram · Short Answer</p>
+    </div>
+    <div class="ctrls">
+      <div class="font-ctrl"><button id="fMinus" title="Giảm cỡ chữ">A−</button><button id="fPlus" title="Tăng cỡ chữ">A+</button></div>
+    </div>
+  </div>
+  <div id="progressBar"></div>
+</header>
+<nav class="tabs"><div class="tab-row" id="tabRow"><button data-panel="p-overview" class="active">🏠 Tổng quan</button><button data-panel="p-mcq">1. Multiple Choice</button><button data-panel="p-diagram">2. Diagram Labelling</button><button data-panel="p-short">3. Short Answer</button><button data-panel="p-compare">⚖️ So sánh 3 dạng</button><button data-panel="p-strategy">🧭 Chiến lược &amp; Thời gian</button><button data-panel="p-quiz">🎯 Practice Hub</button></div></nav>
+<main><section class="panel show" id="p-overview">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ba dạng này nằm ở "ranh giới" của hai họ câu hỏi</h2>
+    <p>Đây là nhóm thú vị vì nó bắc cầu giữa hai họ lớn bạn đã học:</p>
+    <ul class="clean">
+      <li><b class="en">Multiple Choice</b> thuộc họ <b>"chọn phương án cho sẵn"</b> (giống nhóm Matching) — không cần chép từ, mà cần <b>hiểu sâu và loại trừ</b>.</li>
+      <li><b class="en">Diagram Labelling</b> &amp; <b class="en">Short Answer</b> thuộc họ <b>"chép từ nguyên văn từ bài đọc"</b> (giống nhóm Completion) — có <b>word limit</b>, chính tả phải chuẩn.</li>
+    </ul>
+    <div class="note"><b>🎯 Hệ quả sư phạm:</b> Với MCQ, kỹ năng lõi là <b>elimination</b> (tìm lý do 3 phương án kia SAI). Với Diagram &amp; Short Answer, kỹ năng lõi là <b>định vị + chép đúng</b> theo đúng luật word limit như nhóm Completion.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bảng nhận diện nhanh 3 dạng</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Dạng</th><th>Yêu cầu</th><th>Chép từ bài đọc?</th><th>Đáp án theo thứ tự?</th><th>Kỹ năng lõi</th></tr>
+      <tr><td><b class="en">1. Multiple Choice</b><br>Trắc nghiệm</td><td>Chọn 1 (A–D) hoặc chọn 2–3 từ danh sách dài</td><td>❌ (chọn phương án)</td><td>✅ Có</td><td>Đọc hiểu sâu + Loại trừ</td></tr>
+      <tr><td><b class="en">2. Diagram Labelling</b><br>Dán nhãn sơ đồ</td><td>Điền tên bộ phận vào nhãn trên sơ đồ</td><td>✅ Có word limit</td><td>❌ Theo vị trí/không gian</td><td>Định vị mô tả không gian</td></tr>
+      <tr><td><b class="en">3. Short Answer</b><br>Trả lời ngắn</td><td>Trả lời câu hỏi Wh- bằng vài từ</td><td>✅ Có word limit</td><td>✅ Có</td><td>Scanning dữ kiện + từ để hỏi</td></tr>
+    </table></div>
+    <div class="tipbox"><b>💡 Ghi nhớ lõi:</b> MCQ hỏi <b>"Điều nào ĐÚNG theo bài?"</b> → loại trừ. Diagram hỏi <b>"Bộ phận NÀY tên gì?"</b> → định vị theo vị trí. Short Answer hỏi <b>"Ai / Cái gì / Bao nhiêu?"</b> → từ để hỏi quyết định loại đáp án.</div>
+  </div>
+</section><section class="panel" id="p-mcq">
+  <div class="qt-hero">
+    <div class="qt-num">1</div>
+    <div>
+      <h2 class="en">Multiple Choice</h2>
+      <div class="vi-name">Trắc nghiệm</div>
+      <p class="desc">Có 2 biến thể: (a) chọn 1 đáp án đúng trong A–D; (b) chọn 2 hoặc 3 đáp án đúng từ một danh sách dài (A–E hoặc A–G). Kiểm tra khả năng đọc hiểu chi tiết, ý chính, hoặc quan điểm tác giả. Đáp án <b>theo thứ tự</b> bài đọc.</p>
+      <div class="meta-chips"><span>Kỹ năng: Đọc hiểu sâu + Loại trừ</span><span>Độ khó: ★★★★☆</span><span>Đáp án theo thứ tự ✅</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất: đây là bài toán LOẠI TRỪ</h2>
+    <p>Sai lầm lớn nhất của học sinh là đọc câu hỏi rồi "săn" phương án nào <i>nghe giống bài đọc nhất</i>. Cambridge thiết kế MCQ để <span class="hl">phương án sai luôn nghe rất giống</span>. Tư duy Band 9 làm ngược lại: xác định đáp án đúng bằng cách <b>chứng minh 3 phương án kia SAI</b>, mỗi phương án sai đều có một "lỗi" cụ thể có thể chỉ ra bằng bằng chứng.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 5 bước</h2>
+    <ol class="steps">
+      <li><b>Đọc PHẦN THÂN câu hỏi (question stem) TRƯỚC, chưa đọc phương án.</b> Xác định chính xác câu hỏi đang hỏi gì: chi tiết? ý chính đoạn? quan điểm tác giả? Gạch từ khóa của thân câu.</li>
+      <li><b>Định vị vùng bài đọc</b> (đáp án theo thứ tự → câu 2 nằm sau câu 1). Đọc <b>kỹ</b> vùng đó — MCQ là dạng đòi close reading, không phải lướt.</li>
+      <li><b>Tự trả lời bằng lời của mình</b> dựa trên bài đọc, TRƯỚC KHI đọc 4 phương án — để không bị phương án "mớm".</li>
+      <li><b>Đọc từng phương án và LOẠI TRỪ:</b> với mỗi phương án sai, gọi tên lỗi của nó (xem bảng bẫy bên dưới).</li>
+      <li><b>Xác nhận phương án còn lại bằng bằng chứng cụ thể.</b> Với câu "chọn 2/3": kiểm tra ĐỦ số lượng, mỗi lựa chọn phải có bằng chứng riêng.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> 6 loại bẫy phương án sai — học thuộc để loại nhanh</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Loại bẫy</th><th>Cambridge làm gì</th><th>Cách nhận ra</th></tr>
+      <tr><td><b>Trùng từ khóa</b> (Keyword)</td><td>Phương án lặp đúng từ trong bài nhưng ý sai</td><td>Trùng từ nguyên văn = nghi ngờ, không tin ngay</td></tr>
+      <tr><td><b>Đúng một nửa</b> (Partial)</td><td>Nửa đầu đúng, nửa sau sai (hoặc ngược lại)</td><td>Kiểm tra <b>cả</b> phương án phải đúng, không chỉ một vế</td></tr>
+      <tr><td><b>Ngôn ngữ tuyệt đối</b> (Extreme)</td><td>Dùng <i class="en">all, always, never, only, must</i></td><td>Bài đọc thường thận trọng (<i class="en">some, may, often</i>) → cảnh giác từ tuyệt đối</td></tr>
+      <tr><td><b>Ngược nghĩa</b> (Opposite)</td><td>Phát biểu trái ngược điều bài nói, dùng từ quen</td><td>Đọc kỹ từ phủ định / hướng nghĩa</td></tr>
+      <tr><td><b>Ngoài phạm vi</b> (Not given)</td><td>Nghe hợp lý nhưng bài KHÔNG nói</td><td>Không tìm được bằng chứng = loại</td></tr>
+      <tr><td><b>Đúng nhưng lạc đề</b> (True but…)</td><td>Phát biểu đúng theo bài nhưng KHÔNG trả lời câu hỏi</td><td>Hỏi: "Cái này có trả lời ĐÚNG câu hỏi không?"</td></tr>
+    </table></div>
+    <div class="warn"><b>⛔ Bẫy nguy hiểm nhất: "Đúng nhưng lạc đề".</b> Một phương án có thể là sự thật ghi rõ trong bài, nhưng không phải câu trả lời cho câu hỏi được đặt ra. Học sinh thấy "đúng theo bài" là chọn → sai. Luôn quay lại thân câu hỏi.</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example · chọn 1 đáp án</div>
+      <div class="qbox"><b>Question:</b> Why does the writer mention the tomato?</div>
+      <ul class="opts-demo">
+        <li>A to prove that all fruits are healthy</li>
+        <li>B to show that a common belief can be mistaken</li>
+        <li>C to explain how tomatoes are grown</li>
+        <li>D to compare fruits with vegetables</li>
+      </ul>
+      <div class="passage en">Most people are quite sure they know the difference between a fruit and a vegetable. The tomato, however, upends this confidence: though we treat it as a vegetable in the kitchen, botanically it is unmistakably a fruit — a neat reminder that everyday assumptions are not always correct.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: B.</b> "a neat reminder that everyday assumptions are not always correct" = <span class="hl-g">a common belief can be mistaken</span>. Chú ý: câu hỏi hỏi <b>MỤC ĐÍCH</b> nhắc đến cà chua, không hỏi sự thật về cà chua.</p>
+          <p><b>Loại trừ:</b> A = "all fruits" (bẫy tuyệt đối + ngoài phạm vi). C = đúng ngữ pháp nhưng bài không nói cách trồng (ngoài phạm vi). D = "so sánh fruit với vegetable" — đúng là bài có nhắc cả hai, nhưng đó không phải MỤC ĐÍCH nhắc cà chua (bẫy "đúng nhưng lạc đề").</p>
+        </div>
+      </details>
+    </div>
+  </div>
+<div class="prac-divider"><span>&#9997;&#65039; LUYỆN TẬP · Practice</span></div><div class="prac-wrap"><h2 class="test-title">TEST 1 · Multiple Choice</h2><p class="test-sub">The Myth of Multitasking</p><div class="ansstrip"><div class="ac" data-jump="1"><b>1</b><span class="a">B</span></div><div class="ac" data-jump="2"><b>2</b><span class="a">C</span></div><div class="ac" data-jump="3"><b>3</b><span class="a">B</span></div><div class="ac" data-jump="4"><b>4</b><span class="a">B</span></div><div class="ac" data-jump="5"><b>5</b><span class="a">A, B</span></div></div><div class="section-lab">Reading Passage</div><div class="passage"><div class="ptitle">The Myth of Multitasking</div>
+<div class="para"><div class="ptext" style="padding-left:0">Many people take pride in their ability to multitask — to answer emails during meetings, or to cook dinner while helping a child with homework. In a busy world, <mark class="ev" data-q="1">juggling several tasks at once can feel like a <span class='hl-g'>valuable skill, even a necessity</span><span class="evi-vi">làm nhiều việc cùng lúc có thể cảm thấy như một kỹ năng quý giá, thậm chí là điều cần thiết</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 1 → B</span><span class="en-t">Answer: Q1 → B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc stem:</b> trong thế giới bận rộn, người ta xem đa nhiệm là gì.</span><span class="en-t"><b>Read the stem:</b> in a busy world, how people regard multitasking.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn 1 — [valuable skill, even a necessity].</span><span class="en-t"><b>Locate:</b> para 1 — [valuable skill, even a necessity].</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp phương án:</b> <span class='hl-v'>a useful or even necessary ability</span> ↔ <span class='hl-g'>valuable skill, even a necessity</span>.</span><span class="en-t"><b>Match the option:</b> <span class='hl-v'>a useful or even necessary ability</span> ↔ <span class='hl-g'>valuable skill, even a necessity</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> A (chỉ vài người) / C (luôn cải thiện) / D (muốn bỏ) — bài không nói.</span><span class="en-t"><b>Eliminate distractors:</b> A (only a few) / C (always improves) / D (want to give up) — not stated.</span></div></div></div></span></mark>. Yet a growing body of research suggests that true multitasking, at least where mental effort is involved, is largely an illusion.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">The brain, scientists argue, cannot actually focus on two demanding tasks at the same time. <mark class="ev" data-q="2">What feels like multitasking is in fact rapid <span class='hl-g'>‘task-switching’</span>: the mind darts back and forth<span class="evi-vi">Cái ta cảm thấy là đa nhiệm thực chất là 'chuyển việc' nhanh: tâm trí nhảy qua lại</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 2 → C</span><span class="en-t">Answer: Q2 → C</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc stem:</b> đa nhiệm thực chất là gì.</span><span class="en-t"><b>Read the stem:</b> what multitasking really involves.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn 2 — [rapid 'task-switching'… darts back and forth].</span><span class="en-t"><b>Locate:</b> para 2 — [rapid 'task-switching'… darts back and forth].</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp phương án:</b> <span class='hl-v'>switching rapidly between tasks</span> ↔ <span class='hl-g'>rapid task-switching</span>.</span><span class="en-t"><b>Match the option:</b> <span class='hl-v'>switching rapidly between tasks</span> ↔ <span class='hl-g'>rapid task-switching</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> A (tập trung cả hai) trái bài; B/D không được nêu.</span><span class="en-t"><b>Eliminate distractors:</b> A (full focus on both) is contradicted; B/D not stated.</span></div></div></div></span></mark> between activities, giving each a few seconds of attention before moving on. Each switch, however, comes at a cost. Studies have found that people who switch frequently between tasks <mark class="ev" data-q="5">take significantly <span class='hl-g'>longer to finish them, and make far more errors</span><span class="evi-vi">mất nhiều thời gian hơn hẳn để hoàn thành, và mắc nhiều lỗi hơn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 5–6 → A, B</span><span class="en-t">Answer: Q5–6 → A, B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc stem:</b> chọn HAI tác động của việc chuyển việc liên tục.</span><span class="en-t"><b>Read the stem:</b> choose TWO effects of frequent task-switching.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn 2 — [longer to finish… make far more errors].</span><span class="en-t"><b>Locate:</b> para 2 — [longer to finish… make far more errors].</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp phương án:</b> <span class='hl-v'>A tasks take longer / B more mistakes</span> ↔ <span class='hl-g'>longer to finish… far more errors</span>.</span><span class="en-t"><b>Match the option:</b> <span class='hl-v'>A tasks take longer / B more mistakes</span> ↔ <span class='hl-g'>longer to finish… far more errors</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> C (mệt về thể chất) / D (mất hứng thú) / E (tốn năng lượng) — bài không nêu.</span><span class="en-t"><b>Eliminate distractors:</b> C (physically tired) / D (lose interest) / E (more energy) — not stated.</span></div></div></div></span></mark>, than those who tackle one thing at a time.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">The effects go beyond mere speed. Researchers at Stanford University tested people who regularly juggled several streams of media at once and, to their surprise, found that <mark class="ev" data-q="3">these habitual multitaskers actually <span class='hl-g'>performed worse on tests of attention and memory</span><span class="evi-vi">những người quen đa nhiệm này thực ra làm bài kiểm tra chú ý và trí nhớ kém hơn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 3 → B</span><span class="en-t">Answer: Q3 → B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc stem:</b> nghiên cứu Stanford cho thấy gì.</span><span class="en-t"><b>Read the stem:</b> what the Stanford study revealed.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn 3 — [performed worse on tests of attention and memory].</span><span class="en-t"><b>Locate:</b> para 3 — [performed worse on tests of attention and memory].</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp phương án:</b> <span class='hl-v'>did worse on attention and memory tests</span> ↔ <span class='hl-g'>performed worse on tests of attention and memory</span>.</span><span class="en-t"><b>Match the option:</b> <span class='hl-v'>did worse on attention and memory tests</span> ↔ <span class='hl-g'>performed worse…</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> A/D nói đa nhiệm tốt hơn — trái bài; C không phải kết quả nghiên cứu này.</span><span class="en-t"><b>Eliminate distractors:</b> A/D claim multitasking helps — contradicted; C isn't this study's finding.</span></div></div></div></span></mark> than people who rarely multitasked. Far from training the brain to handle information better, constant switching appeared to weaken the very skills it was supposed to sharpen.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">None of this means that all multitasking is harmful. Combining a mindless activity with a mental one — listening to music while jogging, say — poses no real problem, because <mark class="ev" data-q="4">the routine task makes <span class='hl-g'>almost no demand on our attention</span><span class="evi-vi">việc quen thuộc gần như không đòi hỏi sự chú ý</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 4 → B</span><span class="en-t">Answer: Q4 → B</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc stem:</b> vì sao nghe nhạc khi chạy bộ là vô hại.</span><span class="en-t"><b>Read the stem:</b> why music while jogging is harmless.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Định vị:</b> đoạn 4 — [routine task makes almost no demand on our attention].</span><span class="en-t"><b>Locate:</b> para 4 — [routine task makes almost no demand on our attention].</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Khớp phương án:</b> <span class='hl-v'>routine task demands very little attention</span> ↔ <span class='hl-g'>makes almost no demand on our attention</span>.</span><span class="en-t"><b>Match the option:</b> <span class='hl-v'>routine task demands very little attention</span> ↔ <span class='hl-g'>almost no demand on our attention</span>.</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Loại bẫy:</b> A/C/D nghe hợp lý nhưng KHÔNG phải lý do bài nêu.</span><span class="en-t"><b>Eliminate distractors:</b> A/C/D sound plausible but are NOT the reason given.</span></div></div></div></span></mark>. The danger arises only when two tasks both compete for the same limited mental resources.</div></div></div><div class="section-lab">Questions 1–6</div><p class="test-sub">Choose the correct letter. (Q5–6: choose TWO letters.)</p><div class="qcard"><div class="q" data-jump="1"><span class="qn">1</span><div class="qbody"><b>In a busy world, many people regard multitasking as</b><div><b>A</b> a skill that only a few people possess.</div><div class="opt-ok"><b>B</b> a useful or even necessary ability.</div><div><b>C</b> something that always improves results.</div><div><b>D</b> a habit they would like to give up.</div></div><span class="qans">B</span></div><div class="q" data-jump="2"><span class="qn">2</span><div class="qbody"><b>According to the writer, what does ‘multitasking’ really involve?</b><div><b>A</b> concentrating fully on two tasks at once</div><div><b>B</b> completing tasks in a fixed order</div><div class="opt-ok"><b>C</b> switching rapidly between tasks</div><div><b>D</b> avoiding the most difficult tasks</div></div><span class="qans">C</span></div><div class="q" data-jump="3"><span class="qn">3</span><div class="qbody"><b>What did the study at Stanford University reveal?</b><div><b>A</b> Habitual multitaskers finished tasks more quickly.</div><div class="opt-ok"><b>B</b> Habitual multitaskers did worse on attention and memory tests.</div><div><b>C</b> Most people prefer to work on a single task.</div><div><b>D</b> Multitasking gradually improves the memory.</div></div><span class="qans">B</span></div><div class="q" data-jump="4"><span class="qn">4</span><div class="qbody"><b>Why is listening to music while jogging harmless?</b><div><b>A</b> because music makes running easier</div><div class="opt-ok"><b>B</b> because the routine task demands very little attention</div><div><b>C</b> because both activities are physical</div><div><b>D</b> because jogging improves concentration</div></div><span class="qans">B</span></div><div class="q" data-jump="5"><span class="qn">5</span><div class="qbody"><b>Which TWO effects of frequent task-switching are mentioned?</b><div class="opt-ok"><b>A</b> Tasks take longer to complete.</div><div class="opt-ok"><b>B</b> More mistakes are made.</div><div><b>C</b> People become physically tired.</div><div><b>D</b> People lose interest in their work.</div><div><b>E</b> More energy is used up.</div></div><span class="qans">A, B</span></div></div></div></section><section class="panel" id="p-diagram">
+  <div class="qt-hero">
+    <div class="qt-num">2</div>
+    <div>
+      <h2 class="en">Diagram Labelling</h2>
+      <div class="vi-name">Dán nhãn sơ đồ</div>
+      <p class="desc">Một sơ đồ (bộ máy, thiết bị, vật thể, cấu tạo tự nhiên) có các nhãn để trống. Nhiệm vụ: điền tên bộ phận bằng từ nguyên văn từ bài đọc, tuân word limit. Đáp án <b>theo trật tự KHÔNG GIAN của sơ đồ</b>, thường KHÔNG theo thứ tự bài đọc.</p>
+      <div class="meta-chips"><span>Kỹ năng: Định vị mô tả không gian</span><span>Độ khó: ★★★☆☆</span><span>Word limit ✅ · Không theo thứ tự bài</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bản chất: khớp MÔ TẢ trong bài với VỊ TRÍ trên sơ đồ</h2>
+    <p>Dạng này gần như luôn đi kèm bài đọc <b>mô tả một vật thể/thiết bị/quy trình</b>. Đề đã in sẵn một số nhãn (bộ phận đã biết) — đây là "mỏ neo" quý giá: dùng các nhãn có sẵn để định vị đúng đoạn mô tả, rồi lần theo mô tả không gian (<i class="en">above, below, next to, surrounds, at the top, inside</i>) để tìm bộ phận còn thiếu.</p>
+    <div class="note"><b>📌 Vì sao không theo thứ tự bài đọc:</b> Bài văn có thể mô tả bộ phận theo chức năng, còn sơ đồ đánh số theo vị trí (trên→dưới, trái→phải). Vì vậy hãy đi theo <b>sơ đồ</b>, không đi theo dòng chảy bài đọc.</p></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 5 bước</h2>
+    <ol class="steps">
+      <li><b>Quan sát cả sơ đồ + đọc các nhãn ĐÃ IN SẴN.</b> Hiểu vật thể này là gì, các bộ phận đã biết nằm ở đâu.</li>
+      <li><b>Định vị đoạn bài đọc mô tả vật thể này</b> bằng cách dùng nhãn có sẵn làm từ khóa.</li>
+      <li><b>Với mỗi nhãn trống, xác định vị trí không gian của nó</b> so với các bộ phận đã biết (ở trên? bao quanh? bên trong?).</li>
+      <li><b>Tìm câu mô tả đúng vị trí/chức năng đó</b> trong bài, dự đoán loại từ (gần như luôn là <b>danh từ</b> — tên bộ phận).</li>
+      <li><b>Chép nguyên văn + kiểm tra word limit + chính tả.</b></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example · ONE WORD ONLY — Cấu tạo một bình giữ nhiệt (thermos)</div>
+      <div class="diagram">
+        <svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif" font-size="12">
+          <!-- outer case -->
+          <rect x="90" y="30" width="140" height="190" rx="14" fill="#eef2f9" stroke="#0a1f44" stroke-width="2"/>
+          <!-- inner wall outer -->
+          <rect x="108" y="55" width="104" height="150" rx="8" fill="#ffffff" stroke="#0a1f44" stroke-width="1.5"/>
+          <!-- inner wall inner (liquid) -->
+          <rect x="122" y="68" width="76" height="124" rx="6" fill="#dbe9ff" stroke="#0a1f44" stroke-width="1.5"/>
+          <!-- stopper -->
+          <rect x="118" y="18" width="84" height="20" rx="5" fill="#f6e6b8" stroke="#0a1f44" stroke-width="1.5"/>
+          <!-- leader lines + numbers -->
+          <line x1="118" y1="28" x2="40" y2="28" stroke="#9fb2d4" stroke-width="1"/><text x="10" y="31" font-weight="700" fill="#f0c75e">(A)</text>
+          <line x1="90" y1="120" x2="40" y2="120" stroke="#9fb2d4" stroke-width="1"/><text x="10" y="123" font-weight="700" fill="#f0c75e">(B)</text>
+          <line x1="115" y1="130" x2="55" y2="165" stroke="#9fb2d4" stroke-width="1"/><text x="20" y="185" font-weight="700" fill="#f0c75e">(C)</text>
+          <line x1="230" y1="150" x2="290" y2="150" stroke="#9fb2d4" stroke-width="1"/><text x="292" y="153" font-weight="700" fill="#f0c75e">(D)</text>
+        </svg>
+      </div>
+      <div class="passage en">The delicate glass bottle is protected inside a tough outer <b>case</b> of metal or plastic. The bottle itself has a double wall; between the two walls almost all the air has been pumped out to form a <b>vacuum</b>, which stops heat escaping through the sides. The facing surfaces of the glass are coated with a shiny layer of <b>silver</b>, which reflects heat rays back. The opening at the top is sealed with a tight <b>stopper</b> to trap warmth.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>A = stopper · B = case · C = vacuum · D = silver.</b></p>
+          <p><b>A</b> ở trên cùng, đậy miệng → "sealed with a tight <span class="hl-g">stopper</span>". <b>B</b> là lớp ngoài cùng bao bọc → "tough outer <span class="hl-g">case</span>". <b>C</b> là khoảng trống giữa hai vách → "form a <span class="hl-g">vacuum</span>". <b>D</b> là lớp phủ phản xạ nhiệt → "shiny layer of <span class="hl-g">silver</span>".</p>
+          <p><b>Điểm mấu chốt:</b> ta đi theo <b>vị trí không gian</b> (trên cùng / ngoài cùng / khoảng giữa / lớp phủ), không đi theo thứ tự xuất hiện trong bài.</p>
+        </div>
+      </details>
+    </div>
+    <div class="tipbox"><b>💡 Mẹo:</b> Luôn dùng các từ chỉ vị trí trong bài (<i class="en">outer, inner, between, top, facing surfaces</i>) làm cầu nối giữa câu văn và điểm trên sơ đồ.</div>
+  </div>
+<div class="prac-divider"><span>&#9997;&#65039; LUYỆN TẬP · Practice</span></div><div class="prac-wrap"><h2 class="test-title">TEST 2 · Diagram Labelling</h2><p class="test-sub">The Vacuum Flask</p><div class="ansstrip"><div class="ac" data-jump="7"><b>7</b><span class="a">stopper</span></div><div class="ac" data-jump="8"><b>8</b><span class="a">silver</span></div><div class="ac" data-jump="9"><b>9</b><span class="a">vacuum</span></div><div class="ac" data-jump="10"><b>10</b><span class="a">case</span></div></div><div class="section-lab">Reading Passage</div><div class="passage"><div class="ptitle">The Vacuum Flask</div>
+<div class="para"><div class="ptext" style="padding-left:0">The vacuum flask, invented by the Scottish scientist James Dewar in 1892, keeps hot drinks hot and cold drinks cold for hours. Its secret lies in the way it blocks the three routes by which heat normally travels.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">At the heart of the flask is a bottle with a double wall — one glass container placed inside another, joined only at the neck. The narrow gap between these two walls is not filled with anything: instead, <mark class="ev" data-q="9">almost all the air has been pumped out to create a <span class='hl-g'>vacuum</span><span class="evi-vi">gần như toàn bộ không khí đã được hút ra để tạo một chân không</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 9 → vacuum</span><span class="en-t">Answer: Q9 → vacuum</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Hiểu sơ đồ:</b> vị trí 9 ở khe giữa hai thành.</span><span class="en-t"><b>Understand the diagram:</b> label 9 is the gap between the two walls.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Loại từ + giới hạn:</b> danh từ; CHỈ 1 TỪ.</span><span class="en-t"><b>Word type + limit:</b> a noun; ONE WORD only.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị mô tả:</b> "air has been pumped out to create a [vacuum]".</span><span class="en-t"><b>Locate the description:</b> "air has been pumped out to create a [vacuum]".</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>vacuum</span>.</span><span class="en-t"><b>Take the exact word:</b> <span class='hl-g'>vacuum</span>.</span></div></div></div></span></mark>. Because heat cannot travel by conduction or convection through empty space, this vacuum forms a highly effective barrier.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">Heat can still travel a third way, however — as radiation. To block this, <mark class="ev" data-q="8">the facing surfaces of the two glass walls are coated with a thin, shiny layer of <span class='hl-g'>silver</span><span class="evi-vi">bề mặt đối diện của hai lớp kính được phủ một lớp bạc mỏng, bóng</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 8 → silver</span><span class="en-t">Answer: Q8 → silver</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Hiểu sơ đồ:</b> vị trí 8 ở lớp phủ bóng giữa hai thành kính.</span><span class="en-t"><b>Understand the diagram:</b> label 8 is the shiny coating between the two walls.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Loại từ + giới hạn:</b> danh từ; CHỈ 1 TỪ.</span><span class="en-t"><b>Word type + limit:</b> a noun; ONE WORD only.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị mô tả:</b> "coated with a thin, shiny layer of [silver]".</span><span class="en-t"><b>Locate the description:</b> "coated with a thin, shiny layer of [silver]".</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>silver</span>.</span><span class="en-t"><b>Take the exact word:</b> <span class='hl-g'>silver</span>.</span></div></div></div></span></mark>. Like a mirror, this silvered surface reflects heat rays back towards their source.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">The most heat is usually lost through the top, so <mark class="ev" data-q="7">the opening is closed with a tight <span class='hl-g'>stopper</span>, often made of cork or plastic<span class="evi-vi">phần miệng được đậy bằng một nút kín, thường làm bằng nút bần hoặc nhựa</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 7 → stopper</span><span class="en-t">Answer: Q7 → stopper</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Hiểu sơ đồ:</b> vị trí số 7 ở miệng bình (trên cùng).</span><span class="en-t"><b>Understand the diagram:</b> label 7 is at the mouth (top).</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Loại từ + giới hạn:</b> cần danh từ; CHỈ 1 TỪ.</span><span class="en-t"><b>Word type + limit:</b> a noun; ONE WORD only.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị mô tả:</b> "the opening is closed with a tight [stopper]".</span><span class="en-t"><b>Locate the description:</b> "the opening is closed with a tight [stopper]".</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>stopper</span>.</span><span class="en-t"><b>Take the exact word:</b> <span class='hl-g'>stopper</span>.</span></div></div></div></span></mark>, which traps a pocket of still air. Finally, <mark class="ev" data-q="10">the delicate glass bottle is protected inside a tough outer <span class='hl-g'>case</span><span class="evi-vi">chai thủy tinh mỏng manh được bảo vệ bên trong một vỏ ngoài chắc chắn</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 10 → case</span><span class="en-t">Answer: Q10 → case</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Hiểu sơ đồ:</b> vị trí 10 ở lớp vỏ ngoài cùng.</span><span class="en-t"><b>Understand the diagram:</b> label 10 is the outermost shell.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Loại từ + giới hạn:</b> danh từ; CHỈ 1 TỪ.</span><span class="en-t"><b>Word type + limit:</b> a noun; ONE WORD only.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị mô tả:</b> "protected inside a tough outer [case]".</span><span class="en-t"><b>Locate the description:</b> "protected inside a tough outer [case]".</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>case</span>.</span><span class="en-t"><b>Take the exact word:</b> <span class='hl-g'>case</span>.</span></div></div></div></span></mark>, usually of metal or plastic, which guards it against knocks and gives the flask its familiar shape.</div></div></div><div class="passage" style="text-align:center">
+<svg viewBox="0 0 340 380" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%;font-family:'Segoe UI',Arial,sans-serif">
+  <rect x="120" y="52" width="100" height="298" rx="18" fill="#f4f6fb" stroke="#0a1f44" stroke-width="3"/>
+  <rect x="134" y="74" width="72" height="262" rx="12" fill="#fff" stroke="#9aa4b8" stroke-width="2"/>
+  <rect x="146" y="86" width="48" height="238" rx="9" fill="#eef4ff" stroke="#c0c0c0" stroke-width="4"/>
+  <rect x="150" y="110" width="40" height="205" rx="6" fill="#dbe8ff"/>
+  <rect x="128" y="36" width="84" height="30" rx="7" fill="#c9a36b" stroke="#8a6d1a" stroke-width="2"/>
+  <!-- 7 stopper -->
+  <g class="dlbl" data-jump="7" style="cursor:pointer"><line x1="212" y1="50" x2="286" y2="50" stroke="#9fb2d4" stroke-width="1.5"/><circle cx="300" cy="50" r="15" fill="#f0c75e"/><text x="300" y="55" text-anchor="middle" fill="#12294f" font-weight="800" font-size="14">7</text></g>
+  <!-- 8 silver -->
+  <g class="dlbl" data-jump="8" style="cursor:pointer"><line x1="194" y1="150" x2="286" y2="150" stroke="#9fb2d4" stroke-width="1.5"/><circle cx="300" cy="150" r="15" fill="#f0c75e"/><text x="300" y="155" text-anchor="middle" fill="#12294f" font-weight="800" font-size="14">8</text></g>
+  <!-- 9 vacuum -->
+  <g class="dlbl" data-jump="9" style="cursor:pointer"><line x1="140" y1="220" x2="54" y2="220" stroke="#9fb2d4" stroke-width="1.5"/><circle cx="40" cy="220" r="15" fill="#f0c75e"/><text x="40" y="225" text-anchor="middle" fill="#12294f" font-weight="800" font-size="14">9</text></g>
+  <!-- 10 case -->
+  <g class="dlbl" data-jump="10" style="cursor:pointer"><line x1="120" y1="300" x2="54" y2="300" stroke="#9fb2d4" stroke-width="1.5"/><circle cx="40" cy="300" r="15" fill="#f0c75e"/><text x="40" y="305" text-anchor="middle" fill="#12294f" font-weight="800" font-size="14">10</text></g>
+</svg>
+<div class="test-sub" style="margin-top:.4rem">Bấm số 7–10 trên sơ đồ (hoặc câu bên dưới) để xem dẫn chứng · Tap 7–10 on the diagram</div>
+</div><div class="section-lab">Questions 7–10</div><p class="test-sub">Label the diagram. Choose ONE WORD ONLY from the passage.</p><div class="qcard"><div class="q" data-jump="7"><span class="qn">7</span><div class="qbody"><mark class="kw">7</mark> — closure at the top of the flask</div><span class="qans">stopper</span></div><div class="q" data-jump="8"><span class="qn">8</span><div class="qbody"><mark class="kw">8</mark> — shiny coating that reflects heat</div><span class="qans">silver</span></div><div class="q" data-jump="9"><span class="qn">9</span><div class="qbody"><mark class="kw">9</mark> — empty gap between the two walls</div><span class="qans">vacuum</span></div><div class="q" data-jump="10"><span class="qn">10</span><div class="qbody"><mark class="kw">10</mark> — tough outer shell</div><span class="qans">case</span></div></div></div></section><section class="panel" id="p-short">
+  <div class="qt-hero">
+    <div class="qt-num">3</div>
+    <div>
+      <h2 class="en">Short Answer Questions</h2>
+      <div class="vi-name">Trả lời ngắn</div>
+      <p class="desc">Trả lời các câu hỏi Wh- (What / Where / When / Who / How many / Which / Why) bằng vài từ lấy nguyên văn từ bài đọc, tuân word limit. Đáp án <b>theo thứ tự</b> bài đọc. Nội dung thường là dữ kiện cụ thể.</p>
+      <div class="meta-chips"><span>Kỹ năng: Scanning dữ kiện</span><span>Độ khó: ★★★☆☆</span><span>Word limit ✅ · Theo thứ tự ✅</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Vũ khí lõi: TỪ ĐỂ HỎI quyết định loại đáp án</h2>
+    <p>Không như Sentence/Note Completion (phải suy ngữ pháp), Short Answer cho bạn một manh mối cực mạnh miễn phí: <b>từ để hỏi</b>. Nó nói thẳng bạn cần tìm loại thông tin gì:</p>
+    <div class="table-wrap"><table>
+      <tr><th>Từ để hỏi</th><th>Cần tìm</th><th>Quét gì trong bài</th></tr>
+      <tr><td class="en">Who</td><td>người / nhóm người</td><td>Tên riêng, chức danh, "scientists", "the Egyptians"</td></tr>
+      <tr><td class="en">When</td><td>thời gian</td><td>Năm, thế kỷ, "in 1892", "during winter"</td></tr>
+      <tr><td class="en">Where</td><td>nơi chốn</td><td>Địa danh, "in the marshes", "underground"</td></tr>
+      <tr><td class="en">How many / How much</td><td>số lượng</td><td>Con số, "thousands", "up to 30"</td></tr>
+      <tr><td class="en">What / Which</td><td>vật / khái niệm</td><td>Danh từ chính trong câu bằng chứng</td></tr>
+      <tr><td class="en">Why</td><td>lý do</td><td>"because", "in order to", "due to"</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quy trình 5 bước</h2>
+    <ol class="steps">
+      <li><b>Đọc câu hỏi, khoanh TỪ ĐỂ HỎI</b> → biết loại đáp án cần tìm (người/nơi/số/vật/lý do).</li>
+      <li><b>Gạch từ khóa nội dung</b> trong câu hỏi để định vị (đáp án theo thứ tự → dò tuần tự).</li>
+      <li><b>Scan tìm vùng chứa từ khóa</b> (nhớ: ngữ cảnh bị paraphrase).</li>
+      <li><b>Trích đúng loại thông tin mà từ để hỏi yêu cầu</b>, chép nguyên văn — <b>chỉ vài từ</b>, KHÔNG viết cả câu.</li>
+      <li><b>Kiểm tra word limit + chính tả.</b></li>
+    </ol>
+    <div class="warn"><b>⛔ Ba lỗi mất điểm oan:</b> (1) Viết cả câu hoàn chỉnh → dễ vượt word limit; (2) Tự paraphrase thay vì chép nguyên văn; (3) Trả lời sai loại (câu hỏi "How many" mà điền tên vật).</div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Ví dụ minh họa</h2>
+    <div class="example">
+      <div class="ex-label">Mini Example · NO MORE THAN TWO WORDS</div>
+      <div class="qbox"><b>Q:</b> Where do peregrine falcons build their nests in cities?</div>
+      <div class="passage en">Freed from their natural cliffs, urban peregrines have adapted with ease. In the modern city they raise their young high up on the ledges of skyscrapers, hunting the abundant pigeons below.</div>
+      <details class="solution"><summary>Xem lời giải &amp; phân tích tư duy</summary>
+        <div class="sol-body">
+          <p><b>Đáp án: (on) skyscrapers</b> hoặc <b>ledges</b> (of skyscrapers) tùy word limit.</p>
+          <p><b>Từ để hỏi "Where"</b> → cần <b>nơi chốn</b>. "build their nests" ≈ <span class="hl">raise their young</span>. Nơi chốn: <span class="hl-g">on the ledges of skyscrapers</span>. NO MORE THAN TWO WORDS → "skyscrapers" (1 từ) là an toàn nhất.</p>
+          <p><b>Bẫy:</b> "pigeons" xuất hiện gần đó nhưng trả lời câu "What do they hunt?", không phải "Where". Từ để hỏi giúp loại ngay.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+<div class="prac-divider"><span>&#9997;&#65039; LUYỆN TẬP · Practice</span></div><div class="prac-wrap"><h2 class="test-title">TEST 3 · Short Answer</h2><p class="test-sub">The Dancing Bees</p><div class="ansstrip"><div class="ac" data-jump="11"><b>11</b><span class="a">von Frisch</span></div><div class="ac" data-jump="12"><b>12</b><span class="a">round dance</span></div><div class="ac" data-jump="13"><b>13</b><span class="a">figure eight</span></div><div class="ac" data-jump="14"><b>14</b><span class="a">distance</span></div><div class="ac" data-jump="15"><b>15</b><span class="a">antennae</span></div><div class="ac" data-jump="16"><b>16</b><span class="a">sounds</span></div></div><div class="section-lab">Reading Passage</div><div class="passage"><div class="ptitle">The Dancing Bees</div>
+<div class="para"><div class="ptext" style="padding-left:0">When a honeybee discovers a rich source of food, it faces a problem: how to tell the thousands of other bees back in the dark hive exactly where to find it. <mark class="ev" data-q="11">The Austrian scientist <span class='hl-g'>Karl von Frisch</span> spent decades unravelling the answer<span class="evi-vi">Nhà khoa học người Áo Karl von Frisch đã dành hàng chục năm để tìm lời giải</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 11 → (Karl) von Frisch</span><span class="en-t">Answer: Q11 → (Karl) von Frisch</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHO — ai đã tìm ra cách ong giao tiếp.</span><span class="en-t"><b>Read the question:</b> a WHO question — who discovered how bees communicate.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ → "von Frisch".</span><span class="en-t"><b>Word limit:</b> ≤ 2 words → "von Frisch".</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 1 — [Karl von Frisch spent decades].</span><span class="en-t"><b>Locate + scan:</b> para 1 — [Karl von Frisch spent decades].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>(Karl) von Frisch</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>(Karl) von Frisch</span>.</span></div></div></div></span></mark>, and what he found astonished the scientific world. Bees, he showed, communicate through a kind of dance.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">A bee that has found food close to the hive <mark class="ev" data-q="12">performs a simple <span class='hl-g'>‘round dance’</span>, running in tight circles<span class="evi-vi">thực hiện một 'điệu nhảy vòng' đơn giản, chạy thành vòng tròn khép</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 12 → round dance</span><span class="en-t">Answer: Q12 → round dance</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHICH DANCE — khi thức ăn ở gần.</span><span class="en-t"><b>Read the question:</b> a WHICH question — the dance when food is close.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ.</span><span class="en-t"><b>Word limit:</b> ≤ 2 words.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 2 — [a simple 'round dance'].</span><span class="en-t"><b>Locate + scan:</b> para 2 — [a simple 'round dance'].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>round dance</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>round dance</span>.</span></div></div></div></span></mark>. This tells the others that food is nearby but gives no direction. For food further away, the bee switches to the far more informative ‘waggle dance’. It runs in a straight line while shaking its body from side to side, then loops back and repeats the pattern, <mark class="ev" data-q="13">tracing a shape rather like the <span class='hl-g'>figure eight</span><span class="evi-vi">vẽ nên một hình khá giống số tám</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 13 → figure eight</span><span class="en-t">Answer: Q13 → figure eight</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHAT SHAPE — hình của điệu waggle.</span><span class="en-t"><b>Read the question:</b> a WHAT question — the shape of the waggle dance.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ.</span><span class="en-t"><b>Word limit:</b> ≤ 2 words.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 2 — [a shape rather like the figure eight].</span><span class="en-t"><b>Locate + scan:</b> para 2 — [a shape rather like the figure eight].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>figure eight</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>figure eight</span>.</span></div></div></div></span></mark>.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">The details of this dance carry a surprising amount of information. The direction of the straight run indicates the direction of the food relative to the sun. <mark class="ev" data-q="14">The length of time the bee waggles reveals the <span class='hl-g'>distance</span><span class="evi-vi">Thời lượng con ong lắc cho biết khoảng cách</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 14 → (the) distance</span><span class="en-t">Answer: Q14 → (the) distance</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHAT — độ dài waggle cho biết điều gì.</span><span class="en-t"><b>Read the question:</b> a WHAT question — what the waggle length tells.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ.</span><span class="en-t"><b>Word limit:</b> ≤ 2 words.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 3 — [the length… reveals the distance].</span><span class="en-t"><b>Locate + scan:</b> para 3 — [the length… reveals the distance].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>(the) distance</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>(the) distance</span>.</span></div></div></div></span></mark>: the longer the waggle, the further the journey.</div></div>
+<div class="para"><div class="ptext" style="padding-left:0">Because the hive is completely dark, the watching bees cannot see the dance at all. Instead they press close to the dancer and follow her movements by touch, <mark class="ev" data-q="15">using their sensitive <span class='hl-g'>antennae</span> to feel the vibrations of her body<span class="evi-vi">dùng đôi râu nhạy cảm để cảm nhận rung động cơ thể nó</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 15 → (their) antennae</span><span class="en-t">Answer: Q15 → (their) antennae</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHICH PART — bộ phận nào để cảm nhận điệu nhảy.</span><span class="en-t"><b>Read the question:</b> a WHICH-PART question — the body part used to feel the dance.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ.</span><span class="en-t"><b>Word limit:</b> ≤ 2 words.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 4 — [using their sensitive antennae].</span><span class="en-t"><b>Locate + scan:</b> para 4 — [using their sensitive antennae].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>(their) antennae</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>(their) antennae</span>.</span></div></div></div></span></mark>. Some scientists believe <mark class="ev" data-q="16">they also pick up faint <span class='hl-g'>sounds</span> produced by the beating of her wings<span class="evi-vi">chúng còn thu được những âm thanh nhỏ do đôi cánh nó vỗ tạo ra</span><span class="note"><div class="ansline"><b><span class="vi">Đáp án: Câu 16 → (faint) sounds</span><span class="en-t">Answer: Q16 → (faint) sounds</span></b></div><div class="steps"><div class="stp"><span class="sn">1</span><div><span class="vi"><b>Đọc câu hỏi:</b> câu hỏi WHAT — ngoài chuyển động, ong còn nhận gì.</span><span class="en-t"><b>Read the question:</b> a WHAT question — besides movements, what bees detect.</span></div></div><div class="stp"><span class="sn">2</span><div><span class="vi"><b>Giới hạn từ:</b> ≤ 2 từ.</span><span class="en-t"><b>Word limit:</b> ≤ 2 words.</span></div></div><div class="stp"><span class="sn">3</span><div><span class="vi"><b>Định vị + quét:</b> đoạn 4 — [pick up faint sounds].</span><span class="en-t"><b>Locate + scan:</b> para 4 — [pick up faint sounds].</span></div></div><div class="stp"><span class="sn">4</span><div><span class="vi"><b>Lấy đúng nguyên văn:</b> <span class='hl-g'>(faint) sounds</span>.</span><span class="en-t"><b>Take the exact word(s):</b> <span class='hl-g'>(faint) sounds</span>.</span></div></div></div></span></mark>. Within moments the bees stream out of the hive and fly straight to the food.</div></div></div><div class="section-lab">Questions 11–16</div><p class="test-sub">Choose NO MORE THAN TWO WORDS from the passage.</p><div class="qcard"><div class="q" data-jump="11"><span class="qn">11</span><div class="qbody"><mark class="kw">Who</mark> spent many years discovering how bees communicate?</div><span class="qans">von Frisch</span></div><div class="q" data-jump="12"><span class="qn">12</span><div class="qbody"><mark class="kw">Which dance</mark> does a bee perform when food is <mark class="kw">close</mark> to the hive?</div><span class="qans">round dance</span></div><div class="q" data-jump="13"><span class="qn">13</span><div class="qbody"><mark class="kw">What shape</mark> does the waggle dance resemble?</div><span class="qans">figure eight</span></div><div class="q" data-jump="14"><span class="qn">14</span><div class="qbody">What does the <mark class="kw">length of the waggle</mark> tell the other bees?</div><span class="qans">distance</span></div><div class="q" data-jump="15"><span class="qn">15</span><div class="qbody"><mark class="kw">Which part of their body</mark> do the watching bees use to feel the dance?</div><span class="qans">antennae</span></div><div class="q" data-jump="16"><span class="qn">16</span><div class="qbody">Apart from movements, <mark class="kw">what</mark> may some bees detect from the dancer?</div><span class="qans">sounds</span></div></div></div></section><section class="panel" id="p-compare">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Điểm GIỐNG nhau</h2>
+    <ul class="clean">
+      <li><b>Đều đòi bằng chứng văn bản cụ thể</b> — không có dạng nào cho phép đoán theo cảm giác; luôn phải chỉ ra được câu bằng chứng.</li>
+      <li><b>Đều dựa trên paraphrase để định vị</b> — ngữ cảnh quanh thông tin cần tìm luôn được diễn đạt lại.</li>
+      <li><b>Đều thưởng việc "tự trả lời trước, nhìn phương án/chép sau"</b> để tránh bị mớm hoặc lấy nhầm.</li>
+      <li><b>MCQ &amp; Short Answer đều theo thứ tự bài đọc</b> → đọc bài một lượt từ trên xuống.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Bảng so sánh KHÁC nhau toàn diện</h2>
+    <div class="table-wrap"><table>
+      <tr><th></th><th>1. Multiple Choice</th><th>2. Diagram Labelling</th><th>3. Short Answer</th></tr>
+      <tr><td><b>Thuộc "họ"</b></td><td>Chọn phương án (như Matching)</td><td>Chép từ bài đọc (như Completion)</td><td>Chép từ bài đọc (như Completion)</td></tr>
+      <tr><td><b>Có word limit?</b></td><td>Không</td><td>✅ Có</td><td>✅ Có</td></tr>
+      <tr><td><b>Chính tả tính điểm?</b></td><td>Không (chọn chữ cái)</td><td>✅ Có (sai = mất điểm)</td><td>✅ Có</td></tr>
+      <tr><td><b>Đáp án theo thứ tự bài?</b></td><td>✅</td><td>❌ (theo không gian sơ đồ)</td><td>✅</td></tr>
+      <tr><td><b>Manh mối định vị</b></td><td>Từ khóa thân câu hỏi</td><td>Nhãn in sẵn + từ chỉ vị trí</td><td>Từ để hỏi + từ khóa nội dung</td></tr>
+      <tr><td><b>Kỹ năng lõi</b></td><td>Đọc hiểu sâu + loại trừ</td><td>Định vị mô tả không gian</td><td>Scanning dữ kiện</td></tr>
+      <tr><td><b>Cấp độ đọc</b></td><td>Close reading (chậm, kỹ)</td><td>Scanning mô tả</td><td>Scanning nhanh</td></tr>
+      <tr><td><b>Bẫy đặc trưng</b></td><td>Phương án "đúng nhưng lạc đề"</td><td>Đi theo thứ tự bài thay vì vị trí sơ đồ</td><td>Viết cả câu / vượt word limit / sai loại</td></tr>
+      <tr><td><b>Độ khó điển hình</b></td><td>★★★★☆</td><td>★★★☆☆</td><td>★★★☆☆</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Insight thống nhất: "Nhận diện" vs "Tái tạo"</h2>
+    <p>Cách gọn nhất để dạy học sinh phân biệt tư duy 3 dạng:</p>
+    <div class="vs-grid">
+      <div class="vs-col">
+        <div class="vs-head">MCQ — bài toán NHẬN DIỆN</div>
+        <div class="vs-body">
+          <p>Đáp án nằm sẵn trước mắt; việc của bạn là <b>nhận ra cái đúng bằng cách giết 3 cái sai</b>.</p>
+          <p>Không cần chép, không lo chính tả/word limit. Nhưng đòi hiểu sâu và cảnh giác bẫy tinh vi.</p>
+        </div>
+      </div>
+      <div class="vs-col alt">
+        <div class="vs-head">Diagram &amp; Short — bài toán TÁI TẠO</div>
+        <div class="vs-body">
+          <p>Không có sẵn đáp án; bạn phải <b>tự tìm và chép đúng từ</b> từ bài đọc.</p>
+          <p>Phải lo word limit + chính tả (như nhóm Completion). Diagram định vị theo <b>không gian</b>; Short định vị theo <b>từ để hỏi</b>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="panel" id="p-strategy">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Sơ đồ quyết định nhanh</h2>
+    <ol class="steps">
+      <li><b>Đề cho phương án A–D (hoặc danh sách dài để chọn 2–3)?</b> → Multiple Choice → đọc thân câu trước, LOẠI TRỪ.</li>
+      <li><b>Đề có một hình vẽ/sơ đồ với nhãn trống?</b> → Diagram Labelling → đi theo VỊ TRÍ, dùng nhãn in sẵn làm neo, chép nguyên văn.</li>
+      <li><b>Đề là câu hỏi Wh- yêu cầu trả lời vài từ?</b> → Short Answer → khoanh TỪ ĐỂ HỎI, chép vài từ, đừng viết cả câu.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Quản lý thời gian theo band mục tiêu</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Band</th><th>MCQ / câu</th><th>Diagram &amp; Short / câu</th><th>Chiến lược</th></tr>
+      <tr><td><b>5.0–5.5</b></td><td>~2 phút</td><td>~1,5 phút</td><td>Ưu tiên Diagram &amp; Short (định vị rõ hơn). MCQ: loại 2 phương án hiển nhiên sai trước, rồi chọn giữa 2 còn lại. Luôn kiểm word limit.</td></tr>
+      <tr><td><b>6.0–6.5</b></td><td>~1,5 phút</td><td>~1 phút</td><td>MCQ: tập gọi tên lỗi của từng phương án sai. Short: bám từ để hỏi. Đánh dấu câu khó, quay lại sau.</td></tr>
+      <tr><td><b>7.0–7.5</b></td><td>~1 phút</td><td>~45 giây</td><td>Close reading vùng bằng chứng của MCQ thật kỹ (đây là dạng dễ mất điểm nhất ở band này). Soát chính tả Diagram/Short.</td></tr>
+      <tr><td><b>8.0+</b></td><td>~45 giây</td><td>~30 giây</td><td>Xử lý gần như đồng thời khi đọc; dành thời gian dư kiểm tra bẫy "đúng nhưng lạc đề" của MCQ.</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="gold-bar"></span> Checklist tự kiểm trước khi chốt</h2>
+    <ul class="clean">
+      <li><b>(MCQ)</b> Tôi đã chỉ ra được lý do <b>cả 3</b> phương án kia sai chưa? Phương án tôi chọn có thực sự <b>trả lời câu hỏi</b> (không "đúng nhưng lạc đề") không?</li>
+      <li><b>(Diagram)</b> Tôi định vị theo <b>vị trí không gian</b> hay lỡ đi theo thứ tự bài? Từ điền có đúng <b>word limit + chính tả</b>?</li>
+      <li><b>(Short)</b> Đáp án có đúng <b>loại</b> mà từ để hỏi yêu cầu không? Tôi có lỡ viết cả câu / vượt số từ không?</li>
+      <li><b>(Chung)</b> Mọi đáp án đều có <b>câu bằng chứng</b> cụ thể chứ?</li>
+    </ul>
+  </div>
+</section><section class="panel" id="p-quiz">
+  <div class="card">
+    <h2><span class="gold-bar"></span> Practice Hub — 12 câu kiểm tra tư duy chiến lược</h2>
+    <p>Chọn đáp án cho từng câu. Hệ thống chấm ngay, giải thích ngay, và lưu kết quả trên máy của bạn.</p>
+    <div class="score-box">
+      <div class="sans" style="font-size:.85rem;letter-spacing:.05em">ĐIỂM HIỆN TẠI</div>
+      <div class="big"><span id="scoreNow">0</span>/12</div>
+      <div class="sans" id="bestScore" style="font-size:.8rem;color:#c9d3ea"></div>
+    </div>
+    <div id="quizWrap"></div>
+    <div id="quizReport" class="card"></div>
+    <div style="text-align:center;margin-top:1rem">
+      <button class="btn" id="btnFinish">📊 Xem báo cáo kết quả</button>
+      <button class="btn ghost" id="btnReset">↺ Làm lại từ đầu</button>
+    </div>
+  </div>
+</section></main>
+<div id="popMask"></div>
+<div id="pop"><button class="pclose" id="popClose">✕</button><div class="phead" id="popHead"></div><div id="popBody"></div></div>
+<footer>N.D.N - 0932067877</footer>
+<script>
+(function(){
+"use strict";
+var LS_KEY = "popodoo_mcq_diagram_short_integrated_v1";
+function loadState(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; } }
+function saveState(s){ try{ localStorage.setItem(LS_KEY, JSON.stringify(s)); }catch(e){} }
+var state = loadState();
+state.answers = state.answers || {};
+state.fontSize = state.fontSize || 17;
+  state.mode = state.mode || "both";
+
+function applyFont(){ document.documentElement.style.setProperty("--fs", state.fontSize + "px"); }
+applyFont();
+document.getElementById("fPlus").addEventListener("click", function(){ if(state.fontSize < 22){ state.fontSize++; applyFont(); saveState(state); } });
+document.getElementById("fMinus").addEventListener("click", function(){ if(state.fontSize > 13){ state.fontSize--; applyFont(); saveState(state); } });
+
+var tabRow = document.getElementById("tabRow");
+tabRow.addEventListener("click", function(e){
+  var btn = e.target.closest("button[data-panel]"); if(!btn) return;
+  document.querySelectorAll("section.panel").forEach(function(p){ p.classList.remove("show"); });
+  tabRow.querySelectorAll("button").forEach(function(t){ t.classList.remove("active"); });
+  btn.classList.add("active");
+  document.getElementById(btn.dataset.panel).classList.add("show");
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+window.addEventListener("scroll", function(){
+  var h = document.documentElement;
+  document.getElementById("progressBar").style.width = Math.min(100, Math.max(0, h.scrollTop/(h.scrollHeight-h.clientHeight)*100)) + "%";
+}, {passive:true});
+
+var QUIZ = [
+  {type:"overview", q:"Ba dạng này chia thành hai “họ”. Cặp nào CÙNG họ với nhau (đều chép từ nguyên văn từ bài đọc)?",
+   opts:["Multiple Choice & Diagram Labelling","Diagram Labelling & Short Answer","Multiple Choice & Short Answer","Cả ba cùng một họ"], a:1,
+   ex:"Diagram Labelling và Short Answer đều yêu cầu chép từ nguyên văn từ bài đọc (có word limit, tính chính tả) — cùng “họ” với nhóm Completion. Multiple Choice là chọn phương án cho sẵn."},
+  {type:"mcq", q:"Kỹ năng lõi khi làm Multiple Choice là:",
+   opts:["Tìm phương án nghe giống bài đọc nhất","Loại trừ — chứng minh 3 phương án kia SAI","Chép từ khóa từ bài","Đoán theo trực giác rồi kiểm tra"], a:1,
+   ex:"Cambridge cố tình làm phương án sai nghe rất giống bài. Tư duy Band 9 là loại trừ: mỗi phương án sai có một lỗi cụ thể (trùng từ, đúng một nửa, tuyệt đối, ngược nghĩa, ngoài phạm vi, đúng-nhưng-lạc-đề)."},
+  {type:"mcq", q:"Trước khi đọc 4 phương án A–D, bạn nên:",
+   opts:["Đọc phương án trước rồi mới đọc câu hỏi","Đọc THÂN câu hỏi để biết chính xác nó hỏi gì, rồi tự trả lời trước","Đọc lướt cả bài đọc","Chọn ngay phương án dài nhất"], a:1,
+   ex:"Đọc thân câu (stem) trước để xác định câu hỏi hỏi gì (chi tiết? mục đích? quan điểm?), tự trả lời bằng lời của mình, rồi mới đối chiếu phương án — tránh bị phương án mớm."},
+  {type:"mcq", q:"Một phương án phát biểu đúng sự thật ghi trong bài, NHƯNG không trả lời câu hỏi được đặt ra. Đây là bẫy:",
+   opts:["Ngôn ngữ tuyệt đối","Ngoài phạm vi","Đúng nhưng lạc đề (True but…)","Trùng từ khóa"], a:2,
+   ex:"“Đúng nhưng lạc đề” là bẫy nguy hiểm nhất: học sinh thấy “đúng theo bài” là chọn. Luôn quay lại thân câu hỏi và hỏi: cái này có TRẢ LỜI đúng câu hỏi không?"},
+  {type:"mcq", q:"Phương án chứa từ “only/always/never” cần được:",
+   opts:["Ưu tiên chọn vì nghe chắc chắn","Cảnh giác — bài đọc thường thận trọng (some/may/often)","Bỏ qua hoàn toàn","Chọn nếu có từ trùng bài"], a:1,
+   ex:"Ngôn ngữ tuyệt đối (all/always/never/only/must) thường là bẫy, vì văn học thuật hay dùng ngôn ngữ thận trọng. Không loại máy móc, nhưng phải kiểm tra kỹ bằng chứng."},
+  {type:"diagram", q:"Đáp án của Diagram Labelling thường sắp theo:",
+   opts:["Đúng thứ tự bài đọc","Trật tự KHÔNG GIAN của sơ đồ (trên→dưới, ngoài→trong)","Bảng chữ cái","Độ khó tăng dần"], a:1,
+   ex:"Bài văn có thể mô tả bộ phận theo chức năng, còn sơ đồ đánh số theo vị trí. Vì vậy đi theo sơ đồ (vị trí không gian), KHÔNG đi theo dòng chảy bài đọc."},
+  {type:"diagram", q:"Manh mối định vị quý nhất khi làm Diagram Labelling là:",
+   opts:["Các nhãn ĐÃ IN SẴN trên sơ đồ + từ chỉ vị trí trong bài","Từ để hỏi","Ô từ vựng","Số thứ tự câu"], a:0,
+   ex:"Nhãn in sẵn là “mỏ neo” giúp định vị đúng đoạn mô tả; sau đó dùng từ chỉ vị trí (above, below, between, surrounds, at the top) để lần ra bộ phận còn thiếu."},
+  {type:"diagram", q:"Từ điền cho nhãn sơ đồ gần như luôn là loại từ nào?",
+   opts:["Động từ","Tính từ","Danh từ (tên bộ phận)","Trạng từ"], a:2,
+   ex:"Nhãn sơ đồ đặt tên cho các bộ phận, nên đáp án gần như luôn là danh từ. Vẫn phải tuân word limit và chép nguyên văn từ bài."},
+  {type:"short", q:"Trong Short Answer, manh mối mạnh nhất cho biết cần tìm LOẠI thông tin gì là:",
+   opts:["Độ dài câu hỏi","Từ để hỏi (Who/When/Where/How many/What/Why)","Số thứ tự câu","Dấu câu"], a:1,
+   ex:"Từ để hỏi nói thẳng loại đáp án: Who→người, When→thời gian, Where→nơi chốn, How many→số, What/Which→vật, Why→lý do. Đây là lợi thế miễn phí của dạng này."},
+  {type:"short", q:"Câu hỏi “How many species were recorded?”. Bạn nên tìm:",
+   opts:["Một tên loài","Một con số","Một nơi chốn","Một lý do"], a:1,
+   ex:"“How many” → cần một con số/số lượng. Nếu điền tên loài là trả lời sai LOẠI — một trong ba lỗi mất điểm oan của Short Answer."},
+  {type:"short", q:"Lỗi mất điểm oan phổ biến nhất của Short Answer là:",
+   opts:["Chép nguyên văn từ bài","Viết cả câu hoàn chỉnh → vượt word limit","Dùng từ để hỏi","Trả lời quá ngắn"], a:1,
+   ex:"Viết cả câu dễ vượt word limit và bị 0 điểm dù nội dung đúng. Chỉ trả lời vài từ cần thiết, chép nguyên văn, đúng loại thông tin."},
+  {type:"compare", q:"Điểm KHÁC biệt then chốt giữa Multiple Choice và hai dạng còn lại là:",
+   opts:["MCQ khó hơn nhiều","MCQ không có word limit và không tính chính tả (chọn chữ cái), còn Diagram & Short thì có","MCQ không cần bằng chứng","MCQ không theo thứ tự bài"], a:1,
+   ex:"MCQ là “nhận diện” (chọn phương án) → không word limit, không lo chính tả. Diagram & Short là “tái tạo” (chép từ) → phải tuân word limit và chính tả như nhóm Completion."}
+];
+
+var quizWrap = document.getElementById("quizWrap");
+var TYPE_NAME = {overview:"Tổng quan", mcq:"Multiple Choice", diagram:"Diagram", short:"Short Answer", compare:"So sánh"};
+
+function renderQuiz(){
+  quizWrap.innerHTML = "";
+  QUIZ.forEach(function(item, qi){
+    var box = document.createElement("div"); box.className = "quiz-q";
+    var head = document.createElement("div"); head.className = "q-head";
+    head.textContent = "Câu " + (qi+1) + " · [" + TYPE_NAME[item.type] + "]";
+    var qtext = document.createElement("p"); qtext.textContent = item.q; qtext.style.marginBottom = ".6rem";
+    var opts = document.createElement("div"); opts.className = "opts";
+    var explain = document.createElement("div"); explain.className = "q-explain"; explain.textContent = "💡 " + item.ex;
+    item.opts.forEach(function(opt, oi){
+      var b = document.createElement("button");
+      b.textContent = String.fromCharCode(65+oi) + ". " + opt;
+      b.addEventListener("click", function(){ answer(qi, oi, opts, explain); });
+      opts.appendChild(b);
+    });
+    box.appendChild(head); box.appendChild(qtext); box.appendChild(opts); box.appendChild(explain);
+    quizWrap.appendChild(box);
+    if(state.answers[qi] !== undefined){ paint(qi, state.answers[qi], opts, explain); }
+  });
+  updateScore();
+}
+function answer(qi, oi, optsEl, explainEl){ if(state.answers[qi] !== undefined) return; state.answers[qi] = oi; saveState(state); paint(qi, oi, optsEl, explainEl); updateScore(); }
+function paint(qi, oi, optsEl, explainEl){
+  optsEl.querySelectorAll("button").forEach(function(b, i){
+    b.disabled = true;
+    if(i === QUIZ[qi].a) b.classList.add("correct");
+    if(i === oi && oi !== QUIZ[qi].a) b.classList.add("wrong");
+  });
+  explainEl.classList.add("show");
+}
+function currentScore(){ var s=0; Object.keys(state.answers).forEach(function(k){ if(state.answers[k]===QUIZ[k].a) s++; }); return s; }
+function updateScore(){
+  var s = currentScore();
+  document.getElementById("scoreNow").textContent = s;
+  if(Object.keys(state.answers).length === QUIZ.length){ if(state.best===undefined || s>state.best){ state.best=s; saveState(state); } }
+  document.getElementById("bestScore").textContent = (state.best!==undefined) ? ("Kỷ lục của bạn: " + state.best + "/12") : "";
+}
+document.getElementById("btnFinish").addEventListener("click", function(){
+  var done = Object.keys(state.answers).length;
+  var rep = document.getElementById("quizReport");
+  if(done < QUIZ.length){
+    rep.style.display = "block";
+    rep.innerHTML = "<h2><span class='gold-bar'></span> Báo cáo kết quả</h2><p>Bạn mới hoàn thành <b>" + done + "/12</b> câu. Hãy làm hết để nhận báo cáo theo từng dạng nhé!</p>";
+    rep.scrollIntoView({behavior:"smooth"}); return;
+  }
+  var byType = {};
+  QUIZ.forEach(function(item, qi){ byType[item.type]=byType[item.type]||{right:0,total:0}; byType[item.type].total++; if(state.answers[qi]===item.a) byType[item.type].right++; });
+  var s = currentScore(); state.best = Math.max(state.best||0, s); saveState(state);
+  var verdict, advice;
+  if(s>=11){ verdict="🏆 Xuất sắc — tư duy Band 8+"; advice="Bạn nắm chắc cả loại trừ MCQ lẫn định vị chép từ. Bước tiếp: luyện tốc độ + soát bẫy “đúng nhưng lạc đề” trên đề Cambridge thật."; }
+  else if(s>=8){ verdict="👍 Khá vững — nền tảng Band 6.5–7.0"; advice="Xem lại giải thích các câu sai, đặc biệt 6 loại bẫy MCQ và luật word limit của Diagram/Short."; }
+  else if(s>=5){ verdict="🔄 Cần củng cố — quanh Band 5.5–6.0"; advice="Đọc lại tab của dạng có tỉ lệ đúng thấp; luyện “gọi tên lỗi phương án” (MCQ) và “từ để hỏi → loại đáp án” (Short), rồi làm lại quiz."; }
+  else { verdict="📚 Bắt đầu lại từ nền tảng"; advice="Học lần lượt Tổng quan → 1→3, làm chậm các ví dụ (che lời giải, tự làm trước), rồi quay lại quiz."; }
+  var rows = "";
+  Object.keys(byType).forEach(function(t){ var r=byType[t]; var pct=Math.round(r.right/r.total*100); var flag=pct===100?"✅":(pct>=50?"🟡":"🔴"); rows += "<tr><td>"+TYPE_NAME[t]+"</td><td>"+r.right+"/"+r.total+"</td><td>"+flag+" "+pct+"%</td></tr>"; });
+  rep.style.display = "block";
+  rep.innerHTML = "<h2><span class='gold-bar'></span> Báo cáo kết quả cá nhân</h2><p style='font-size:1.1rem'><b>Tổng điểm: "+s+"/12</b> — "+verdict+"</p><div class='table-wrap'><table><tr><th>Nhóm kiến thức</th><th>Đúng</th><th>Tỉ lệ</th></tr>"+rows+"</table></div><div class='tipbox'><b>🧭 Lời khuyên:</b> "+advice+"</div>";
+  rep.scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("btnReset").addEventListener("click", function(){
+  if(!confirm("Xóa toàn bộ câu trả lời và làm lại từ đầu?")) return;
+  state.answers = {}; saveState(state);
+  document.getElementById("quizReport").style.display = "none";
+  renderQuiz();
+});
+
+/* ---------- bilingual default ---------- */
+document.body.className="mode-"+(state.mode||"both");
+
+/* ---------- practice: reveal + explain ---------- */
+var pop=document.getElementById("pop"), popMask=document.getElementById("popMask");
+var popHead=document.getElementById("popHead"), popBody=document.getElementById("popBody");
+var activeEv=null, openEl=null;
+function revealEv(ev){ if(!ev)return; hidePop(); if(activeEv&&activeEv!==ev){activeEv.classList.remove("reveal","open");} activeEv=ev; ev.classList.add("reveal"); }
+function clearReveal(){ if(activeEv){activeEv.classList.remove("reveal","open"); activeEv=null;} }
+function showPop(el){
+  var noteEl=el.querySelector(".note"); if(!noteEl)return;
+  var viEl=el.querySelector(".evi-vi");
+  if(openEl&&openEl!==el)openEl.classList.remove("open");
+  openEl=el; el.classList.add("open");
+  popHead.innerHTML="Explain";
+  var html=""; if(viEl){html+='<div class="pv-trans">'+viEl.innerHTML+'</div>';}
+  html+=noteEl.innerHTML; popBody.innerHTML=html;
+  pop.style.display="block"; pop.classList.add("show"); popMask.classList.add("show");
+  var r=el.getBoundingClientRect();
+  var scY=window.pageYOffset||document.documentElement.scrollTop;
+  var scX=window.pageXOffset||document.documentElement.scrollLeft;
+  var pw=pop.offsetWidth, ph=pop.offsetHeight, vw=document.documentElement.clientWidth;
+  var left=scX+r.left; if(left+pw>scX+vw-10)left=scX+vw-pw-10; if(left<scX+8)left=scX+8;
+  var top=scY+r.bottom+8;
+  if(r.bottom+ph+16>document.documentElement.clientHeight&&r.top-ph-8>0){top=scY+r.top-ph-8;}
+  pop.style.left=left+"px"; pop.style.top=top+"px";
+}
+function hidePop(){ pop.classList.remove("show"); pop.style.display="none"; popMask.classList.remove("show"); if(openEl){openEl.classList.remove("open"); openEl=null;} }
+function clearAll(){ hidePop(); clearReveal(); }
+if(document.getElementById("popClose")) document.getElementById("popClose").addEventListener("click",hidePop);
+if(popMask) popMask.addEventListener("click",hidePop);
+document.addEventListener("click",function(e){
+  var ev=e.target.closest("mark.ev");
+  if(ev&&ev.classList.contains("reveal")){ e.preventDefault(); if(pop.classList.contains("show")&&ev.classList.contains("open")){hidePop();}else{showPop(ev);} return; }
+  var sr=e.target.closest(".selfreveal");
+  if(sr && !e.target.closest("mark.ev")){ sr.classList.toggle("revealed"); }
+  var jumper=e.target.closest("[data-jump]");
+  if(jumper){
+    var q=jumper.getAttribute("data-jump");
+    var panel=jumper.closest("section.panel");
+    var target=panel?panel.querySelector('mark.ev[data-q="'+q+'"]'):null;
+    if(panel){ panel.querySelectorAll('[data-jump="'+q+'"]').forEach(function(el){el.classList.add("revealed");}); }
+    if(target){ revealEv(target); target.scrollIntoView({behavior:"smooth",block:"center"}); target.classList.add("flash"); setTimeout(function(){target.classList.remove("flash");},1200); }
+    else if(jumper.querySelector(".note")){ clearReveal(); showPop(jumper); }
+  }
+});
+window.addEventListener("resize",hidePop);
+
+renderQuiz();
+})();
+</script>
+</body>
+</html>
